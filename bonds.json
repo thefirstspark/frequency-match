@@ -1,0 +1,357 @@
+{
+  "version": "1.0",
+  "generated": "2026-05-10",
+  "center_default": "E1855DD782A3",
+  "souls": {
+    "E1855DD782A3": {
+      "name": "Katelin Jill Puzakulics",
+      "alias": "KJP",
+      "life_path": 5,
+      "expression": 11,
+      "soul_urge": 4,
+      "personality": 7,
+      "birthday_num": 1,
+      "soul_frequency_hz": 824.43,
+      "rarity_tier": "EPIC",
+      "color": "#F3B23A"
+    },
+    "EB3F62F0AEEB": {
+      "name": "Kevin Andrew Tippel",
+      "alias": "Kevin",
+      "life_path": 6,
+      "expression": 6,
+      "soul_urge": 7,
+      "personality": 8,
+      "birthday_num": 5,
+      "soul_frequency_hz": 743.82,
+      "rarity_tier": "COMMON",
+      "color": "#6B4DF2"
+    },
+    "BA7455E92F36": {
+      "name": "Aaron Joseph Thomas",
+      "alias": "Aaron",
+      "life_path": 5,
+      "expression": 9,
+      "soul_urge": 8,
+      "personality": 1,
+      "birthday_num": 6,
+      "soul_frequency_hz": 660.53,
+      "rarity_tier": "COMMON",
+      "color": "#FF6A3D"
+    },
+    "6F631C26E75F": {
+      "name": "Tupac Amaru Shakur",
+      "alias": "Tup",
+      "life_path": 22,
+      "expression": 4,
+      "soul_urge": 4,
+      "personality": 9,
+      "birthday_num": 7,
+      "soul_frequency_hz": 949.19,
+      "rarity_tier": "EPIC",
+      "color": "#26E4D8"
+    },
+    "BB3DDC9D9066": {
+      "name": "Albert Einstein",
+      "alias": "Einstein",
+      "life_path": 6,
+      "expression": 9,
+      "soul_urge": 7,
+      "personality": 11,
+      "birthday_num": 5,
+      "soul_frequency_hz": 764.9,
+      "rarity_tier": "RARE",
+      "color": "#8B6FFF"
+    },
+    "289DA6B88624": {
+      "name": "David Bowie",
+      "alias": "Bowie",
+      "life_path": 3,
+      "expression": 4,
+      "soul_urge": 3,
+      "personality": 1,
+      "birthday_num": 8,
+      "soul_frequency_hz": 705.63,
+      "rarity_tier": "COMMON",
+      "color": "#FF6A3D"
+    },
+    "6DFDED1F5FE1": {
+      "name": "Elvis Presley",
+      "alias": "Elvis",
+      "life_path": 9,
+      "expression": 5,
+      "soul_urge": 6,
+      "personality": 8,
+      "birthday_num": 8,
+      "soul_frequency_hz": 804.56,
+      "rarity_tier": "COMMON",
+      "color": "#F3B23A"
+    },
+    "69FC162B3A49": {
+      "name": "Nikola Tesla",
+      "alias": "Tesla",
+      "life_path": 1,
+      "expression": 11,
+      "soul_urge": 22,
+      "personality": 7,
+      "birthday_num": 1,
+      "soul_frequency_hz": 939.6,
+      "rarity_tier": "LEGENDARY",
+      "color": "#26E4D8"
+    },
+    "A208A66BF1F6": {
+      "name": "Adele",
+      "alias": "Adele",
+      "life_path": 9,
+      "expression": 9,
+      "soul_urge": 11,
+      "personality": 7,
+      "birthday_num": 5,
+      "soul_frequency_hz": 757.21,
+      "rarity_tier": "RARE",
+      "color": "#6B4DF2"
+    },
+    "22651BCDA4A1": {
+      "name": "Joshua Bokoski",
+      "alias": "Josh B",
+      "life_path": 2,
+      "expression": 3,
+      "soul_urge": 4,
+      "personality": 8,
+      "birthday_num": 3,
+      "soul_frequency_hz": 748.83,
+      "rarity_tier": "COMMON",
+      "color": "#FF6A3D"
+    },
+    "026A4D2480DC": {
+      "name": "Aerie Ann Tippel",
+      "alias": "Aerie",
+      "life_path": 8,
+      "expression": 1,
+      "soul_urge": 8,
+      "personality": 11,
+      "birthday_num": 5,
+      "soul_frequency_hz": 950.49,
+      "rarity_tier": "RARE",
+      "color": "#FFE9A8"
+    },
+    "C8F7EB1226F4": {
+      "name": "Charlie",
+      "alias": "Charlie",
+      "life_path": 5,
+      "expression": 11,
+      "soul_urge": 6,
+      "personality": 5,
+      "birthday_num": 5,
+      "soul_frequency_hz": 794.97,
+      "rarity_tier": "EPIC",
+      "color": "#FF6A3D"
+    },
+    "96C838B4E982": {
+      "name": "Devon",
+      "alias": "Devon",
+      "life_path": 1,
+      "expression": 6,
+      "soul_urge": 11,
+      "personality": 4,
+      "birthday_num": 9,
+      "soul_frequency_hz": 718.07,
+      "rarity_tier": "RARE",
+      "color": "#26E4D8"
+    },
+    "029AF6F73E8B": {
+      "name": "Mason",
+      "alias": "Mason",
+      "life_path": 3,
+      "expression": 8,
+      "soul_urge": 7,
+      "personality": 1,
+      "birthday_num": 22,
+      "soul_frequency_hz": 932.43,
+      "rarity_tier": "RARE",
+      "color": "#6B4DF2"
+    },
+    "2EC50DFEF2C9": {
+      "name": "Thomas",
+      "alias": "Thomas",
+      "life_path": 7,
+      "expression": 22,
+      "soul_urge": 7,
+      "personality": 6,
+      "birthday_num": 5,
+      "soul_frequency_hz": 917.31,
+      "rarity_tier": "EPIC",
+      "color": "#8B6FFF"
+    },
+    "6F6B33EC8D69": {
+      "name": "Matthew Vincent Jablonski",
+      "alias": "MVJ",
+      "life_path": 4,
+      "expression": 9,
+      "soul_urge": 9,
+      "personality": 9,
+      "birthday_num": 7,
+      "soul_frequency_hz": 622.77,
+      "rarity_tier": "COMMON",
+      "color": "#26E4D8"
+    },
+    "9D727E24EA3A": {
+      "name": "Joshua Thomas Puzakulics",
+      "alias": "JTP",
+      "life_path": 11,
+      "expression": 1,
+      "soul_urge": 33,
+      "personality": 4,
+      "birthday_num": 8,
+      "soul_frequency_hz": 1209.6,
+      "rarity_tier": "LEGENDARY",
+      "color": "#FF6A3D"
+    }
+  },
+  "bonds": [
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "EB3F62F0AEEB",
+      "type": "parent_child",
+      "relationship": "Father \u2014 Daughter",
+      "resonance": 45,
+      "verified": true,
+      "context": "Father \u2014 Daughter"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "BA7455E92F36",
+      "type": "partners",
+      "relationship": "Partners",
+      "resonance": 41,
+      "verified": true,
+      "context": "Partners"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "9D727E24EA3A",
+      "type": "siblings",
+      "relationship": "Siblings",
+      "resonance": 33,
+      "verified": true,
+      "context": "Siblings"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "026A4D2480DC",
+      "type": "parent_child",
+      "relationship": "Mother \u2014 Daughter",
+      "resonance": 47,
+      "verified": true,
+      "context": "Mother \u2014 Daughter"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "C8F7EB1226F4",
+      "type": "siblings",
+      "relationship": "Siblings / Soul Bond",
+      "resonance": 68,
+      "verified": true,
+      "context": "Siblings / Soul Bond"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "96C838B4E982",
+      "type": "extended_family",
+      "relationship": "Family \u2014 Nephew",
+      "resonance": 47,
+      "verified": true,
+      "context": "Family \u2014 Nephew"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "029AF6F73E8B",
+      "type": "extended_family",
+      "relationship": "Family \u2014 Nephew",
+      "resonance": 48,
+      "verified": true,
+      "context": "Family \u2014 Nephew"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "2EC50DFEF2C9",
+      "type": "extended_family",
+      "relationship": "Family \u2014 Father figure",
+      "resonance": 50,
+      "verified": true,
+      "context": "Family \u2014 Father figure"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "6F6B33EC8D69",
+      "type": "soul_resonance",
+      "relationship": "Soul Resonance \u2014 First Member",
+      "resonance": 31,
+      "verified": true,
+      "context": "Soul Resonance \u2014 First Member"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "22651BCDA4A1",
+      "type": "soul_resonance",
+      "relationship": "Soul Resonance \u2014 Inner Circle",
+      "resonance": 52,
+      "verified": true,
+      "context": "Soul Resonance \u2014 Inner Circle"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "69FC162B3A49",
+      "type": "ancestor",
+      "relationship": "Lineage Echo \u2014 Shared Expression 11",
+      "resonance": 71,
+      "verified": true,
+      "context": "Lineage Echo \u2014 Shared Expression 11"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "BB3DDC9D9066",
+      "type": "ancestor",
+      "relationship": "Lineage Echo \u2014 Shared Personality 11",
+      "resonance": 53,
+      "verified": true,
+      "context": "Lineage Echo \u2014 Shared Personality 11"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "289DA6B88624",
+      "type": "ancestor",
+      "relationship": "Lineage Echo \u2014 The Creator",
+      "resonance": 41,
+      "verified": true,
+      "context": "Lineage Echo \u2014 The Creator"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "6DFDED1F5FE1",
+      "type": "ancestor",
+      "relationship": "Lineage Echo \u2014 The Performer",
+      "resonance": 53,
+      "verified": true,
+      "context": "Lineage Echo \u2014 The Performer"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "6F631C26E75F",
+      "type": "ancestor",
+      "relationship": "Lineage Echo \u2014 Master 22 Channel",
+      "resonance": 53,
+      "verified": true,
+      "context": "Lineage Echo \u2014 Master 22 Channel"
+    },
+    {
+      "soul_a": "E1855DD782A3",
+      "soul_b": "A208A66BF1F6",
+      "type": "soul_resonance",
+      "relationship": "Frequency Kin \u2014 Earth Dragon 1988",
+      "resonance": 58,
+      "verified": true,
+      "context": "Frequency Kin \u2014 Earth Dragon 1988"
+    }
+  ]
+}
