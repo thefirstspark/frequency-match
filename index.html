@@ -652,6 +652,218 @@ footer a {
 /* ========== HIDE/SHOW ========== */
 .hidden { display: none !important; }
 
+/* ========== FREEMIUM UI ========== */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  padding: 12px 16px;
+  background: rgba(13, 7, 40, 0.55);
+  border: 1px solid rgba(107, 77, 242, 0.25);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+}
+.usage-pill {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+.usage-pill strong { color: var(--cyan); }
+.usage-pill.pro strong { color: var(--gold); }
+.top-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn-sm {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(38, 228, 216, 0.4);
+  background: transparent;
+  color: var(--soft-white);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-sm:hover { border-color: var(--cyan); color: var(--cyan); }
+.btn-sm.primary {
+  background: linear-gradient(135deg, var(--violet), var(--ember));
+  border: none;
+  color: white;
+}
+.btn-sm.primary:hover { filter: brightness(1.1); color: white; }
+
+.pro-field {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(243, 178, 58, 0.25);
+}
+.pro-field-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.pro-lock { opacity: 0.7; font-size: 10px; color: var(--gold-soft); }
+.mode-select {
+  width: 100%;
+  background: rgba(3, 1, 13, 0.6);
+  border: 1px solid rgba(243, 178, 58, 0.35);
+  border-radius: 10px;
+  color: var(--soft-white);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  padding: 12px 14px;
+}
+.mode-select:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.pro-section {
+  margin-top: 28px;
+  padding: 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(243, 178, 58, 0.35);
+  background: linear-gradient(135deg, rgba(243,178,58,0.06), rgba(107,77,242,0.08));
+}
+.pro-section h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--gold);
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+}
+.pro-badge {
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 2px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(243, 178, 58, 0.15);
+  color: var(--gold);
+  border: 1px solid rgba(243, 178, 58, 0.4);
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(3, 1, 13, 0.82);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(6px);
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  width: min(440px, 100%);
+  background: linear-gradient(160deg, #120a2e 0%, #03010d 100%);
+  border: 1px solid rgba(107, 77, 242, 0.45);
+  border-radius: 18px;
+  padding: 28px 24px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, var(--cyan), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.modal p.lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  color: var(--gold-soft);
+  margin-bottom: 18px;
+  font-style: italic;
+}
+.modal .feature-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+.modal .feature-list li {
+  font-size: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: rgba(240,240,240,0.85);
+}
+.modal .feature-list li::before {
+  content: '✦ ';
+  color: var(--cyan);
+}
+.modal-close {
+  position: absolute;
+  top: 12px; right: 14px;
+  background: none; border: none;
+  color: rgba(240,240,240,0.5);
+  font-size: 22px;
+  cursor: pointer;
+}
+.modal-close:hover { color: white; }
+.modal input[type="email"] {
+  width: 100%;
+  background: rgba(3,1,13,0.7);
+  border: 1px solid rgba(38,228,216,0.35);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: white;
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 12px;
+}
+.modal .btn-row { display: flex; flex-direction: column; gap: 10px; }
+.modal .btn-row .btn { width: 100%; }
+.modal .hint {
+  font-size: 11px;
+  color: rgba(240,240,240,0.45);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+.modal .error {
+  color: #ff8a70;
+  font-size: 12px;
+  margin-bottom: 10px;
+  min-height: 1em;
+}
+.history-panel {
+  margin-top: 40px;
+  display: none;
+}
+.history-panel.active { display: block; }
+.history-panel h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.history-list { display: grid; gap: 10px; }
+.history-item {
+  background: rgba(13,7,40,0.55);
+  border: 1px solid rgba(107,77,242,0.25);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.history-item .score { color: var(--cyan); font-weight: 700; }
+.history-item .meta { color: rgba(240,240,240,0.45); font-size: 10px; }
+
 </style>
 </head>
 <body>
@@ -666,6 +878,17 @@ footer a {
   <p class="subtitle">Two souls. One collision. Find out if you're running the same code.</p>
   <p class="meta-line">⚡ NUMEROLOGY · ASTROLOGY · ARCHETYPAL RESONANCE ⚡</p>
 </header>
+
+<div class="top-bar" id="topBar">
+  <div class="usage-pill" id="usagePill">
+    <strong id="usageText">3 free matches</strong> · then Frequency Pro
+  </div>
+  <div class="top-actions">
+    <button type="button" class="btn-sm" id="btnHistory" onclick="toggleHistory()" style="display:none">History</button>
+    <button type="button" class="btn-sm" id="btnAccount" onclick="openAuthModal()">Sign in</button>
+    <button type="button" class="btn-sm primary" id="btnUpgrade" onclick="openPaywall()">Go Pro · $4.99/mo</button>
+  </div>
+</div>
 
 <!-- ========== INPUT PHASE ========== -->
 <section id="inputPhase">
@@ -707,6 +930,21 @@ footer a {
       </div>
     </div>
 
+  </div>
+
+  <!-- Pro: relationship lens (unlocked for Pro; free users see locked teaser) -->
+  <div class="pro-field" id="relationshipField">
+    <div class="pro-field-label">
+      Relationship lens
+      <span class="pro-lock" id="modeLock">🔒 Frequency Pro</span>
+    </div>
+    <select class="mode-select" id="relationshipMode" disabled>
+      <option value="general">General chemistry</option>
+      <option value="romance">Romance / partnership</option>
+      <option value="friendship">Friendship</option>
+      <option value="family">Family</option>
+      <option value="business">Business / collab</option>
+    </select>
   </div>
 
   <div class="collide-zone">
@@ -784,23 +1022,85 @@ footer a {
       <h3>⟁ The Pattern</h3>
       <p class="breakdown-text" id="patternText">—</p>
     </div>
+
+    <!-- Pro deeper analysis -->
+    <div class="pro-section hidden" id="proDeepSection">
+      <h3>Frequency Pro · Deep Scan <span class="pro-badge">PRO</span></h3>
+      <div class="dimensions-grid" id="proDimensionsGrid"></div>
+      <div class="breakdown-section" style="margin-top:18px">
+        <h3 style="font-size:0.95rem;color:var(--gold)">◎ Lens reading</h3>
+        <p class="breakdown-text" id="lensText">—</p>
+      </div>
+      <div class="breakdown-section">
+        <h3 style="font-size:0.95rem;color:var(--gold)">◈ Expression × Personality</h3>
+        <p class="breakdown-text" id="exprPersText">—</p>
+      </div>
+    </div>
   </div>
 
   <div class="actions">
     <button class="btn" onclick="downloadVerdict()">⬇ Download Verdict Card</button>
     <button class="btn btn-secondary" onclick="shareResults()">↗ Share Results</button>
+    <button class="btn btn-secondary" id="btnSaveMatch" onclick="saveCurrentMatch()" style="display:none">☁ Save to Library</button>
     <button class="btn btn-secondary" onclick="resetTool()">↻ Run Another Match</button>
   </div>
 
 </section>
 
+<section class="history-panel" id="historyPanel">
+  <h2>Match Library <span class="pro-badge">PRO</span></h2>
+  <div class="history-list" id="historyList"></div>
+</section>
+
 <footer>
   <p class="tagline">Reality is programmable. Consciousness is the code.</p>
   <p>Built by <a href="https://thefirstspark.shop" target="_blank">The First Spark</a> · Powered by Soul Maps</p>
+  <p style="margin-top:10px;font-size:11px;opacity:0.45">3 free collisions · then Frequency Pro $4.99/mo</p>
 </footer>
 
 </div>
 
+<!-- Auth modal -->
+<div class="modal-overlay" id="authModal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <button type="button" class="modal-close" onclick="closeModal('authModal')" aria-label="Close">&times;</button>
+    <h2>Sign in</h2>
+    <p class="lead">Save progress across devices. Required for Frequency Pro.</p>
+    <div class="error" id="authError"></div>
+    <input type="email" id="authEmail" placeholder="you@email.com" autocomplete="email">
+    <div class="btn-row">
+      <button type="button" class="btn" onclick="submitMagicLink()">Email me a magic link</button>
+      <button type="button" class="btn btn-secondary" id="btnSignOut" onclick="doSignOut()" style="display:none">Sign out</button>
+      <button type="button" class="btn btn-secondary" id="btnPortal" onclick="openPortal()" style="display:none">Manage billing</button>
+    </div>
+    <p class="hint" id="authHint">We’ll email a one-time link. No password.</p>
+  </div>
+</div>
+
+<!-- Paywall modal -->
+<div class="modal-overlay" id="paywallModal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <button type="button" class="modal-close" onclick="closeModal('paywallModal')" aria-label="Close">&times;</button>
+    <h2>You’ve used your free collisions</h2>
+    <p class="lead">Keep colliding with Frequency Pro — $4.99/mo.</p>
+    <ul class="feature-list">
+      <li>Unlimited frequency matches</li>
+      <li>Saved match history library</li>
+      <li>Deeper analysis: expression, personality, relationship lens</li>
+      <li>Romance / friendship / family / business readings</li>
+    </ul>
+    <div class="error" id="paywallError"></div>
+    <div class="btn-row">
+      <button type="button" class="btn" id="btnCheckout" onclick="startProCheckout()">Unlock Frequency Pro · $4.99/mo</button>
+      <button type="button" class="btn btn-secondary" onclick="openAuthModal(); closeModal('paywallModal')">Sign in first</button>
+    </div>
+    <p class="hint">Cancel anytime via the billing portal. 3 free matches always reset per account after setup.</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/freemium.js"></script>
 <script>
 // ========== STARFIELD ==========
 (function() {
@@ -1094,13 +1394,29 @@ function buildPlayerCard(player, cardNum) {
 async function runCollision() {
   const p1Name = document.getElementById('p1Name').value.trim();
   const p1Date = document.getElementById('p1Date').value;
+  const p1Place = document.getElementById('p1Place').value.trim();
   const p2Name = document.getElementById('p2Name').value.trim();
   const p2Date = document.getElementById('p2Date').value;
+  const p2Place = document.getElementById('p2Place').value.trim();
 
   if (!p1Name || !p1Date || !p2Name || !p2Date) {
     alert('Both players need a name and birth date to collide.');
     return;
   }
+
+  // Freemium gate
+  if (window.FM) {
+    const gate = await FM.authorizeMatch();
+    if (!gate.ok) {
+      openPaywall();
+      return;
+    }
+  }
+
+  const isPro = window.FM ? FM.isPro() : false;
+  const relationshipMode = isPro
+    ? (document.getElementById('relationshipMode').value || 'general')
+    : 'general';
 
   // Hide input, show loader
   document.getElementById('inputPhase').classList.add('hidden');
@@ -1124,10 +1440,10 @@ async function runCollision() {
   clearInterval(interval);
 
   // Build player profiles
-  const p1 = buildProfile(p1Name, p1Date, 1);
-  const p2 = buildProfile(p2Name, p2Date, 2);
+  const p1 = buildProfile(p1Name, p1Date, 1, p1Place);
+  const p2 = buildProfile(p2Name, p2Date, 2, p2Place);
 
-  // Calculate dimensional scores
+  // Calculate dimensional scores (core free)
   const scores = {
     numerology: numerologyResonance(p1.lifePath, p2.lifePath),
     soulUrge: numerologyResonance(p1.soulUrge, p2.soulUrge),
@@ -1136,14 +1452,39 @@ async function runCollision() {
     zodiac: chineseZodiacAffinity(p1.chinese.animal, p2.chinese.animal)
   };
 
+  // Pro dimensions
+  if (isPro) {
+    scores.expression = numerologyResonance(p1.expression, p2.expression);
+    scores.personality = numerologyResonance(p1.personality, p2.personality);
+    scores.birthday = numerologyResonance(p1.birthday, p2.birthday);
+  }
+
   // Weighted overall score
-  const overall = Math.round(
-    scores.numerology * 0.28 +
-    scores.soulUrge * 0.20 +
-    scores.element * 0.22 +
-    scores.modality * 0.15 +
-    scores.zodiac * 0.15
-  );
+  let overall;
+  if (isPro) {
+    overall = Math.round(
+      scores.numerology * 0.22 +
+      scores.soulUrge * 0.16 +
+      scores.element * 0.16 +
+      scores.modality * 0.12 +
+      scores.zodiac * 0.12 +
+      scores.expression * 0.12 +
+      scores.personality * 0.10
+    );
+  } else {
+    overall = Math.round(
+      scores.numerology * 0.28 +
+      scores.soulUrge * 0.20 +
+      scores.element * 0.22 +
+      scores.modality * 0.15 +
+      scores.zodiac * 0.15
+    );
+  }
+
+  // Consume free match (after successful compute)
+  if (window.FM) {
+    await FM.recordMatch();
+  }
 
   // Hide loader, show results
   document.getElementById('loadingScreen').classList.remove('active');
@@ -1177,7 +1518,7 @@ async function runCollision() {
 
   // Animate bars
   setTimeout(() => {
-    const bars = document.querySelectorAll('.dim-bar');
+    const bars = document.querySelectorAll('#dimensionsGrid .dim-bar');
     bars.forEach((bar, idx) => {
       bar.style.width = dims[idx].value + '%';
     });
@@ -1186,12 +1527,51 @@ async function runCollision() {
   // Strengths + tensions + pattern
   const strengths = generateStrengths(p1, p2, scores);
   const tensions = generateTensions(p1, p2, scores);
+  const pattern = generatePattern(p1, p2, overall);
   document.getElementById('strengthsList').innerHTML = strengths.map(s => `<li>${s}</li>`).join('');
   document.getElementById('tensionList').innerHTML = tensions.map(t => `<li>${t}</li>`).join('');
-  document.getElementById('patternText').innerHTML = generatePattern(p1, p2, overall);
+  document.getElementById('patternText').innerHTML = pattern;
 
-  // Store for share
-  window.matchData = { p1, p2, scores, overall };
+  // Pro deep scan UI
+  const proSection = document.getElementById('proDeepSection');
+  if (isPro) {
+    proSection.classList.remove('hidden');
+    const proDims = [
+      {name:'Expression Resonance', value: scores.expression},
+      {name:'Personality Sync', value: scores.personality},
+      {name:'Birthday Pulse', value: scores.birthday}
+    ];
+    document.getElementById('proDimensionsGrid').innerHTML = proDims.map(d => `
+      <div class="dimension">
+        <div class="dim-name">${d.name}</div>
+        <div class="dim-value">${d.value}%</div>
+        <div class="dim-bar-wrap"><div class="dim-bar pro-bar" style="width:0%"></div></div>
+      </div>
+    `).join('');
+    setTimeout(() => {
+      document.querySelectorAll('.pro-bar').forEach((bar, idx) => {
+        bar.style.width = proDims[idx].value + '%';
+      });
+    }, 350);
+    document.getElementById('lensText').innerHTML = generateLensReading(p1, p2, overall, relationshipMode, scores);
+    document.getElementById('exprPersText').innerHTML = generateExprPersonality(p1, p2, scores);
+  } else {
+    proSection.classList.add('hidden');
+  }
+
+  const saveBtn = document.getElementById('btnSaveMatch');
+  if (saveBtn) saveBtn.style.display = isPro ? '' : 'none';
+
+  // Store for share / save
+  window.matchData = {
+    p1, p2, scores, overall, relationshipMode, isPro,
+    strengths, tensions, pattern
+  };
+
+  // Auto-save for Pro
+  if (isPro && window.FM) {
+    await persistMatch(false);
+  }
 
   // Smooth scroll to verdict
   setTimeout(() => {
@@ -1199,7 +1579,7 @@ async function runCollision() {
   }, 200);
 }
 
-function buildProfile(name, date, id) {
+function buildProfile(name, date, id, place = '') {
   const sun = sunSign(date);
   const year = parseInt(date.split('-')[0]);
   return {
@@ -1207,6 +1587,7 @@ function buildProfile(name, date, id) {
     fullName: name,
     firstName: name.split(' ')[0],
     date,
+    place: place || '',
     lifePath: lifePath(date),
     expression: expressionNumber(name),
     soulUrge: soulUrge(name),
@@ -1215,6 +1596,33 @@ function buildProfile(name, date, id) {
     sun,
     chinese: chineseZodiac(year)
   };
+}
+
+// ========== PRO NARRATIVES ==========
+function generateLensReading(p1, p2, score, mode, scores) {
+  const names = `${p1.firstName} and ${p2.firstName}`;
+  const placeNote = (p1.place || p2.place)
+    ? ` Geography in the chart (${[p1.place, p2.place].filter(Boolean).join(' · ')}) colors the story — place is a soft signal, not a verdict.`
+    : '';
+
+  const byMode = {
+    general: `Under a <strong>general chemistry</strong> lens, ${names} score ${score}%. The core stack (life path + element + soul urge) is the main signal; Pro dimensions refine how you show up, not whether the code can run.${placeNote}`,
+    romance: `As a <strong>romantic / partnership</strong> pair, watch soul urge (${scores.soulUrge}%) and expression (${scores.expression}%). Desire (soul urge) vs. how love is spoken (expression) is where most couples misfire. Score ${score}% means the bond is ${score >= 75 ? 'structurally supportive' : 'a practice, not a free ride'}.${placeNote}`,
+    friendship: `As <strong>friends</strong>, modality (${scores.modality}%) and personality (${scores.personality}%) matter more than destiny theater. ${names} will click when social pacing matches; friction shows up as “why aren’t you answering?” more than cosmic doom. Overall ${score}%.${placeNote}`,
+    family: `In a <strong>family</strong> frame, life path difference is curriculum, not incompatibility. Eastern affinity (${scores.zodiac}%) often tracks instinctive roles (protector, messenger, stabiliser). ${names}: treat ${score}% as a map of who needs more explicit care language.${placeNote}`,
+    business: `For <strong>business / collab</strong>, expression (${scores.expression}%) and modality (${scores.modality}%) predict meeting culture and launch style. ${names} at ${score}% — ${score >= 78 ? 'strong co-founding harmonic if roles are explicit' : 'pair a visionary with an operator and write the ops down'}.${placeNote}`
+  };
+  return byMode[mode] || byMode.general;
+}
+
+function generateExprPersonality(p1, p2, scores) {
+  return `<strong>${p1.firstName}</strong> Expression ${p1.expression} / Personality ${p1.personality} meets <strong>${p2.firstName}</strong> Expression ${p2.expression} / Personality ${p2.personality}. ` +
+    `Expression resonance ${scores.expression}% is how you <em>broadcast</em>; personality sync ${scores.personality}% is how the world reads you cold. ` +
+    (scores.expression >= 80 && scores.personality < 70
+      ? `You speak a similar language but present differently — great for public/private duality, messy if one expects the other to “look” like they sound.`
+      : scores.personality >= 80
+        ? `The room reads you as a unit even before you speak. Use that; don’t let it become a costume you can’t take off.`
+        : `Neither mask nor microphone fully match — translate out loud. Name the gap and it becomes a feature.`);
 }
 
 function animateScore(target) {
@@ -1267,8 +1675,222 @@ function resetTool() {
   document.getElementById('p2Name').value = '';
   document.getElementById('p2Date').value = '';
   document.getElementById('p2Place').value = '';
+  document.getElementById('proDeepSection').classList.add('hidden');
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
+
+// ========== FREEMIUM UI ==========
+function updateUsageUI(usage) {
+  const u = usage || (window.FM && FM.getUsageSnapshot()) || {};
+  const pill = document.getElementById('usagePill');
+  const text = document.getElementById('usageText');
+  const btnAccount = document.getElementById('btnAccount');
+  const btnUpgrade = document.getElementById('btnUpgrade');
+  const btnHistory = document.getElementById('btnHistory');
+  const modeSelect = document.getElementById('relationshipMode');
+  const modeLock = document.getElementById('modeLock');
+  const btnSignOut = document.getElementById('btnSignOut');
+  const btnPortal = document.getElementById('btnPortal');
+
+  if (u.isPro) {
+    pill.classList.add('pro');
+    text.textContent = 'Frequency Pro · unlimited';
+    btnUpgrade.textContent = 'Pro active';
+    btnUpgrade.onclick = () => openPortal();
+    modeSelect.disabled = false;
+    modeLock.textContent = '✦ Unlocked';
+    btnHistory.style.display = '';
+  } else {
+    pill.classList.remove('pro');
+    const left = u.remaining != null ? u.remaining : 3;
+    text.textContent = left === 1 ? '1 free match left' : `${left} free matches left`;
+    btnUpgrade.textContent = `Go Pro · ${u.priceLabel || '$4.99/mo'}`;
+    btnUpgrade.onclick = () => openPaywall();
+    modeSelect.disabled = true;
+    modeSelect.value = 'general';
+    modeLock.textContent = '🔒 Frequency Pro';
+    btnHistory.style.display = 'none';
+  }
+
+  if (u.signedIn) {
+    btnAccount.textContent = u.email ? u.email.split('@')[0] : 'Account';
+    if (btnSignOut) btnSignOut.style.display = '';
+    if (btnPortal) btnPortal.style.display = u.isPro ? '' : 'none';
+  } else {
+    btnAccount.textContent = 'Sign in';
+    if (btnSignOut) btnSignOut.style.display = 'none';
+    if (btnPortal) btnPortal.style.display = 'none';
+  }
+}
+
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
+function openAuthModal() {
+  document.getElementById('authError').textContent = '';
+  const u = window.FM && FM.getUsageSnapshot();
+  document.getElementById('authHint').textContent = u && u.signedIn
+    ? `Signed in as ${u.email || 'member'}.`
+    : 'We’ll email a one-time link. No password.';
+  openModal('authModal');
+}
+function openPaywall() {
+  document.getElementById('paywallError').textContent = '';
+  openModal('paywallModal');
+}
+
+async function submitMagicLink() {
+  const email = document.getElementById('authEmail').value.trim();
+  const err = document.getElementById('authError');
+  err.textContent = '';
+  if (!email) {
+    err.textContent = 'Enter your email.';
+    return;
+  }
+  if (!window.FM || !FM.isConfigured()) {
+    err.textContent = 'Auth not configured yet — add Supabase keys in js/config.js (see docs/FREEMIUM.md).';
+    return;
+  }
+  try {
+    await FM.signInWithEmail(email);
+    document.getElementById('authHint').textContent = 'Check your inbox for the magic link.';
+  } catch (e) {
+    err.textContent = e.message || 'Sign-in failed';
+  }
+}
+
+async function doSignOut() {
+  if (window.FM) await FM.signOut();
+  closeModal('authModal');
+  updateUsageUI();
+}
+
+async function startProCheckout() {
+  const err = document.getElementById('paywallError');
+  err.textContent = '';
+  if (!window.FM) return;
+  const u = FM.getUsageSnapshot();
+  if (!u.signedIn) {
+    err.textContent = 'Sign in first, then subscribe.';
+    return;
+  }
+  try {
+    await FM.startCheckout();
+  } catch (e) {
+    err.textContent = e.message || 'Checkout unavailable';
+  }
+}
+
+async function openPortal() {
+  try {
+    if (window.FM) await FM.openBillingPortal();
+  } catch (e) {
+    alert(e.message || 'Billing portal unavailable');
+  }
+}
+
+async function persistMatch(alertOnFail) {
+  if (!window.matchData || !window.FM) return;
+  const { p1, p2, scores, overall, relationshipMode, isPro, strengths, tensions, pattern } = window.matchData;
+  const result = await FM.saveMatch({
+    p1_name: p1.fullName,
+    p1_date: p1.date,
+    p1_place: p1.place,
+    p2_name: p2.fullName,
+    p2_date: p2.date,
+    p2_place: p2.place,
+    relationship_mode: relationshipMode || 'general',
+    overall_score: overall,
+    scores,
+    profiles: { p1, p2 },
+    narrative: { strengths, tensions, pattern },
+    is_pro_analysis: Boolean(isPro),
+  });
+  if (alertOnFail && !result.saved && result.reason === 'pro_required') {
+    openPaywall();
+  } else if (alertOnFail && result.saved) {
+    alert('Saved to your library.');
+  }
+  return result;
+}
+
+async function saveCurrentMatch() {
+  await persistMatch(true);
+}
+
+async function toggleHistory() {
+  const panel = document.getElementById('historyPanel');
+  const opening = !panel.classList.contains('active');
+  if (!opening) {
+    panel.classList.remove('active');
+    return;
+  }
+  if (window.FM && !FM.isPro()) {
+    openPaywall();
+    return;
+  }
+  panel.classList.add('active');
+  const list = document.getElementById('historyList');
+  list.innerHTML = '<div class="history-item">Loading…</div>';
+  const { matches, source } = await FM.listMatches();
+  if (!matches.length) {
+    list.innerHTML = '<div class="history-item">No saved matches yet. Run a Pro collision — it auto-saves.</div>';
+    return;
+  }
+  list.innerHTML = matches.map(m => {
+    const a = m.p1_name || (m.profiles && m.profiles.p1 && m.profiles.p1.fullName) || '?';
+    const b = m.p2_name || (m.profiles && m.profiles.p2 && m.profiles.p2.fullName) || '?';
+    const score = m.overall_score != null ? m.overall_score : m.overall;
+    const when = m.created_at ? new Date(m.created_at).toLocaleDateString() : '';
+    const mode = m.relationship_mode || 'general';
+    return `<div class="history-item">
+      <div><strong>${escapeHtml(String(a).split(' ')[0])} × ${escapeHtml(String(b).split(' ')[0])}</strong>
+        <div class="meta">${escapeHtml(mode)} · ${escapeHtml(when)} · ${source}</div>
+      </div>
+      <div class="score">${score}%</div>
+    </div>`;
+  }).join('');
+  panel.scrollIntoView({ behavior: 'smooth' });
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Boot freemium
+document.addEventListener('DOMContentLoaded', async () => {
+  if (!window.FM) return;
+  FM.on('usage', updateUsageUI);
+  FM.on('auth', () => updateUsageUI());
+  FM.on('ready', () => updateUsageUI());
+  await FM.init();
+  updateUsageUI();
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('checkout') === 'success') {
+    // Refresh profile after Stripe return
+    setTimeout(async () => {
+      if (FM.getSession()) {
+        // soft reload profile via re-init auth path
+        location.replace(location.pathname);
+      }
+    }, 800);
+  }
+});
+
+// Close modals on backdrop click
+['authModal', 'paywallModal'].forEach(id => {
+  document.getElementById(id).addEventListener('click', (e) => {
+    if (e.target.id === id) closeModal(id);
+  });
+});
 </script>
 
 </body>

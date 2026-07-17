@@ -1,0 +1,10 @@
+# Supabase project config (functions only; link with `supabase link`)
+
+[functions.create-checkout]
+verify_jwt = false
+
+[functions.create-portal]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
