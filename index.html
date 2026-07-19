@@ -864,6 +864,56 @@ footer a {
 .history-item .score { color: var(--cyan); font-weight: 700; }
 .history-item .meta { color: rgba(240,240,240,0.45); font-size: 10px; }
 
+/* Free for players CTA */
+.free-players-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 0 auto 28px;
+  max-width: 720px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(38, 228, 216, 0.45);
+  background: linear-gradient(135deg, rgba(38, 228, 216, 0.12), rgba(107, 77, 242, 0.14));
+  box-shadow: 0 0 32px rgba(38, 228, 216, 0.12);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.free-players-cta:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 40px rgba(38, 228, 216, 0.22);
+  transform: translateY(-1px);
+}
+.free-players-cta .cta-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--core-black);
+  background: linear-gradient(90deg, var(--cyan), var(--gold));
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.free-players-cta .cta-copy {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  color: var(--soft-white);
+  font-style: italic;
+  line-height: 1.3;
+}
+.free-players-cta .cta-copy strong {
+  font-family: 'Space Mono', monospace;
+  font-style: normal;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  color: var(--cyan);
+}
+
 </style>
 </head>
 <body>
@@ -879,9 +929,14 @@ footer a {
   <p class="meta-line">⚡ NUMEROLOGY · ASTROLOGY · ARCHETYPAL RESONANCE ⚡</p>
 </header>
 
+<button type="button" class="free-players-cta" id="freePlayersCta" onclick="document.getElementById('inputPhase').scrollIntoView({behavior:'smooth'})" aria-label="Frequency Match is free for players — start a match">
+  <span class="cta-badge">Free for Players</span>
+  <span class="cta-copy">Frequency Match is free for players — <strong>3 full collisions, no card needed</strong></span>
+</button>
+
 <div class="top-bar" id="topBar">
   <div class="usage-pill" id="usagePill">
-    <strong id="usageText">3 free matches</strong> · then Frequency Pro
+    <strong id="usageText">3 free matches</strong> · free for players
   </div>
   <div class="top-actions">
     <button type="button" class="btn-sm" id="btnHistory" onclick="toggleHistory()" style="display:none">History</button>
@@ -1055,7 +1110,7 @@ footer a {
 <footer>
   <p class="tagline">Reality is programmable. Consciousness is the code.</p>
   <p>Built by <a href="https://thefirstspark.shop" target="_blank">The First Spark</a> · Powered by Soul Maps</p>
-  <p style="margin-top:10px;font-size:11px;opacity:0.45">3 free collisions · then Frequency Pro $4.99/month</p>
+  <p style="margin-top:10px;font-size:11px;opacity:0.45">Free for players · 3 collisions · then Frequency Pro $4.99/month</p>
 </footer>
 
 </div>
@@ -1692,6 +1747,7 @@ function updateUsageUI(usage) {
   const btnSignOut = document.getElementById('btnSignOut');
   const btnPortal = document.getElementById('btnPortal');
 
+  const freeCta = document.getElementById('freePlayersCta');
   if (u.isPro) {
     pill.classList.add('pro');
     text.textContent = 'Frequency Pro · unlimited';
@@ -1700,16 +1756,20 @@ function updateUsageUI(usage) {
     modeSelect.disabled = false;
     modeLock.textContent = '✦ Unlocked';
     btnHistory.style.display = '';
+    if (freeCta) freeCta.style.display = 'none';
   } else {
     pill.classList.remove('pro');
     const left = u.remaining != null ? u.remaining : 3;
-    text.textContent = left === 1 ? '1 free match left' : `${left} free matches left`;
+    text.textContent = left === 1
+      ? '1 free match left · free for players'
+      : `${left} free matches left · free for players`;
     btnUpgrade.textContent = `Go Pro · ${u.priceLabel || '$4.99/month'}`;
     btnUpgrade.onclick = () => openPaywall();
     modeSelect.disabled = true;
     modeSelect.value = 'general';
     modeLock.textContent = '🔒 Frequency Pro';
     btnHistory.style.display = 'none';
+    if (freeCta) freeCta.style.display = '';
   }
 
   if (u.signedIn) {
