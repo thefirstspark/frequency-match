@@ -20,8 +20,9 @@ After the 3rd free match, the next “Collide” opens the paywall (sign in + su
 ## Stack
 
 - **Frontend:** static HTML/JS (GitHub Pages) + Supabase JS CDN
-- **Auth / DB:** Supabase (`fm_profiles`, `fm_matches`)
+- **Auth / DB:** Supabase project **linktree** (`qqlodxrzisbwapjcvjoj`) — tables `fm_profiles`, `fm_matches` (isolated; free-tier project limit blocked a dedicated project)
 - **Billing:** Stripe Checkout + Customer Portal + webhook Edge Function
+- **Live config:** `js/config.js` (publishable key wired; `STRIPE_PRICE_ID` still empty until Stripe product exists)
 
 ## Setup checklist
 
