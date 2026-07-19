@@ -1,13 +1,13 @@
 /**
  * Frequency Match freemium client
- * Free: FREE_MATCH_LIMIT collisions · Pro: unlimited + saves + deeper analysis
+ * Players: FREE forever (unlimited core collisions)
+ * Frequency Pro ($4.99/month via Whop): saves, history, deep analysis, relationship lens
  */
 (function (global) {
-  const LS_USED = 'fm_free_matches_used';
   const LS_HISTORY = 'fm_local_history';
+  const LS_MATCH_COUNT = 'fm_match_count'; // stats only, never blocks
 
   const cfg = () => global.FM_CONFIG || {};
-  const limit = () => Number(cfg().FREE_MATCH_LIMIT) || 3;
 
   let supabase = null;
   let session = null;
@@ -24,35 +24,22 @@
     return '';
   }
 
-  function getGuestUsed() {
-    const n = parseInt(localStorage.getItem(LS_USED) || '0', 10);
+  function isPro() {
+    return Boolean(profile && profile.is_pro);
+  }
+
+  /** Core collide is always free for players. */
+  function canRunMatch() {
+    return true;
+  }
+
+  function matchCount() {
+    const n = parseInt(localStorage.getItem(LS_MATCH_COUNT) || '0', 10);
     return Number.isFinite(n) && n > 0 ? n : 0;
   }
 
-  function setGuestUsed(n) {
-    localStorage.setItem(LS_USED, String(Math.max(0, n)));
-  }
-
-  function isPro() {
-    if (profile && profile.is_pro) return true;
-    return false;
-  }
-
-  function freeUsed() {
-    if (session && profile) {
-      return Math.max(profile.free_matches_used || 0, getGuestUsed());
-    }
-    return getGuestUsed();
-  }
-
-  function remaining() {
-    if (isPro()) return null;
-    return Math.max(limit() - freeUsed(), 0);
-  }
-
-  function canRunMatch() {
-    if (isPro()) return true;
-    return remaining() > 0;
+  function bumpMatchCount() {
+    localStorage.setItem(LS_MATCH_COUNT, String(matchCount() + 1));
   }
 
   async function init() {
@@ -76,16 +63,12 @@
 
     const { data } = await supabase.auth.getSession();
     session = data.session || null;
-    if (session) {
-      await loadProfile();
-      await mergeGuestUsage();
-    }
+    if (session) await loadProfile();
 
     supabase.auth.onAuthStateChange(async (_event, s) => {
       session = s;
       if (session) {
         await loadProfile();
-        await mergeGuestUsage();
       } else {
         profile = null;
       }
@@ -123,30 +106,16 @@
       profile = inserted || null;
     } else {
       profile = data;
+      // Keep email fresh for Whop webhook matching
+      if (session.user.email && data.email !== session.user.email) {
+        await supabase
+          .from('fm_profiles')
+          .update({ email: session.user.email })
+          .eq('id', session.user.id);
+        profile = { ...data, email: session.user.email };
+      }
     }
     return profile;
-  }
-
-  async function mergeGuestUsage() {
-    if (!supabase || !session) return;
-    const guest = getGuestUsed();
-    if (guest <= 0) return;
-    const { data, error } = await supabase.rpc('fm_merge_guest_usage', {
-      guest_used: guest,
-    });
-    if (error) {
-      console.warn('[FM] mergeGuestUsage', error.message);
-      return;
-    }
-    if (data) {
-      profile = {
-        ...(profile || {}),
-        free_matches_used: data.free_matches_used,
-        is_pro: data.is_pro,
-      };
-      // Align local with server (higher used wins already applied server-side)
-      setGuestUsed(data.free_matches_used || guest);
-    }
   }
 
   function getUsageSnapshot() {
@@ -155,58 +124,32 @@
       signedIn: Boolean(session),
       email: session?.user?.email || null,
       isPro: isPro(),
-      freeUsed: freeUsed(),
-      remaining: remaining(),
-      limit: limit(),
-      canRun: canRunMatch(),
+      freeUsed: matchCount(),
+      remaining: null, // unlimited for players
+      limit: null,
+      canRun: true,
+      playersFree: true,
       priceLabel: cfg().PRO_PRICE_LABEL || '$4.99/month',
       proName: cfg().PRO_NAME || 'Frequency Pro',
     };
   }
 
-  /**
-   * Call before starting a collision. Returns { ok, reason?, usage }
-   */
+  /** Core match: always allowed (free for players). */
   async function authorizeMatch() {
-    if (!canRunMatch()) {
-      return { ok: false, reason: 'free_limit_reached', usage: getUsageSnapshot() };
-    }
     return { ok: true, usage: getUsageSnapshot() };
   }
 
-  /**
-   * Call after a successful collision. Decrements free quota when not Pro.
-   */
+  /** After a successful collision — stats only, never blocks. */
   async function recordMatch() {
-    if (isPro()) {
-      emit('usage', getUsageSnapshot());
-      return { ok: true, usage: getUsageSnapshot() };
-    }
-
-    if (supabase && session) {
-      const { data, error } = await supabase.rpc('fm_consume_match');
-      if (error) {
-        console.warn('[FM] consume', error.message);
-        // Fall back to local
-      } else if (data) {
-        if (data.ok === false) {
-          return { ok: false, reason: 'free_limit_reached', usage: getUsageSnapshot() };
-        }
-        profile = {
-          ...(profile || {}),
-          free_matches_used: data.free_matches_used,
-          is_pro: data.is_pro,
-        };
-        setGuestUsed(data.free_matches_used || getGuestUsed());
-        emit('usage', getUsageSnapshot());
-        return { ok: true, usage: getUsageSnapshot() };
-      }
-    }
-
-    const next = getGuestUsed() + 1;
-    setGuestUsed(next);
+    bumpMatchCount();
     emit('usage', getUsageSnapshot());
     return { ok: true, usage: getUsageSnapshot() };
+  }
+
+  /** Pro-only features (saves, history, deep lens). */
+  function requirePro() {
+    if (isPro()) return { ok: true, usage: getUsageSnapshot() };
+    return { ok: false, reason: 'pro_required', usage: getUsageSnapshot() };
   }
 
   async function signInWithEmail(email) {
@@ -230,7 +173,6 @@
   }
 
   async function saveMatch(matchPayload) {
-    // Local history always (last 20)
     try {
       const list = JSON.parse(localStorage.getItem(LS_HISTORY) || '[]');
       list.unshift({
@@ -303,16 +245,13 @@
     return { matches: data || [], source: 'cloud' };
   }
 
-  /**
-   * Open Whop checkout. Sign-in first so webhook can match email → Pro.
-   */
   async function startCheckout() {
     const checkoutUrl = cfg().WHOP_CHECKOUT_URL;
     if (!checkoutUrl) {
       throw new Error('WHOP_CHECKOUT_URL missing in js/config.js');
     }
     if (!session) {
-      throw new Error('Sign in with the same email you’ll use on Whop, then subscribe');
+      throw new Error('Sign in with the same email you’ll use on Whop, then upgrade');
     }
 
     try {
@@ -326,7 +265,6 @@
       );
     } catch (_) { /* ignore */ }
 
-    // Land back on Frequency Match after checkout when Whop allows redirect
     const returnUrl =
       window.location.origin +
       window.location.pathname +
@@ -350,7 +288,6 @@
     window.open(manage, '_blank', 'noopener,noreferrer');
   }
 
-  /** Re-fetch profile after Whop return (webhook may have flipped is_pro). */
   async function refreshProStatus() {
     if (session) await loadProfile();
     emit('usage', getUsageSnapshot());
@@ -358,7 +295,6 @@
     return getUsageSnapshot();
   }
 
-  // Simple event bus
   const listeners = {};
   function on(event, fn) {
     (listeners[event] = listeners[event] || []).push(fn);
@@ -379,10 +315,11 @@
     isConfigured,
     isPro,
     canRunMatch,
-    remaining,
+    remaining: () => null,
     getUsageSnapshot,
     authorizeMatch,
     recordMatch,
+    requirePro,
     signInWithEmail,
     signOut,
     saveMatch,

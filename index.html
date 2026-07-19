@@ -931,12 +931,12 @@ footer a {
 
 <button type="button" class="free-players-cta" id="freePlayersCta" onclick="document.getElementById('inputPhase').scrollIntoView({behavior:'smooth'})" aria-label="Frequency Match is free for players — start a match">
   <span class="cta-badge">Free for Players</span>
-  <span class="cta-copy">Frequency Match is free for players — <strong>3 full collisions, no card needed</strong></span>
+  <span class="cta-copy">Frequency Match is free for players — <strong>unlimited collisions, no card needed</strong></span>
 </button>
 
 <div class="top-bar" id="topBar">
   <div class="usage-pill" id="usagePill">
-    <strong id="usageText">3 free matches</strong> · free for players
+    <strong id="usageText">Free for players</strong> · unlimited matches
   </div>
   <div class="top-actions">
     <button type="button" class="btn-sm" id="btnHistory" onclick="toggleHistory()" style="display:none">History</button>
@@ -987,8 +987,8 @@ footer a {
 
   </div>
 
-  <!-- Pro: relationship lens (unlocked for Pro; free users see locked teaser) -->
-  <div class="pro-field" id="relationshipField">
+  <!-- Pro: relationship lens (unlocked for Pro; free players can still collide) -->
+  <div class="pro-field" id="relationshipField" onclick="if (window.FM && !FM.isPro()) openPaywall()">
     <div class="pro-field-label">
       Relationship lens
       <span class="pro-lock" id="modeLock">🔒 Frequency Pro</span>
@@ -1110,7 +1110,7 @@ footer a {
 <footer>
   <p class="tagline">Reality is programmable. Consciousness is the code.</p>
   <p>Built by <a href="https://thefirstspark.shop" target="_blank">The First Spark</a> · Powered by Soul Maps</p>
-  <p style="margin-top:10px;font-size:11px;opacity:0.45">Free for players · 3 collisions · then Frequency Pro $4.99/month</p>
+  <p style="margin-top:10px;font-size:11px;opacity:0.45">Free for players · unlimited matches · Pro $4.99/month optional</p>
 </footer>
 
 </div>
@@ -1136,20 +1136,21 @@ footer a {
 <div class="modal-overlay" id="paywallModal" role="dialog" aria-modal="true">
   <div class="modal">
     <button type="button" class="modal-close" onclick="closeModal('paywallModal')" aria-label="Close">&times;</button>
-    <h2>You’ve used your free collisions</h2>
-    <p class="lead">Keep colliding with Frequency Pro — $4.99/month via Whop.</p>
+    <h2>Frequency Pro</h2>
+    <p class="lead">Players stay free forever. Pro unlocks the deep toolkit — $4.99/month via Whop.</p>
     <ul class="feature-list">
-      <li>Unlimited frequency matches</li>
-      <li>Saved match history library</li>
-      <li>Deeper analysis: expression, personality, relationship lens</li>
-      <li>Romance / friendship / family / business readings</li>
+      <li>Players: unlimited free collisions (always)</li>
+      <li>Pro: saved match history library</li>
+      <li>Pro: deeper analysis — expression, personality, birthday</li>
+      <li>Pro: romance / friendship / family / business lens</li>
     </ul>
     <div class="error" id="paywallError"></div>
     <div class="btn-row">
-      <button type="button" class="btn" id="btnCheckout" onclick="startProCheckout()">Unlock on Whop · $4.99/month</button>
+      <button type="button" class="btn" id="btnCheckout" onclick="startProCheckout()">Upgrade on Whop · $4.99/month</button>
       <button type="button" class="btn btn-secondary" onclick="openAuthModal(); closeModal('paywallModal')">Sign in first</button>
+      <button type="button" class="btn btn-secondary" onclick="closeModal('paywallModal'); document.getElementById('inputPhase').scrollIntoView({behavior:'smooth'})">Keep playing free</button>
     </div>
-    <p class="hint">Sign in with the <strong>same email</strong> you use on Whop so Pro unlocks automatically. Manage or cancel anytime in your Whop orders.</p>
+    <p class="hint">Sign in with the <strong>same email</strong> you use on Whop so Pro unlocks automatically. Core Frequency Match stays free for players either way.</p>
   </div>
 </div>
 
@@ -1459,13 +1460,9 @@ async function runCollision() {
     return;
   }
 
-  // Freemium gate
+  // Players are free — core collide never paywalls
   if (window.FM) {
-    const gate = await FM.authorizeMatch();
-    if (!gate.ok) {
-      openPaywall();
-      return;
-    }
+    await FM.authorizeMatch();
   }
 
   const isPro = window.FM ? FM.isPro() : false;
@@ -1750,7 +1747,7 @@ function updateUsageUI(usage) {
   const freeCta = document.getElementById('freePlayersCta');
   if (u.isPro) {
     pill.classList.add('pro');
-    text.textContent = 'Frequency Pro · unlimited';
+    text.textContent = 'Frequency Pro · deep toolkit';
     btnUpgrade.textContent = 'Pro active';
     btnUpgrade.onclick = () => openPortal();
     modeSelect.disabled = false;
@@ -1759,10 +1756,7 @@ function updateUsageUI(usage) {
     if (freeCta) freeCta.style.display = 'none';
   } else {
     pill.classList.remove('pro');
-    const left = u.remaining != null ? u.remaining : 3;
-    text.textContent = left === 1
-      ? '1 free match left · free for players'
-      : `${left} free matches left · free for players`;
+    text.textContent = 'Free for players · unlimited matches';
     btnUpgrade.textContent = `Go Pro · ${u.priceLabel || '$4.99/month'}`;
     btnUpgrade.onclick = () => openPaywall();
     modeSelect.disabled = true;

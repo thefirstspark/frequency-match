@@ -8,9 +8,9 @@ A public tool from [The First Spark](https://thefirstspark.shop) that turns two 
 
 ## Freemium
 
-| | Free | Frequency Pro ($4.99/month) |
+| | Free for players | Frequency Pro ($4.99/month via Whop) |
 |--|------|---------------------------|
-| Collisions | **3** | Unlimited |
+| Collisions | **Unlimited** | Unlimited |
 | Core score + cards + download | ✓ | ✓ |
 | Saved match library | — | ✓ |
 | Relationship lens + deep dimensions | — | ✓ |

@@ -9,7 +9,7 @@ window.FM_CONFIG = {
   WHOP_PLAN_ID: 'plan_XXXX',
   WHOP_MANAGE_URL: 'https://whop.com/orders',
   FUNCTIONS_BASE: 'https://YOUR_PROJECT.supabase.co/functions/v1',
-  FREE_MATCH_LIMIT: 3,
+  PLAYERS_FREE: true,
   PRO_PRICE_LABEL: '$4.99/month',
   PRO_NAME: 'Frequency Pro',
   SITE_NAME: 'Frequency Match',

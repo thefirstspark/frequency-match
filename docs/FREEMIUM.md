@@ -4,18 +4,17 @@
 
 | Tier | Price | What you get |
 |------|-------|----------------|
-| **Free** | $0 | **3** full collisions. Player cards, score, 5 core dimensions, strengths/tensions/pattern, download + share. |
-| **Frequency Pro** | **$4.99/month** | Unlimited collisions · saved match history · deeper analysis (relationship mode, expression/personality dimensions, extended narrative) |
+| **Free for players** | $0 | **Unlimited** collisions. Player cards, score, 5 core dimensions, strengths/tensions/pattern, download + share. No card needed. |
+| **Frequency Pro** | **$4.99/month** (Whop) | Everything free + saved match history · deeper analysis (relationship mode, expression/personality/birthday) · extended narrative |
 
-After the 3rd free match, the next “Collide” opens the paywall (sign in + subscribe).
+Core collide is never paywalled. Pro is optional deep toolkit.
 
 ## User flow
 
-1. Guest runs matches → local counter decrements (banner: “2 free matches left”).
-2. At 0 remaining → paywall modal.
-3. Sign in (magic link) → free remaining syncs to cloud (anti-abuse across devices is soft; Pro is the real unlock).
-4. Subscribe via Stripe Checkout → webhook sets `is_pro`.
-5. Pro: unlimited runs, auto-save to library, Pro dimensions + relationship lens.
+1. Anyone runs unlimited matches — free for players.
+2. Optional: Sign in (magic link) for account + Pro.
+3. Upgrade via Whop → webhook sets `is_pro` (same email).
+4. Pro: auto-save library, relationship lens, deep dimensions.
 
 ## Stack
 

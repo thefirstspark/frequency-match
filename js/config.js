@@ -10,7 +10,8 @@ window.FM_CONFIG = {
   WHOP_PLAN_ID: 'plan_gX14Qd9V6UEml',
   WHOP_MANAGE_URL: 'https://whop.com/orders',
   FUNCTIONS_BASE: 'https://qqlodxrzisbwapjcvjoj.supabase.co/functions/v1',
-  FREE_MATCH_LIMIT: 3,
+  // Core collide is free forever for players (no match cap)
+  PLAYERS_FREE: true,
   PRO_PRICE_LABEL: '$4.99/month',
   PRO_NAME: 'Frequency Pro',
   SITE_NAME: 'Frequency Match',
