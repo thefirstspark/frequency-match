@@ -5,7 +5,7 @@
 | Tier | Price | What you get |
 |------|-------|----------------|
 | **Free** | $0 | **3** full collisions. Player cards, score, 5 core dimensions, strengths/tensions/pattern, download + share. |
-| **Frequency Pro** | **$4.99/mo** | Unlimited collisions · saved match history · deeper analysis (relationship mode, expression/personality dimensions, extended narrative) |
+| **Frequency Pro** | **$4.99/month** | Unlimited collisions · saved match history · deeper analysis (relationship mode, expression/personality dimensions, extended narrative) |
 
 After the 3rd free match, the next “Collide” opens the paywall (sign in + subscribe).
 
@@ -40,10 +40,10 @@ Copy `js/config.example.js` → `js/config.js` (already present; fill keys):
 window.FM_CONFIG = {
   SUPABASE_URL: 'https://YOUR_PROJECT.supabase.co',
   SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_...',
-  STRIPE_PRICE_ID: 'price_...',           // $4.99/mo recurring
+  WHOP_CHECKOUT_URL: 'https://whop.com/checkout/plan_gX14Qd9V6UEml',
   FUNCTIONS_BASE: 'https://YOUR_PROJECT.supabase.co/functions/v1',
   FREE_MATCH_LIMIT: 3,
-  PRO_PRICE_LABEL: '$4.99/mo',
+  PRO_PRICE_LABEL: '$4.99/month',
 };
 ```
 

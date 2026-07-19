@@ -159,7 +159,7 @@
       remaining: remaining(),
       limit: limit(),
       canRun: canRunMatch(),
-      priceLabel: cfg().PRO_PRICE_LABEL || '$4.99/mo',
+      priceLabel: cfg().PRO_PRICE_LABEL || '$4.99/month',
       proName: cfg().PRO_NAME || 'Frequency Pro',
     };
   }

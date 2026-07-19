@@ -8,7 +8,7 @@ A public tool from [The First Spark](https://thefirstspark.shop) that turns two 
 
 ## Freemium
 
-| | Free | Frequency Pro ($4.99/mo) |
+| | Free | Frequency Pro ($4.99/month) |
 |--|------|---------------------------|
 | Collisions | **3** | Unlimited |
 | Core score + cards + download | ✓ | ✓ |

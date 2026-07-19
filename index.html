@@ -886,7 +886,7 @@ footer a {
   <div class="top-actions">
     <button type="button" class="btn-sm" id="btnHistory" onclick="toggleHistory()" style="display:none">History</button>
     <button type="button" class="btn-sm" id="btnAccount" onclick="openAuthModal()">Sign in</button>
-    <button type="button" class="btn-sm primary" id="btnUpgrade" onclick="openPaywall()">Go Pro · $4.99/mo</button>
+    <button type="button" class="btn-sm primary" id="btnUpgrade" onclick="openPaywall()">Go Pro · $4.99/month</button>
   </div>
 </div>
 
@@ -1055,7 +1055,7 @@ footer a {
 <footer>
   <p class="tagline">Reality is programmable. Consciousness is the code.</p>
   <p>Built by <a href="https://thefirstspark.shop" target="_blank">The First Spark</a> · Powered by Soul Maps</p>
-  <p style="margin-top:10px;font-size:11px;opacity:0.45">3 free collisions · then Frequency Pro $4.99/mo</p>
+  <p style="margin-top:10px;font-size:11px;opacity:0.45">3 free collisions · then Frequency Pro $4.99/month</p>
 </footer>
 
 </div>
@@ -1082,7 +1082,7 @@ footer a {
   <div class="modal">
     <button type="button" class="modal-close" onclick="closeModal('paywallModal')" aria-label="Close">&times;</button>
     <h2>You’ve used your free collisions</h2>
-    <p class="lead">Keep colliding with Frequency Pro — $4.99/mo via Whop.</p>
+    <p class="lead">Keep colliding with Frequency Pro — $4.99/month via Whop.</p>
     <ul class="feature-list">
       <li>Unlimited frequency matches</li>
       <li>Saved match history library</li>
@@ -1091,7 +1091,7 @@ footer a {
     </ul>
     <div class="error" id="paywallError"></div>
     <div class="btn-row">
-      <button type="button" class="btn" id="btnCheckout" onclick="startProCheckout()">Unlock on Whop · $4.99/mo</button>
+      <button type="button" class="btn" id="btnCheckout" onclick="startProCheckout()">Unlock on Whop · $4.99/month</button>
       <button type="button" class="btn btn-secondary" onclick="openAuthModal(); closeModal('paywallModal')">Sign in first</button>
     </div>
     <p class="hint">Sign in with the <strong>same email</strong> you use on Whop so Pro unlocks automatically. Manage or cancel anytime in your Whop orders.</p>
@@ -1704,7 +1704,7 @@ function updateUsageUI(usage) {
     pill.classList.remove('pro');
     const left = u.remaining != null ? u.remaining : 3;
     text.textContent = left === 1 ? '1 free match left' : `${left} free matches left`;
-    btnUpgrade.textContent = `Go Pro · ${u.priceLabel || '$4.99/mo'}`;
+    btnUpgrade.textContent = `Go Pro · ${u.priceLabel || '$4.99/month'}`;
     btnUpgrade.onclick = () => openPaywall();
     modeSelect.disabled = true;
     modeSelect.value = 'general';
