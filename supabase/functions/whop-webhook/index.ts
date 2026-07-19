@@ -93,6 +93,17 @@ async function verifyStandardWebhook(
 
 export default {
   fetch: withSupabase({ auth: 'none' }, async (req, ctx) => {
+    // Health / dashboard URL checks (Whop or browser may GET the endpoint)
+    if (req.method === 'GET' || req.method === 'HEAD') {
+      return Response.json({
+        ok: true,
+        service: 'frequency-match-whop-webhook',
+        accept: 'POST',
+      })
+    }
+    if (req.method === 'OPTIONS') {
+      return new Response(null, { status: 204 })
+    }
     if (req.method !== 'POST') {
       return Response.json({ error: 'Method not allowed' }, { status: 405 })
     }
