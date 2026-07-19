@@ -303,60 +303,59 @@
     return { matches: data || [], source: 'cloud' };
   }
 
+  /**
+   * Open Whop checkout. Sign-in first so webhook can match email → Pro.
+   */
   async function startCheckout() {
-    if (!isConfigured()) {
-      throw new Error('Billing not configured yet. Add Supabase + Stripe keys in js/config.js');
+    const checkoutUrl = cfg().WHOP_CHECKOUT_URL;
+    if (!checkoutUrl) {
+      throw new Error('WHOP_CHECKOUT_URL missing in js/config.js');
     }
     if (!session) {
-      throw new Error('Sign in first to subscribe');
-    }
-    if (!cfg().STRIPE_PRICE_ID) {
-      throw new Error('STRIPE_PRICE_ID missing in js/config.js');
+      throw new Error('Sign in with the same email you’ll use on Whop, then subscribe');
     }
 
-    const base = functionsBase();
-    const res = await fetch(base + '/create-checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session.access_token}`,
-        apikey: cfg().SUPABASE_PUBLISHABLE_KEY,
-      },
-      body: JSON.stringify({
-        priceId: cfg().STRIPE_PRICE_ID,
-        successUrl: window.location.href.split('#')[0] + '?checkout=success',
-        cancelUrl: window.location.href.split('#')[0] + '?checkout=cancel',
-      }),
-    });
+    try {
+      localStorage.setItem(
+        'fm_whop_pending',
+        JSON.stringify({
+          userId: session.user.id,
+          email: session.user.email || '',
+          at: Date.now(),
+        })
+      );
+    } catch (_) { /* ignore */ }
 
-    const body = await res.json().catch(() => ({}));
-    if (!res.ok) {
-      throw new Error(body.error || body.message || 'Checkout failed');
+    // Land back on Frequency Match after checkout when Whop allows redirect
+    const returnUrl =
+      window.location.origin +
+      window.location.pathname +
+      '?whop=return';
+    let dest = checkoutUrl;
+    try {
+      const u = new URL(checkoutUrl);
+      if (!u.searchParams.has('redirect')) {
+        u.searchParams.set('redirect', returnUrl);
+      }
+      dest = u.toString();
+    } catch (_) {
+      dest = checkoutUrl;
     }
-    if (body.url) {
-      window.location.href = body.url;
-      return;
-    }
-    throw new Error('No checkout URL returned');
+
+    window.location.href = dest;
   }
 
   async function openBillingPortal() {
-    if (!session) throw new Error('Sign in first');
-    const base = functionsBase();
-    const res = await fetch(base + '/create-portal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session.access_token}`,
-        apikey: cfg().SUPABASE_PUBLISHABLE_KEY,
-      },
-      body: JSON.stringify({
-        returnUrl: window.location.href.split('#')[0],
-      }),
-    });
-    const body = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(body.error || body.message || 'Portal failed');
-    if (body.url) window.location.href = body.url;
+    const manage = cfg().WHOP_MANAGE_URL || 'https://whop.com/orders';
+    window.open(manage, '_blank', 'noopener,noreferrer');
+  }
+
+  /** Re-fetch profile after Whop return (webhook may have flipped is_pro). */
+  async function refreshProStatus() {
+    if (session) await loadProfile();
+    emit('usage', getUsageSnapshot());
+    emit('auth', { session, profile });
+    return getUsageSnapshot();
   }
 
   // Simple event bus
@@ -390,6 +389,7 @@
     listMatches,
     startCheckout,
     openBillingPortal,
+    refreshProStatus,
     getSession: () => session,
     getProfile: () => profile,
     isReady: () => ready,

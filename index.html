@@ -1082,7 +1082,7 @@ footer a {
   <div class="modal">
     <button type="button" class="modal-close" onclick="closeModal('paywallModal')" aria-label="Close">&times;</button>
     <h2>You’ve used your free collisions</h2>
-    <p class="lead">Keep colliding with Frequency Pro — $4.99/mo.</p>
+    <p class="lead">Keep colliding with Frequency Pro — $4.99/mo via Whop.</p>
     <ul class="feature-list">
       <li>Unlimited frequency matches</li>
       <li>Saved match history library</li>
@@ -1091,10 +1091,10 @@ footer a {
     </ul>
     <div class="error" id="paywallError"></div>
     <div class="btn-row">
-      <button type="button" class="btn" id="btnCheckout" onclick="startProCheckout()">Unlock Frequency Pro · $4.99/mo</button>
+      <button type="button" class="btn" id="btnCheckout" onclick="startProCheckout()">Unlock on Whop · $4.99/mo</button>
       <button type="button" class="btn btn-secondary" onclick="openAuthModal(); closeModal('paywallModal')">Sign in first</button>
     </div>
-    <p class="hint">Cancel anytime via the billing portal. 3 free matches always reset per account after setup.</p>
+    <p class="hint">Sign in with the <strong>same email</strong> you use on Whop so Pro unlocks automatically. Manage or cancel anytime in your Whop orders.</p>
   </div>
 </div>
 
@@ -1774,7 +1774,7 @@ async function startProCheckout() {
   if (!window.FM) return;
   const u = FM.getUsageSnapshot();
   if (!u.signedIn) {
-    err.textContent = 'Sign in first, then subscribe.';
+    err.textContent = 'Sign in first (same email you’ll use on Whop), then subscribe.';
     return;
   }
   try {
@@ -1874,14 +1874,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateUsageUI();
 
   const params = new URLSearchParams(window.location.search);
-  if (params.get('checkout') === 'success') {
-    // Refresh profile after Stripe return
-    setTimeout(async () => {
-      if (FM.getSession()) {
-        // soft reload profile via re-init auth path
-        location.replace(location.pathname);
+  if (params.get('whop') === 'return' || params.get('checkout') === 'success') {
+    // Returning from Whop — webhook may still be in flight; poll profile briefly
+    const note = document.getElementById('usageText');
+    if (note) note.textContent = 'Checking Frequency Pro…';
+    let tries = 0;
+    const poll = async () => {
+      tries += 1;
+      const u = await FM.refreshProStatus();
+      if (u.isPro || tries >= 8) {
+        history.replaceState({}, '', location.pathname);
+        updateUsageUI(u);
+        if (u.isPro) {
+          alert('Frequency Pro is active. Unlimited collisions unlocked.');
+        } else {
+          alert('Payment received — if Pro isn’t active yet, wait a minute and refresh. Use the same email on Whop and Frequency Match.');
+        }
+        return;
       }
-    }, 800);
+      setTimeout(poll, 2000);
+    };
+    setTimeout(poll, 1200);
   }
 });
 

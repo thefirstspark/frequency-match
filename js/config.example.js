@@ -5,7 +5,9 @@
 window.FM_CONFIG = {
   SUPABASE_URL: 'https://YOUR_PROJECT.supabase.co',
   SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_...',
-  STRIPE_PRICE_ID: 'price_...',
+  WHOP_CHECKOUT_URL: 'https://whop.com/checkout/plan_XXXX',
+  WHOP_PLAN_ID: 'plan_XXXX',
+  WHOP_MANAGE_URL: 'https://whop.com/orders',
   FUNCTIONS_BASE: 'https://YOUR_PROJECT.supabase.co/functions/v1',
   FREE_MATCH_LIMIT: 3,
   PRO_PRICE_LABEL: '$4.99/mo',

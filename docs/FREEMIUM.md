@@ -21,8 +21,8 @@ After the 3rd free match, the next “Collide” opens the paywall (sign in + su
 
 - **Frontend:** static HTML/JS (GitHub Pages) + Supabase JS CDN
 - **Auth / DB:** Supabase project **linktree** (`qqlodxrzisbwapjcvjoj`) — tables `fm_profiles`, `fm_matches` (isolated; free-tier project limit blocked a dedicated project)
-- **Billing:** Stripe Checkout + Customer Portal + webhook Edge Function
-- **Live config:** `js/config.js` (publishable key wired; `STRIPE_PRICE_ID` still empty until Stripe product exists)
+- **Billing:** **Whop** checkout `plan_gX14Qd9V6UEml` + `whop-webhook` Edge Function (grants `is_pro` by email)
+- **Live config:** `js/config.js` — `WHOP_CHECKOUT_URL` set
 
 ## Setup checklist
 
@@ -49,32 +49,27 @@ window.FM_CONFIG = {
 
 Do **not** put Stripe secret keys in the frontend.
 
-### 3. Stripe
+### 3. Whop billing
 
-1. Create product **Frequency Pro** — $4.99/month recurring.
-2. Copy Price ID → `STRIPE_PRICE_ID`.
-3. Deploy Edge Functions (below).
-4. Stripe Dashboard → Webhooks →  
-   `https://YOUR_PROJECT.supabase.co/functions/v1/stripe-webhook`  
-   Events: `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`.
-5. Secrets:
+Checkout plan (live):
 
-```bash
-supabase secrets set STRIPE_SECRET_KEY=sk_live_...
-supabase secrets set STRIPE_WEBHOOK_SECRET=whsec_...
-supabase secrets set SITE_URL=https://frequency.thefirstspark.shop
-```
+`https://whop.com/checkout/plan_gX14Qd9V6UEml`
 
-### 4. Deploy functions
+1. Whop Dashboard → **Developer** → **Webhooks** → Create webhook  
+   URL: `https://qqlodxrzisbwapjcvjoj.supabase.co/functions/v1/whop-webhook`  
+   Events: `membership.activated`, `membership.deactivated`, `membership.went_valid`, `membership.went_invalid`, `payment.succeeded`
+2. Copy webhook secret → set on Supabase:
 
 ```bash
-cd frequency-match
-supabase functions deploy create-checkout
-supabase functions deploy create-portal
-supabase functions deploy stripe-webhook
+# Management API or Dashboard → Edge Functions → Secrets
+WHOP_WEBHOOK_SECRET=...
 ```
 
-`config.toml` sets `verify_jwt = false` for webhook + checkout as required.
+3. Tell members: **sign in on Frequency Match with the same email as Whop** so Pro auto-unlocks.
+
+### 4. Deploy Whop webhook
+
+Already deployable via Management API multipart `functions/deploy?slug=whop-webhook`.
 
 ### 5. Auth URL allowlist
 

@@ -34,8 +34,8 @@ Static HTML/JS (GitHub Pages) plus optional freemium backend:
 
 - Client engines in `index.html` (html2canvas CDN for PNG export)
 - Supabase Auth + Postgres (`fm_profiles`, `fm_matches`) — see `supabase/schema.sql`
-- Stripe Checkout / Portal via Edge Functions in `supabase/functions/`
-- Config: `js/config.js` (public keys only)
+- Whop checkout (`plan_gX14Qd9V6UEml`) + `whop-webhook` Edge Function
+- Config: `js/config.js` (public keys + Whop URL only)
 
 Local free-limit demo works without keys (localStorage). Cloud auth, Pro billing, and cloud saves need Supabase + Stripe wired.
 
