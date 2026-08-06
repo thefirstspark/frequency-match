@@ -6,14 +6,16 @@ A public tool from [The First Spark](https://thefirstspark.shop) that turns two 
 
 **Live:** https://frequency.thefirstspark.shop
 
-## Freemium
+## Access (Whop members)
 
-| | Free for players | Frequency Pro ($4.99/month via Whop) |
-|--|------|---------------------------|
-| Collisions | **Unlimited** | Unlimited |
-| Core score + cards + download | ✓ | ✓ |
-| Saved match library | — | ✓ |
-| Relationship lens + deep dimensions | — | ✓ |
+| | Locked | Players (pass) | Frequency Pro ($4.99/month via Whop) |
+|--|------|----------------|-------------------------------------|
+| Collisions | — | ✓ | ✓ |
+| Core score + cards + download | — | ✓ | ✓ |
+| Saved match library | — | — | ✓ |
+| Relationship lens + deep dimensions | — | — | ✓ |
+
+**Not free** unless you pay **$4.99/month** or hold a **player** pass. Designed as a Whop embedded app with an in-app access gate.
 
 Full setup: [docs/FREEMIUM.md](docs/FREEMIUM.md)
 
@@ -30,14 +32,12 @@ Then renders both as Player Cards (rarity tier, sigil, stats) and computes a wei
 
 ## Tech
 
-Static HTML/JS (GitHub Pages) plus optional freemium backend:
+Static HTML/JS (GitHub Pages) plus members backend:
 
 - Client engines in `index.html` (html2canvas CDN for PNG export)
 - Supabase Auth + Postgres (`fm_profiles`, `fm_matches`) — see `supabase/schema.sql`
-- Whop checkout (`plan_gX14Qd9V6UEml`) + `whop-webhook` Edge Function
-- Config: `js/config.js` (public keys + Whop URL only)
-
-Local free-limit demo works without keys (localStorage). Cloud auth, Pro billing, and cloud saves need Supabase + Stripe wired.
+- Whop checkout (`plan_gX14Qd9V6UEml`) + `whop-webhook` Edge Function (Pro + player plans)
+- Config: `js/config.js` — `ACCESS_MODE: 'members'`
 
 ```powershell
 cd frequency-match
