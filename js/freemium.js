@@ -1,11 +1,11 @@
 /**
- * Frequency Match freemium client
- * Players: FREE forever (unlimited core collisions)
- * Frequency Pro ($4.99/month via Whop): saves, history, deep analysis, relationship lens
+ * Frequency Match access client
+ * Access = Frequency Pro ($4.99/month via Whop) OR verified player
+ * Designed for Whop embedded app + standalone site.
  */
 (function (global) {
   const LS_HISTORY = 'fm_local_history';
-  const LS_MATCH_COUNT = 'fm_match_count'; // stats only, never blocks
+  const LS_MATCH_COUNT = 'fm_match_count';
 
   const cfg = () => global.FM_CONFIG || {};
 
@@ -24,13 +24,45 @@
     return '';
   }
 
+  /** Running inside Whop (or any parent iframe). */
+  function isEmbedded() {
+    try {
+      if (cfg().FORCE_EMBED === true) return true;
+      const params = new URLSearchParams(global.location.search);
+      if (params.get('whop_embed') === '1' || params.get('embed') === 'whop') return true;
+      if (global.self !== global.top) return true;
+    } catch (_) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * members (default): must be Pro or player once backend is configured
+   * open: legacy unrestricted core collide
+   */
+  function accessMode() {
+    const mode = (cfg().ACCESS_MODE || 'members').toLowerCase();
+    return mode === 'open' ? 'open' : 'members';
+  }
+
   function isPro() {
     return Boolean(profile && profile.is_pro);
   }
 
-  /** Core collide is always free for players. */
+  function isPlayer() {
+    return Boolean(profile && profile.is_player);
+  }
+
+  /** Entitled to use the app (collide + results). */
+  function hasAccess() {
+    if (accessMode() === 'open') return true;
+    if (!isConfigured()) return true;
+    return isPro() || isPlayer();
+  }
+
   function canRunMatch() {
-    return true;
+    return hasAccess();
   }
 
   function matchCount() {
@@ -46,6 +78,7 @@
     if (!isConfigured() || !global.supabase) {
       ready = true;
       emit('ready');
+      emit('usage', getUsageSnapshot());
       return;
     }
 
@@ -106,7 +139,6 @@
       profile = inserted || null;
     } else {
       profile = data;
-      // Keep email fresh for Whop webhook matching
       if (session.user.email && data.email !== session.user.email) {
         await supabase
           .from('fm_profiles')
@@ -119,34 +151,45 @@
   }
 
   function getUsageSnapshot() {
+    const entitled = hasAccess();
     return {
       configured: isConfigured(),
       signedIn: Boolean(session),
       email: session?.user?.email || null,
       isPro: isPro(),
+      isPlayer: isPlayer(),
+      hasAccess: entitled,
+      accessMode: accessMode(),
+      embedded: isEmbedded(),
       freeUsed: matchCount(),
-      remaining: null, // unlimited for players
+      remaining: entitled ? null : 0,
       limit: null,
-      canRun: true,
-      playersFree: true,
+      canRun: entitled,
       priceLabel: cfg().PRO_PRICE_LABEL || '$4.99/month',
       proName: cfg().PRO_NAME || 'Frequency Pro',
+      playerCheckout: Boolean(cfg().WHOP_PLAYER_CHECKOUT_URL),
     };
   }
 
-  /** Core match: always allowed (free for players). */
   async function authorizeMatch() {
-    return { ok: true, usage: getUsageSnapshot() };
+    const usage = getUsageSnapshot();
+    if (!usage.canRun) {
+      return {
+        ok: false,
+        reason: usage.signedIn ? 'access_required' : 'sign_in_required',
+        usage,
+      };
+    }
+    return { ok: true, usage };
   }
 
-  /** After a successful collision — stats only, never blocks. */
   async function recordMatch() {
     bumpMatchCount();
     emit('usage', getUsageSnapshot());
     return { ok: true, usage: getUsageSnapshot() };
   }
 
-  /** Pro-only features (saves, history, deep lens). */
+  /** Pro-only features (cloud library, deep lens). Players get core access only. */
   function requirePro() {
     if (isPro()) return { ok: true, usage: getUsageSnapshot() };
     return { ok: false, reason: 'pro_required', usage: getUsageSnapshot() };
@@ -245,13 +288,34 @@
     return { matches: data || [], source: 'cloud' };
   }
 
-  async function startCheckout() {
-    const checkoutUrl = cfg().WHOP_CHECKOUT_URL;
+  function buildCheckoutDest(checkoutUrl) {
+    const returnUrl =
+      window.location.origin + window.location.pathname + '?whop=return';
+    try {
+      const u = new URL(checkoutUrl);
+      if (!u.searchParams.has('redirect')) {
+        u.searchParams.set('redirect', returnUrl);
+      }
+      return u.toString();
+    } catch (_) {
+      return checkoutUrl;
+    }
+  }
+
+  async function startCheckout(kind) {
+    const isPlayerPass = kind === 'player';
+    const checkoutUrl = isPlayerPass
+      ? cfg().WHOP_PLAYER_CHECKOUT_URL
+      : cfg().WHOP_CHECKOUT_URL;
     if (!checkoutUrl) {
-      throw new Error('WHOP_CHECKOUT_URL missing in js/config.js');
+      throw new Error(
+        isPlayerPass
+          ? 'WHOP_PLAYER_CHECKOUT_URL missing in js/config.js'
+          : 'WHOP_CHECKOUT_URL missing in js/config.js'
+      );
     }
     if (!session) {
-      throw new Error('Sign in with the same email you’ll use on Whop, then upgrade');
+      throw new Error('Sign in with the same email you’ll use on Whop, then continue');
     }
 
     try {
@@ -260,31 +324,41 @@
         JSON.stringify({
           userId: session.user.id,
           email: session.user.email || '',
+          kind: isPlayerPass ? 'player' : 'pro',
           at: Date.now(),
         })
       );
     } catch (_) { /* ignore */ }
 
-    const returnUrl =
-      window.location.origin +
-      window.location.pathname +
-      '?whop=return';
-    let dest = checkoutUrl;
-    try {
-      const u = new URL(checkoutUrl);
-      if (!u.searchParams.has('redirect')) {
-        u.searchParams.set('redirect', returnUrl);
-      }
-      dest = u.toString();
-    } catch (_) {
-      dest = checkoutUrl;
-    }
+    const dest = buildCheckoutDest(checkoutUrl);
 
+    try {
+      if (global.top && global.top !== global.self) {
+        global.top.location.href = dest;
+        return;
+      }
+    } catch (_) {
+      try {
+        window.open(dest, '_blank', 'noopener,noreferrer');
+        return;
+      } catch (__) { /* ignore */ }
+    }
     window.location.href = dest;
   }
 
   async function openBillingPortal() {
     const manage = cfg().WHOP_MANAGE_URL || 'https://whop.com/orders';
+    try {
+      if (global.top && global.top !== global.self) {
+        try {
+          global.top.open(manage, '_blank');
+          return;
+        } catch (_) {
+          global.top.location.href = manage;
+          return;
+        }
+      }
+    } catch (_) { /* ignore */ }
     window.open(manage, '_blank', 'noopener,noreferrer');
   }
 
@@ -314,8 +388,11 @@
     on,
     isConfigured,
     isPro,
+    isPlayer,
+    hasAccess,
+    isEmbedded,
     canRunMatch,
-    remaining: () => null,
+    remaining: () => (hasAccess() ? null : 0),
     getUsageSnapshot,
     authorizeMatch,
     recordMatch,

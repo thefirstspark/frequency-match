@@ -864,7 +864,7 @@ footer a {
 .history-item .score { color: var(--cyan); font-weight: 700; }
 .history-item .meta { color: rgba(240,240,240,0.45); font-size: 10px; }
 
-/* Free for players CTA */
+/* Members / players CTA */
 .free-players-cta {
   display: flex;
   align-items: center;
@@ -914,6 +914,73 @@ footer a {
   color: var(--cyan);
 }
 
+/* Full-app access gate (Whop embed / members mode) */
+.access-gate {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(3, 1, 13, 0.92);
+  backdrop-filter: blur(10px);
+}
+.access-gate.active { display: flex; }
+.access-gate-card {
+  width: min(440px, 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(107, 77, 242, 0.45);
+  background: linear-gradient(160deg, rgba(20, 12, 40, 0.98), rgba(8, 4, 22, 0.98));
+  box-shadow: 0 0 60px rgba(107, 77, 242, 0.25);
+  padding: 28px 24px 22px;
+  text-align: center;
+}
+.access-gate-card h2 {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.05rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 10px;
+}
+.access-gate-card .lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--soft-white);
+  margin: 0 0 16px;
+  line-height: 1.35;
+}
+.access-gate-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+  text-align: left;
+}
+.access-gate-card li {
+  font-size: 0.85rem;
+  color: rgba(240,240,240,0.75);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.access-gate-card .hint {
+  font-size: 11px;
+  color: rgba(240,240,240,0.45);
+  margin-top: 12px;
+  line-height: 1.4;
+}
+.access-gate-card .error {
+  color: #ff8a7a;
+  font-size: 12px;
+  min-height: 1.2em;
+  margin-bottom: 8px;
+}
+body.access-locked .container {
+  filter: blur(3px);
+  pointer-events: none;
+  user-select: none;
+}
+
 </style>
 </head>
 <body>
@@ -929,14 +996,14 @@ footer a {
   <p class="meta-line">⚡ NUMEROLOGY · ASTROLOGY · ARCHETYPAL RESONANCE ⚡</p>
 </header>
 
-<button type="button" class="free-players-cta" id="freePlayersCta" onclick="document.getElementById('inputPhase').scrollIntoView({behavior:'smooth'})" aria-label="Frequency Match is free for players — start a match">
-  <span class="cta-badge">Free for Players</span>
-  <span class="cta-copy">Frequency Match is free for players — <strong>unlimited collisions, no card needed</strong></span>
+<button type="button" class="free-players-cta" id="freePlayersCta" onclick="openAccessGate()" aria-label="Unlock Frequency Match — Pro or player">
+  <span class="cta-badge">Members</span>
+  <span class="cta-copy">Unlock with <strong>Pro $4.99/mo</strong> or free if you’re a <strong>player</strong></span>
 </button>
 
 <div class="top-bar" id="topBar">
   <div class="usage-pill" id="usagePill">
-    <strong id="usageText">Free for players</strong> · unlimited matches
+    <strong id="usageText">Members access</strong> · Pro or player
   </div>
   <div class="top-actions">
     <button type="button" class="btn-sm" id="btnHistory" onclick="toggleHistory()" style="display:none">History</button>
@@ -987,7 +1054,7 @@ footer a {
 
   </div>
 
-  <!-- Pro: relationship lens (unlocked for Pro; free players can still collide) -->
+  <!-- Pro: relationship lens (Pro only; players get core collide) -->
   <div class="pro-field" id="relationshipField" onclick="if (window.FM && !FM.isPro()) openPaywall()">
     <div class="pro-field-label">
       Relationship lens
@@ -1110,9 +1177,29 @@ footer a {
 <footer>
   <p class="tagline">Reality is programmable. Consciousness is the code.</p>
   <p>Built by <a href="https://thefirstspark.shop" target="_blank">The First Spark</a> · Powered by Soul Maps</p>
-  <p style="margin-top:10px;font-size:11px;opacity:0.45">Free for players · unlimited matches · Pro $4.99/month optional</p>
+  <p style="margin-top:10px;font-size:11px;opacity:0.45">Whop members · Pro $4.99/month or player pass · deep toolkit on Pro</p>
 </footer>
 
+</div>
+
+<!-- Hard access gate (blocks app until Pro or player) -->
+<div class="access-gate" id="accessGate" role="dialog" aria-modal="true" aria-labelledby="accessGateTitle">
+  <div class="access-gate-card">
+    <h2 id="accessGateTitle">Unlock Frequency Match</h2>
+    <p class="lead">Not free on Whop unless you subscribe or you’re a player.</p>
+    <ul>
+      <li><strong>Frequency Pro</strong> — $4.99/month · full collide + deep toolkit</li>
+      <li><strong>Players</strong> — free core collide with a player pass</li>
+      <li>Sign in with the <strong>same email</strong> you use on Whop</li>
+    </ul>
+    <div class="error" id="accessGateError"></div>
+    <div class="btn-row" style="flex-direction:column;gap:10px">
+      <button type="button" class="btn" onclick="startProCheckout()">Subscribe · $4.99/month</button>
+      <button type="button" class="btn btn-secondary" id="btnPlayerPass" onclick="startPlayerCheckout()" style="display:none">Claim player pass</button>
+      <button type="button" class="btn btn-secondary" onclick="openAuthModal()">Sign in</button>
+    </div>
+    <p class="hint" id="accessGateHint">After checkout, return here — access unlocks when the Whop webhook matches your email.</p>
+  </div>
 </div>
 
 <!-- Auth modal -->
@@ -1120,7 +1207,7 @@ footer a {
   <div class="modal">
     <button type="button" class="modal-close" onclick="closeModal('authModal')" aria-label="Close">&times;</button>
     <h2>Sign in</h2>
-    <p class="lead">Save progress across devices. Required for Frequency Pro.</p>
+    <p class="lead">Required to verify Pro or player access. Use your Whop email.</p>
     <div class="error" id="authError"></div>
     <input type="email" id="authEmail" placeholder="you@email.com" autocomplete="email">
     <div class="btn-row">
@@ -1132,25 +1219,25 @@ footer a {
   </div>
 </div>
 
-<!-- Paywall modal -->
+<!-- Paywall modal (Pro upsell / deep toolkit) -->
 <div class="modal-overlay" id="paywallModal" role="dialog" aria-modal="true">
   <div class="modal">
     <button type="button" class="modal-close" onclick="closeModal('paywallModal')" aria-label="Close">&times;</button>
     <h2>Frequency Pro</h2>
-    <p class="lead">Players stay free forever. Pro unlocks the deep toolkit — $4.99/month via Whop.</p>
+    <p class="lead">$4.99/month via Whop — unlock the app if you’re not a player, plus the deep toolkit.</p>
     <ul class="feature-list">
-      <li>Players: unlimited free collisions (always)</li>
-      <li>Pro: saved match history library</li>
-      <li>Pro: deeper analysis — expression, personality, birthday</li>
-      <li>Pro: romance / friendship / family / business lens</li>
+      <li>App access (if you don’t hold a player pass)</li>
+      <li>Saved match history library</li>
+      <li>Deeper analysis — expression, personality, birthday</li>
+      <li>Romance / friendship / family / business lens</li>
     </ul>
     <div class="error" id="paywallError"></div>
     <div class="btn-row">
       <button type="button" class="btn" id="btnCheckout" onclick="startProCheckout()">Upgrade on Whop · $4.99/month</button>
       <button type="button" class="btn btn-secondary" onclick="openAuthModal(); closeModal('paywallModal')">Sign in first</button>
-      <button type="button" class="btn btn-secondary" onclick="closeModal('paywallModal'); document.getElementById('inputPhase').scrollIntoView({behavior:'smooth'})">Keep playing free</button>
+      <button type="button" class="btn btn-secondary" id="btnPlayerFromPaywall" onclick="startPlayerCheckout()" style="display:none">I’m a player</button>
     </div>
-    <p class="hint">Sign in with the <strong>same email</strong> you use on Whop so Pro unlocks automatically. Core Frequency Match stays free for players either way.</p>
+    <p class="hint">Sign in with the <strong>same email</strong> you use on Whop so access unlocks automatically.</p>
   </div>
 </div>
 
@@ -1460,9 +1547,13 @@ async function runCollision() {
     return;
   }
 
-  // Players are free — core collide never paywalls
+  // Members mode: Pro ($4.99) or verified player required
   if (window.FM) {
-    await FM.authorizeMatch();
+    const authz = await FM.authorizeMatch();
+    if (!authz.ok) {
+      openAccessGate(authz.reason);
+      return;
+    }
   }
 
   const isPro = window.FM ? FM.isPro() : false;
@@ -1731,7 +1822,32 @@ function resetTool() {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// ========== FREEMIUM UI ==========
+// ========== ACCESS / FREEMIUM UI ==========
+function setAccessGateVisible(show) {
+  const gate = document.getElementById('accessGate');
+  if (!gate) return;
+  gate.classList.toggle('active', Boolean(show));
+  document.body.classList.toggle('access-locked', Boolean(show));
+}
+
+function openAccessGate(reason) {
+  const err = document.getElementById('accessGateError');
+  if (err) {
+    if (reason === 'sign_in_required') {
+      err.textContent = 'Sign in with your Whop email, then subscribe or claim player access.';
+    } else if (reason === 'access_required') {
+      err.textContent = 'No active Pro or player pass on this account yet.';
+    } else {
+      err.textContent = '';
+    }
+  }
+  setAccessGateVisible(true);
+}
+
+function closeAccessGate() {
+  setAccessGateVisible(false);
+}
+
 function updateUsageUI(usage) {
   const u = usage || (window.FM && FM.getUsageSnapshot()) || {};
   const pill = document.getElementById('usagePill');
@@ -1743,8 +1859,16 @@ function updateUsageUI(usage) {
   const modeLock = document.getElementById('modeLock');
   const btnSignOut = document.getElementById('btnSignOut');
   const btnPortal = document.getElementById('btnPortal');
-
   const freeCta = document.getElementById('freePlayersCta');
+  const btnPlayerPass = document.getElementById('btnPlayerPass');
+  const btnPlayerFromPaywall = document.getElementById('btnPlayerFromPaywall');
+
+  const entitled = u.hasAccess !== false && (u.hasAccess || u.isPro || u.isPlayer || u.accessMode === 'open' || !u.configured);
+  const showPlayerBtn = Boolean(u.playerCheckout);
+
+  if (btnPlayerPass) btnPlayerPass.style.display = showPlayerBtn ? '' : 'none';
+  if (btnPlayerFromPaywall) btnPlayerFromPaywall.style.display = showPlayerBtn ? '' : 'none';
+
   if (u.isPro) {
     pill.classList.add('pro');
     text.textContent = 'Frequency Pro · deep toolkit';
@@ -1754,16 +1878,35 @@ function updateUsageUI(usage) {
     modeLock.textContent = '✦ Unlocked';
     btnHistory.style.display = '';
     if (freeCta) freeCta.style.display = 'none';
-  } else {
+  } else if (u.isPlayer) {
     pill.classList.remove('pro');
-    text.textContent = 'Free for players · unlimited matches';
+    text.textContent = 'Player access · core collide';
     btnUpgrade.textContent = `Go Pro · ${u.priceLabel || '$4.99/month'}`;
     btnUpgrade.onclick = () => openPaywall();
     modeSelect.disabled = true;
     modeSelect.value = 'general';
     modeLock.textContent = '🔒 Frequency Pro';
     btnHistory.style.display = 'none';
-    if (freeCta) freeCta.style.display = '';
+    if (freeCta) freeCta.style.display = 'none';
+  } else {
+    pill.classList.remove('pro');
+    text.textContent = entitled && u.accessMode === 'open'
+      ? 'Open access'
+      : 'Locked · Pro or player';
+    btnUpgrade.textContent = `Go Pro · ${u.priceLabel || '$4.99/month'}`;
+    btnUpgrade.onclick = () => openPaywall();
+    modeSelect.disabled = true;
+    modeSelect.value = 'general';
+    modeLock.textContent = '🔒 Frequency Pro';
+    btnHistory.style.display = 'none';
+    if (freeCta) freeCta.style.display = entitled ? 'none' : '';
+  }
+
+  // Hard gate whenever members mode and not entitled
+  if (u.configured && u.accessMode !== 'open' && !u.isPro && !u.isPlayer && u.hasAccess === false) {
+    setAccessGateVisible(true);
+  } else if (u.isPro || u.isPlayer || u.accessMode === 'open' || !u.configured) {
+    setAccessGateVisible(false);
   }
 
   if (u.signedIn) {
@@ -1823,18 +1966,42 @@ async function doSignOut() {
 }
 
 async function startProCheckout() {
-  const err = document.getElementById('paywallError');
-  err.textContent = '';
+  const err =
+    document.getElementById('paywallError') ||
+    document.getElementById('accessGateError');
+  if (err) err.textContent = '';
   if (!window.FM) return;
   const u = FM.getUsageSnapshot();
   if (!u.signedIn) {
-    err.textContent = 'Sign in first (same email you’ll use on Whop), then subscribe.';
+    const msg = 'Sign in first (same email you’ll use on Whop), then subscribe.';
+    if (err) err.textContent = msg;
+    openAuthModal();
     return;
   }
   try {
-    await FM.startCheckout();
+    await FM.startCheckout('pro');
   } catch (e) {
-    err.textContent = e.message || 'Checkout unavailable';
+    if (err) err.textContent = e.message || 'Checkout unavailable';
+  }
+}
+
+async function startPlayerCheckout() {
+  const err =
+    document.getElementById('accessGateError') ||
+    document.getElementById('paywallError');
+  if (err) err.textContent = '';
+  if (!window.FM) return;
+  const u = FM.getUsageSnapshot();
+  if (!u.signedIn) {
+    const msg = 'Sign in first with your player / Whop email.';
+    if (err) err.textContent = msg;
+    openAuthModal();
+    return;
+  }
+  try {
+    await FM.startCheckout('player');
+  } catch (e) {
+    if (err) err.textContent = e.message || 'Player pass checkout not configured';
   }
 }
 
@@ -1931,18 +2098,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (params.get('whop') === 'return' || params.get('checkout') === 'success') {
     // Returning from Whop — webhook may still be in flight; poll profile briefly
     const note = document.getElementById('usageText');
-    if (note) note.textContent = 'Checking Frequency Pro…';
+    if (note) note.textContent = 'Checking access…';
     let tries = 0;
     const poll = async () => {
       tries += 1;
       const u = await FM.refreshProStatus();
-      if (u.isPro || tries >= 8) {
+      if (u.hasAccess || tries >= 8) {
         history.replaceState({}, '', location.pathname);
         updateUsageUI(u);
         if (u.isPro) {
-          alert('Frequency Pro is active. Unlimited collisions unlocked.');
+          alert('Frequency Pro is active. Full toolkit unlocked.');
+        } else if (u.isPlayer) {
+          alert('Player access is active. Core collide unlocked.');
         } else {
-          alert('Payment received — if Pro isn’t active yet, wait a minute and refresh. Use the same email on Whop and Frequency Match.');
+          alert('If you just paid, wait a minute and refresh. Use the same email on Whop and Frequency Match.');
         }
         return;
       }

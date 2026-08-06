@@ -7,8 +7,12 @@ create table if not exists public.fm_profiles (
   email text,
   free_matches_used int not null default 0 check (free_matches_used >= 0),
   is_pro boolean not null default false,
+  is_player boolean not null default false,
   stripe_customer_id text unique,
   stripe_subscription_id text,
+  whop_membership_id text,
+  whop_user_id text,
+  whop_plan_id text,
   pro_until timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
