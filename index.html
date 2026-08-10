@@ -1011,22 +1011,40 @@ footer a {
   flex-direction: column;
   gap: 10px;
 }
+.access-gate-card a.btn,
+.modal a.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
 body.access-locked .container {
   filter: blur(4px);
   pointer-events: none;
   user-select: none;
+}
+/* Gate + modals sit above blur and stay clickable */
+.access-gate,
+.access-gate *,
+.modal-overlay,
+.modal-overlay * {
+  pointer-events: auto;
 }
 
 /* Modals */
 .modal-overlay {
   position: fixed; inset: 0;
   background: rgba(3, 1, 13, 0.82);
-  z-index: 1000;
+  z-index: 10000;
   display: none;
   align-items: center;
   justify-content: center;
   padding: 20px;
   backdrop-filter: blur(6px);
+  pointer-events: auto;
 }
 .modal-overlay.active { display: flex; }
 .modal {
@@ -1192,7 +1210,10 @@ body.access-locked .container {
   <h1>FREQUENCY MATCH</h1>
   <p class="journey-lead">Compare your code with someone you love, lead, or can&rsquo;t stop thinking about.</p>
   <p class="journey-how">Enter two people&rsquo;s names and birth details to create a symbolic comparison.</p>
-  <span class="free-badge" id="freePlayersCta" onclick="openAccessGate()" style="cursor:pointer">Join Sparkverse free · then collide</span>
+  <a class="free-badge" id="freePlayersCta"
+     href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/"
+     target="_blank" rel="noopener noreferrer"
+     style="cursor:pointer;text-decoration:none">Join Sparkverse free · then collide</a>
 </header>
 
 <div class="top-bar" id="topBar">
@@ -1426,11 +1447,15 @@ body.access-locked .container {
     </ul>
     <div class="error" id="accessGateError"></div>
     <div class="btn-row">
-      <button type="button" class="btn" onclick="startPlayerCheckout()">Join Sparkverse free</button>
-      <button type="button" class="btn btn-secondary" onclick="openAuthModal()">I joined — sign in</button>
-      <button type="button" class="btn btn-secondary" onclick="startProCheckout()">Or go Pro · $4.99/mo</button>
+      <a class="btn" id="btnJoinLobby"
+         href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/"
+         target="_blank" rel="noopener noreferrer">Join Sparkverse free</a>
+      <button type="button" class="btn btn-secondary" id="btnGateSignIn">I joined — sign in</button>
+      <a class="btn btn-secondary" id="btnGoPro"
+         href="https://whop.com/checkout/plan_gX14Qd9V6UEml"
+         target="_blank" rel="noopener noreferrer">Or go Pro · $4.99/mo</a>
     </div>
-    <p class="hint" id="accessGateHint">Use the <strong>same email</strong> on Whop and here so access unlocks after you join. Whop webhook sets player/Pro on your account.</p>
+    <p class="hint" id="accessGateHint">1) Join free Lobby · 2) Come back and sign in with the <strong>same email</strong> · 3) Collide unlocks when membership hits your account.</p>
   </div>
 </div>
 
@@ -1464,9 +1489,13 @@ body.access-locked .container {
     </ul>
     <div class="error" id="paywallError"></div>
     <div class="btn-row">
-      <button type="button" class="btn" id="btnCheckout" onclick="startProCheckout()">Upgrade on Whop · $4.99/month</button>
-      <button type="button" class="btn btn-secondary" onclick="openAuthModal(); closeModal('paywallModal')">Sign in first</button>
-      <button type="button" class="btn btn-secondary" onclick="startPlayerCheckout(); closeModal('paywallModal')">Join free Lobby instead</button>
+      <a class="btn" id="btnCheckout"
+         href="https://whop.com/checkout/plan_gX14Qd9V6UEml"
+         target="_blank" rel="noopener noreferrer">Upgrade on Whop · $4.99/month</a>
+      <button type="button" class="btn btn-secondary" id="btnPaywallSignIn">Sign in first</button>
+      <a class="btn btn-secondary" id="btnPaywallLobby"
+         href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/"
+         target="_blank" rel="noopener noreferrer">Join free Lobby instead</a>
     </div>
     <p class="hint">Sign in with the <strong>same email</strong> as Whop so Pro unlocks automatically.</p>
   </div>
@@ -2249,26 +2278,55 @@ function openPaywall() {
   openModal('paywallModal');
 }
 
-async function startPlayerCheckout() {
-  try {
-    if (window.FM && !FM.getUsageSnapshot().signedIn) {
+function lobbyUrl() {
+  return (
+    (window.FM_CONFIG && window.FM_CONFIG.WHOP_PLAYER_CHECKOUT_URL) ||
+    'https://whop.com/sparkverse-511c/the-sparkverse-lobby/'
+  );
+}
+
+function proUrl() {
+  return (
+    (window.FM_CONFIG && window.FM_CONFIG.WHOP_CHECKOUT_URL) ||
+    'https://whop.com/checkout/plan_gX14Qd9V6UEml'
+  );
+}
+
+/** Keep <a href> buttons in sync with config (always real URLs). */
+function wireCtaUrls() {
+  const pairs = [
+    ['btnJoinLobby', lobbyUrl()],
+    ['btnGoPro', proUrl()],
+    ['btnCheckout', proUrl()],
+    ['btnPaywallLobby', lobbyUrl()],
+  ];
+  pairs.forEach(([id, href]) => {
+    const el = document.getElementById(id);
+    if (el && el.tagName === 'A') {
+      el.setAttribute('href', href);
+      el.setAttribute('target', '_blank');
+      el.setAttribute('rel', 'noopener noreferrer');
+    }
+  });
+  const signIn = document.getElementById('btnGateSignIn');
+  if (signIn) signIn.onclick = () => openAuthModal();
+  const paySignIn = document.getElementById('btnPaywallSignIn');
+  if (paySignIn) {
+    paySignIn.onclick = () => {
+      closeModal('paywallModal');
       openAuthModal();
-      const err = document.getElementById('authError');
-      if (err) err.textContent = 'Sign in first, then join free Sparkverse with the same email.';
-      return;
-    }
-    await FM.startCheckout('player');
-  } catch (e) {
-    // If not signed in, open Lobby URL publicly as lead magnet
-    const url = (window.FM_CONFIG && window.FM_CONFIG.WHOP_PLAYER_CHECKOUT_URL) ||
-      'https://whop.com/sparkverse-511c/the-sparkverse-lobby/';
-    if (!window.FM || !FM.getUsageSnapshot().signedIn) {
-      window.open(url, '_blank', 'noopener,noreferrer');
-      return;
-    }
-    const gateErr = document.getElementById('accessGateError');
-    if (gateErr) gateErr.textContent = e.message || String(e);
+    };
   }
+}
+
+/** Always open Lobby in a new tab (no silent JS failure). */
+function startPlayerCheckout() {
+  window.open(lobbyUrl(), '_blank', 'noopener,noreferrer');
+}
+
+/** Always open Pro checkout (no silent JS failure). */
+function startProCheckout() {
+  window.open(proUrl(), '_blank', 'noopener,noreferrer');
 }
 
 async function submitMagicLink() {
@@ -2297,27 +2355,7 @@ async function doSignOut() {
   updateUsageUI();
 }
 
-async function startProCheckout() {
-  const err = document.getElementById('paywallError');
-  const gateErr = document.getElementById('accessGateError');
-  if (err) err.textContent = '';
-  if (!window.FM) return;
-  const u = FM.getUsageSnapshot();
-  if (!u.signedIn) {
-    const msg = 'Sign in first (same email you’ll use on Whop), then subscribe.';
-    if (err) err.textContent = msg;
-    if (gateErr) gateErr.textContent = msg;
-    openAuthModal();
-    return;
-  }
-  try {
-    await FM.startCheckout('pro');
-  } catch (e) {
-    const msg = e.message || 'Checkout unavailable';
-    if (err) err.textContent = msg;
-    if (gateErr) gateErr.textContent = msg;
-  }
-}
+// startProCheckout defined above with real URL open
 
 async function openPortal() {
   try {
@@ -2401,11 +2439,27 @@ function escapeHtml(s) {
 
 // Boot freemium
 document.addEventListener('DOMContentLoaded', async () => {
-  if (!window.FM) return;
+  wireCtaUrls();
+  // Sign-in buttons always work even if FM fails to load
+  const gateSignIn = document.getElementById('btnGateSignIn');
+  if (gateSignIn) gateSignIn.addEventListener('click', () => openAuthModal());
+  const paySignIn = document.getElementById('btnPaywallSignIn');
+  if (paySignIn) {
+    paySignIn.addEventListener('click', () => {
+      closeModal('paywallModal');
+      openAuthModal();
+    });
+  }
+
+  if (!window.FM) {
+    openAccessGate('sign_in_required');
+    return;
+  }
   FM.on('usage', updateUsageUI);
   FM.on('auth', () => updateUsageUI());
   FM.on('ready', () => updateUsageUI());
   await FM.init();
+  wireCtaUrls();
   updateUsageUI();
 
   const params = new URLSearchParams(window.location.search);
