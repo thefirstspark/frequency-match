@@ -17,7 +17,7 @@ window.FM_CONFIG = {
   WHOP_PLAYER_CHECKOUT_URL:
     'https://whop.com/sparkverse-511c/the-sparkverse-lobby/',
   // Set this to the free Lobby plan id when Whop webhook should set is_player
-  WHOP_PLAYER_PLAN_ID: '',
+  WHOP_PLAYER_PLAN_ID: 'plan_dBFxXLnwQoj1l',
   WHOP_APP_ID: '',
   WHOP_MANAGE_URL: 'https://whop.com/orders',
 

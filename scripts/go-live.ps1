@@ -8,7 +8,7 @@ $ErrorActionPreference = 'Stop'
 $Root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 Set-Location $Root
 
-$ProjectRef = 'ffqcoewjggjgwfsriavj'
+$ProjectRef = 'qqlodxrzisbwapjcvjoj'
 
 Write-Host "== Frequency Match go-live ==" -ForegroundColor Cyan
 
