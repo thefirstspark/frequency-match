@@ -1,9 +1,9 @@
 /**
- * Whop → Frequency Match entitlements
+ * Whop ΓåÆ Frequency Match entitlements
  * Events: membership.activated, membership.deactivated, payment.succeeded, etc.
  *
  * Secrets:
- *   WHOP_WEBHOOK_SECRET     (Whop Developer → Webhooks)
+ *   WHOP_WEBHOOK_SECRET     (Whop Developer ΓåÆ Webhooks)
  *   WHOP_PRO_PLAN_IDS       comma-separated plan ids that grant is_pro (optional)
  *   WHOP_PLAYER_PLAN_IDS    comma-separated plan ids that grant is_player (optional)
  *
@@ -136,7 +136,7 @@ function classifyPlan(planId: string | null): Entitlement {
   if (planId && playerIds.includes(planId)) return 'player'
   if (planId && proIds.includes(planId)) return 'pro'
 
-  // Legacy: no lists configured → treat as Pro
+  // Legacy: no lists configured ΓåÆ treat as Pro
   if (proIds.length === 0 && playerIds.length === 0) return 'pro'
 
   if (planId && proIds.length > 0 && !proIds.includes(planId) && !playerIds.includes(planId)) {

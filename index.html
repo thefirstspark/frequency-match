@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Frequency Match — Soul Card Collider | The First Spark</title>
-<meta name="description" content="Collide two soul maps. Get a compatibility score. Find out if you're running the same code.">
+<meta name="description" content="Compare your code with someone you love, lead, or can't stop thinking about. Enter two names and birth details for a symbolic Frequency Match.">
 <meta property="og:title" content="Frequency Match — Soul Card Collider">
-<meta property="og:description" content="Collide two soul maps. Get a compatibility score. Find out if you're running the same code.">
+<meta property="og:description" content="Compare your code with someone you love, lead, or can't stop thinking about. Two names. Two birth dates. One Player Card match.">
 <meta property="og:image" content="https://thefirstspark.shop/og-frequency-match.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono:wght@400;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
@@ -167,7 +167,61 @@ input, select {
 input:focus, select:focus {
   outline: none;
   border-color: var(--cyan);
-  box-shadow: 0 0 0 2px rgba(38, 228, 216, 0.15);
+  box-shadow: 0 0 0 3px rgba(38, 228, 216, 0.25);
+}
+input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+button:focus:not(:focus-visible) { outline: none; }
+
+.journey-lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.25rem, 3.2vw, 1.55rem);
+  color: var(--gold-soft);
+  font-style: italic;
+  max-width: 640px;
+  margin: 0 auto 10px;
+  line-height: 1.45;
+}
+.journey-how {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  color: rgba(240,240,240,0.55);
+  letter-spacing: 1.5px;
+  max-width: 520px;
+  margin: 0 auto 6px;
+  line-height: 1.5;
+}
+.free-badge {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--core-black);
+  background: linear-gradient(90deg, var(--cyan), var(--gold));
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.form-hint {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  color: rgba(240,240,240,0.7);
+  font-style: italic;
+  margin: 0 0 28px;
+}
+.btn-primary-cta {
+  min-width: min(100%, 360px);
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+  padding: 18px 36px;
+  letter-spacing: 2px;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--gold-soft);
+  outline-offset: 3px;
 }
 
 .row-2col {
@@ -596,6 +650,147 @@ input:focus, select:focus {
   margin-top: 40px;
 }
 
+/* ========== RESULT STORY + UPGRADE ========== */
+.story-open {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 36px;
+  padding: 0 8px;
+}
+.story-open .story-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 12px;
+}
+.story-open .story-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+  font-style: italic;
+  color: var(--gold-soft);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+.story-open .story-plain {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  color: rgba(240,240,240,0.82);
+  line-height: 1.55;
+}
+
+.upgrade-strip {
+  margin: 28px 0;
+  padding: 22px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(243, 178, 58, 0.4);
+  background: linear-gradient(135deg, rgba(243,178,58,0.1), rgba(107,77,242,0.1));
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.upgrade-strip h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.upgrade-strip p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: rgba(240,240,240,0.85);
+  margin-bottom: 16px;
+  line-height: 1.45;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.upgrade-strip .upgrade-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.upgrade-strip a.btn,
+.upgrade-strip button.btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-panel {
+  margin: 32px 0 8px;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(38, 228, 216, 0.35);
+  background: rgba(13, 7, 40, 0.55);
+  text-align: center;
+}
+.share-panel h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.share-panel p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  color: rgba(240,240,240,0.75);
+  margin-bottom: 14px;
+}
+.share-panel .share-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.share-toast {
+  display: none;
+  margin-top: 12px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+.share-toast.show { display: block; }
+
+.player-card {
+  min-height: 0;
+}
+@media (max-width: 900px) {
+  .player-card {
+    aspect-ratio: auto;
+    min-height: 420px;
+  }
+}
+
+.disclaimer {
+  margin-top: 18px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  line-height: 1.55;
+  color: rgba(240,240,240,0.4);
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  text-transform: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ========== FOOTER ========== */
 footer {
   text-align: center;
@@ -752,6 +947,76 @@ footer a {
   margin-left: 6px;
 }
 
+/* Full-app access gate — lead magnet: Sparkverse free tier first */
+.access-gate {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(3, 1, 13, 0.94);
+  backdrop-filter: blur(12px);
+}
+.access-gate.active { display: flex; }
+.access-gate-card {
+  width: min(460px, 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(107, 77, 242, 0.5);
+  background: linear-gradient(160deg, rgba(20, 12, 40, 0.98), rgba(8, 4, 20, 0.99));
+  padding: 28px 24px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+}
+.access-gate-card h2 {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold, #f3b23a);
+  margin: 0 0 12px;
+}
+.access-gate-card .lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  color: rgba(240, 240, 240, 0.9);
+  line-height: 1.4;
+  margin: 0 0 16px;
+}
+.access-gate-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+}
+.access-gate-card li {
+  font-size: 0.88rem;
+  color: rgba(240, 240, 240, 0.72);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.access-gate-card .hint {
+  font-size: 11px;
+  color: rgba(240, 240, 240, 0.45);
+  margin: 14px 0 0;
+  line-height: 1.45;
+}
+.access-gate-card .error {
+  color: #ff8a7a;
+  font-size: 12px;
+  min-height: 1.2em;
+  margin-bottom: 10px;
+}
+.access-gate-card .btn-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+body.access-locked .container {
+  filter: blur(4px);
+  pointer-events: none;
+  user-select: none;
+}
+
 /* Modals */
 .modal-overlay {
   position: fixed; inset: 0;
@@ -864,7 +1129,7 @@ footer a {
 .history-item .score { color: var(--cyan); font-weight: 700; }
 .history-item .meta { color: rgba(240,240,240,0.45); font-size: 10px; }
 
-/* Members / players CTA */
+/* Free for players CTA */
 .free-players-cta {
   display: flex;
   align-items: center;
@@ -914,73 +1179,6 @@ footer a {
   color: var(--cyan);
 }
 
-/* Full-app access gate (Whop embed / members mode) */
-.access-gate {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9000;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  background: rgba(3, 1, 13, 0.92);
-  backdrop-filter: blur(10px);
-}
-.access-gate.active { display: flex; }
-.access-gate-card {
-  width: min(440px, 100%);
-  border-radius: 18px;
-  border: 1px solid rgba(107, 77, 242, 0.45);
-  background: linear-gradient(160deg, rgba(20, 12, 40, 0.98), rgba(8, 4, 22, 0.98));
-  box-shadow: 0 0 60px rgba(107, 77, 242, 0.25);
-  padding: 28px 24px 22px;
-  text-align: center;
-}
-.access-gate-card h2 {
-  font-family: 'Space Mono', monospace;
-  font-size: 1.05rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin: 0 0 10px;
-}
-.access-gate-card .lead {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
-  color: var(--soft-white);
-  margin: 0 0 16px;
-  line-height: 1.35;
-}
-.access-gate-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 18px;
-  text-align: left;
-}
-.access-gate-card li {
-  font-size: 0.85rem;
-  color: rgba(240,240,240,0.75);
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.access-gate-card .hint {
-  font-size: 11px;
-  color: rgba(240,240,240,0.45);
-  margin-top: 12px;
-  line-height: 1.4;
-}
-.access-gate-card .error {
-  color: #ff8a7a;
-  font-size: 12px;
-  min-height: 1.2em;
-  margin-bottom: 8px;
-}
-body.access-locked .container {
-  filter: blur(3px);
-  pointer-events: none;
-  user-select: none;
-}
-
 </style>
 </head>
 <body>
@@ -992,75 +1190,73 @@ body.access-locked .container {
 <header>
   <div class="brand-tag">The First Spark · Soul Card Collider</div>
   <h1>FREQUENCY MATCH</h1>
-  <p class="subtitle">Two souls. One collision. Find out if you're running the same code.</p>
-  <p class="meta-line">⚡ NUMEROLOGY · ASTROLOGY · ARCHETYPAL RESONANCE ⚡</p>
+  <p class="journey-lead">Compare your code with someone you love, lead, or can&rsquo;t stop thinking about.</p>
+  <p class="journey-how">Enter two people&rsquo;s names and birth details to create a symbolic comparison.</p>
+  <span class="free-badge" id="freePlayersCta" onclick="openAccessGate()" style="cursor:pointer">Join Sparkverse free · then collide</span>
 </header>
-
-<button type="button" class="free-players-cta" id="freePlayersCta" onclick="openAccessGate()" aria-label="Unlock Frequency Match — Pro or player">
-  <span class="cta-badge">Members</span>
-  <span class="cta-copy">Unlock with <strong>Pro $4.99/mo</strong> or free if you’re a <strong>player</strong></span>
-</button>
 
 <div class="top-bar" id="topBar">
   <div class="usage-pill" id="usagePill">
-    <strong id="usageText">Members access</strong> · Pro or player
+    <strong id="usageText">Members access</strong> · free Lobby or Pro
   </div>
   <div class="top-actions">
-    <button type="button" class="btn-sm" id="btnHistory" onclick="toggleHistory()" style="display:none">History</button>
-    <button type="button" class="btn-sm" id="btnAccount" onclick="openAuthModal()">Sign in</button>
-    <button type="button" class="btn-sm primary" id="btnUpgrade" onclick="openPaywall()">Go Pro · $4.99/month</button>
+    <button type="button" class="btn-sm" id="btnHistory" onclick="toggleHistory()" style="display:none" aria-label="Open match history">History</button>
+    <button type="button" class="btn-sm" id="btnAccount" onclick="openAuthModal()" aria-label="Sign in to your account">Sign in</button>
+    <button type="button" class="btn-sm" id="btnUpgrade" onclick="openPaywall()" aria-label="Upgrade to Frequency Pro">Frequency Pro</button>
   </div>
 </div>
 
 <!-- ========== INPUT PHASE ========== -->
-<section id="inputPhase">
+<section id="inputPhase" aria-labelledby="form-heading">
+  <h2 id="form-heading" class="sr-only">Enter two people to compare</h2>
+  <p class="form-hint">Player One + Player Two. Name and birth date for each.</p>
   <div class="input-grid">
 
     <div class="player-input player-1">
-      <div class="player-label">◆ Player One ◆</div>
+      <div class="player-label" id="p1-label">◆ Player One ◆</div>
       <div class="input-group">
-        <label>Full Name</label>
-        <input type="text" id="p1Name" placeholder="First Middle Last" autocomplete="off">
+        <label for="p1Name">Full Name</label>
+        <input type="text" id="p1Name" name="p1Name" placeholder="First Middle Last" autocomplete="name" aria-required="true">
       </div>
       <div class="input-group">
-        <label>Birth Date</label>
-        <input type="date" id="p1Date">
+        <label for="p1Date">Birth Date</label>
+        <input type="date" id="p1Date" name="p1Date" aria-required="true">
       </div>
       <div class="input-group">
-        <label>Birth Place (optional)</label>
-        <input type="text" id="p1Place" placeholder="City, State/Country" autocomplete="off">
+        <label for="p1Place">Birth Place <span style="opacity:.55;text-transform:none;letter-spacing:0">(optional)</span></label>
+        <input type="text" id="p1Place" name="p1Place" placeholder="City, State/Country" autocomplete="off">
       </div>
     </div>
 
-    <div class="vs-divider">
+    <div class="vs-divider" aria-hidden="true">
       <div class="vs-circle">VS</div>
     </div>
 
     <div class="player-input player-2">
-      <div class="player-label">◆ Player Two ◆</div>
+      <div class="player-label" id="p2-label">◆ Player Two ◆</div>
       <div class="input-group">
-        <label>Full Name</label>
-        <input type="text" id="p2Name" placeholder="First Middle Last" autocomplete="off">
+        <label for="p2Name">Full Name</label>
+        <input type="text" id="p2Name" name="p2Name" placeholder="First Middle Last" autocomplete="off" aria-required="true">
       </div>
       <div class="input-group">
-        <label>Birth Date</label>
-        <input type="date" id="p2Date">
+        <label for="p2Date">Birth Date</label>
+        <input type="date" id="p2Date" name="p2Date" aria-required="true">
       </div>
       <div class="input-group">
-        <label>Birth Place (optional)</label>
-        <input type="text" id="p2Place" placeholder="City, State/Country" autocomplete="off">
+        <label for="p2Place">Birth Place <span style="opacity:.55;text-transform:none;letter-spacing:0">(optional)</span></label>
+        <input type="text" id="p2Place" name="p2Place" placeholder="City, State/Country" autocomplete="off">
       </div>
     </div>
 
   </div>
 
-  <!-- Pro: relationship lens (Pro only; players get core collide) -->
+  <!-- Pro: relationship lens (unlocked for Pro; free players can still collide) -->
   <div class="pro-field" id="relationshipField" onclick="if (window.FM && !FM.isPro()) openPaywall()">
     <div class="pro-field-label">
-      Relationship lens
+      <label for="relationshipMode">Relationship lens</label>
       <span class="pro-lock" id="modeLock">🔒 Frequency Pro</span>
     </div>
-    <select class="mode-select" id="relationshipMode" disabled>
+    <select class="mode-select" id="relationshipMode" disabled aria-describedby="modeLock">
       <option value="general">General chemistry</option>
       <option value="romance">Romance / partnership</option>
       <option value="friendship">Friendship</option>
@@ -1070,57 +1266,83 @@ body.access-locked .container {
   </div>
 
   <div class="collide-zone">
-    <button class="btn" id="collideBtn" onclick="runCollision()">⚡ Collide Frequencies ⚡</button>
+    <button type="button" class="btn btn-primary-cta" id="collideBtn" onclick="runCollision()">Create Your Frequency Match</button>
   </div>
 </section>
 
 <!-- ========== LOADING ========== -->
 <div class="loading-screen" id="loadingScreen">
   <div class="loader"></div>
-  <div class="loading-text" id="loadingText">Reading frequencies...</div>
+  <div class="loading-text" id="loadingText">Building your match...</div>
 </div>
 
 <!-- ========== RESULTS ========== -->
-<section class="cards-arena" id="resultsPhase">
+<section class="cards-arena" id="resultsPhase" aria-live="polite" aria-label="Frequency Match results">
 
-  <div class="cards-row">
-    <div class="player-card card-1" id="card1">
-      <div class="card-bg-pattern"></div>
+  <div class="story-open" id="storyOpen">
+    <div class="story-kicker">Your match story begins here</div>
+    <p class="story-headline" id="storyHeadline">—</p>
+    <p class="story-plain" id="storyPlain">—</p>
+  </div>
+
+  <div class="upgrade-strip" id="upgradeTop">
+    <h3>Build Your Full Soul Map</h3>
+    <p>Your personal page with archetype identity, gift &amp; shadow, and a permanent code — a full map you keep, not just a score.</p>
+    <div class="upgrade-actions">
+      <a class="btn" id="ctaSoulMapTop" href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener">Build Your Full Soul Map</a>
+      <button type="button" class="btn btn-secondary" id="ctaProTop" onclick="openPaywall()">Unlock deeper relationship insight with Frequency Pro</button>
+    </div>
+  </div>
+
+  <div class="cards-row" role="group" aria-label="Player Cards">
+    <div class="player-card card-1" id="card1" role="img" aria-labelledby="c1Name c1Archetype">
+      <div class="card-bg-pattern" aria-hidden="true"></div>
       <div class="card-header">
         <div class="card-id" id="c1Id">SPARK·001</div>
         <div class="card-rarity" id="c1Rarity">RARE</div>
       </div>
       <div class="card-name" id="c1Name">—</div>
       <div class="card-archetype" id="c1Archetype">—</div>
-      <div class="card-sigil" id="c1Sigil">⚡</div>
+      <div class="card-sigil" id="c1Sigil" aria-hidden="true">⚡</div>
       <div class="stat-grid" id="c1Stats"></div>
       <div class="card-footer">THE FIRST SPARK · PLAYER CARD</div>
     </div>
 
-    <div class="collision-line">
+    <div class="collision-line" aria-hidden="true">
       <div class="collision-orb"></div>
       <div class="collision-bolt"></div>
     </div>
 
-    <div class="player-card card-2" id="card2">
-      <div class="card-bg-pattern"></div>
+    <div class="player-card card-2" id="card2" role="img" aria-labelledby="c2Name c2Archetype">
+      <div class="card-bg-pattern" aria-hidden="true"></div>
       <div class="card-header">
         <div class="card-id" id="c2Id">SPARK·002</div>
         <div class="card-rarity" id="c2Rarity">RARE</div>
       </div>
       <div class="card-name" id="c2Name">—</div>
       <div class="card-archetype" id="c2Archetype">—</div>
-      <div class="card-sigil" id="c2Sigil">⚡</div>
+      <div class="card-sigil" id="c2Sigil" aria-hidden="true">⚡</div>
       <div class="stat-grid" id="c2Stats"></div>
       <div class="card-footer">THE FIRST SPARK · PLAYER CARD</div>
     </div>
   </div>
 
+  <div class="share-panel" id="sharePanel">
+    <h3>Share this Player Card</h3>
+    <p>Send the match — or just the vibe — to someone who needs to see it.</p>
+    <div class="share-btns">
+      <button type="button" class="btn" onclick="shareResults('native')" aria-label="Share match with native share">Share</button>
+      <button type="button" class="btn btn-secondary" onclick="shareResults('copy')" aria-label="Copy match link to clipboard">Copy link</button>
+      <button type="button" class="btn btn-secondary" onclick="downloadVerdict()" aria-label="Download verdict card as image">Download card</button>
+    </div>
+    <div class="share-toast" id="shareToast" role="status">Link copied.</div>
+  </div>
+
   <div class="verdict-card" id="verdictCard">
-    <div class="verdict-bg"></div>
+    <div class="verdict-bg" aria-hidden="true"></div>
 
     <div class="score-display">
-      <div class="score-label">FREQUENCY MATCH SCORE</div>
+      <div class="score-label">Symbolic match score</div>
       <div>
         <span class="score-number" id="scoreNumber">0</span><span class="score-percent">%</span>
       </div>
@@ -1158,13 +1380,21 @@ body.access-locked .container {
         <p class="breakdown-text" id="exprPersText">—</p>
       </div>
     </div>
+
+    <div class="upgrade-strip" id="upgradeBottom" style="margin-top:32px;margin-bottom:0">
+      <h3>Build Your Full Soul Map</h3>
+      <p>Go deeper than the match: your archetype, gift &amp; shadow pair, and full Soul Code on a private page you keep.</p>
+      <div class="upgrade-actions">
+        <a class="btn" id="ctaSoulMapBottom" href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener">Build Your Full Soul Map</a>
+        <button type="button" class="btn btn-secondary" id="ctaProBottom" onclick="openPaywall()">Unlock deeper relationship insight with Frequency Pro</button>
+      </div>
+    </div>
   </div>
 
   <div class="actions">
-    <button class="btn" onclick="downloadVerdict()">⬇ Download Verdict Card</button>
-    <button class="btn btn-secondary" onclick="shareResults()">↗ Share Results</button>
-    <button class="btn btn-secondary" id="btnSaveMatch" onclick="saveCurrentMatch()" style="display:none">☁ Save to Library</button>
-    <button class="btn btn-secondary" onclick="resetTool()">↻ Run Another Match</button>
+    <button type="button" class="btn" onclick="resetTool()">Compare Another Connection</button>
+    <a class="btn btn-secondary" href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">Build Your Full Soul Map</a>
+    <button type="button" class="btn btn-secondary" id="btnSaveMatch" onclick="saveCurrentMatch()" style="display:none">☁ Save to Library</button>
   </div>
 
 </section>
@@ -1176,29 +1406,31 @@ body.access-locked .container {
 
 <footer>
   <p class="tagline">Reality is programmable. Consciousness is the code.</p>
-  <p>Built by <a href="https://thefirstspark.shop" target="_blank">The First Spark</a> · Powered by Soul Maps</p>
-  <p style="margin-top:10px;font-size:11px;opacity:0.45">Whop members · Pro $4.99/month or player pass · deep toolkit on Pro</p>
+  <p>Built by <a href="https://thefirstspark.shop" target="_blank" rel="noopener">The First Spark</a> · Powered by <a href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener">Soul Maps</a></p>
+  <p style="margin-top:10px;font-size:11px;opacity:0.45">Free via Sparkverse Lobby · Pro $4.99/month optional</p>
+  <p class="disclaimer">For reflection, exploration, and entertainment. Symbolic readings from the Selector Model — not scientific measurement, medical advice, or professional counseling.</p>
 </footer>
 
 </div>
 
-<!-- Hard access gate (blocks app until Pro or player) -->
+<!-- Hard access gate: join free Lobby + sign in before first try -->
 <div class="access-gate" id="accessGate" role="dialog" aria-modal="true" aria-labelledby="accessGateTitle">
   <div class="access-gate-card">
     <h2 id="accessGateTitle">Unlock Frequency Match</h2>
-    <p class="lead">Not free on Whop unless you subscribe or you’re a player.</p>
+    <p class="lead">Join free Sparkverse first — then sign in. No collide until you’re in.</p>
     <ul>
-      <li><strong>Frequency Pro</strong> — $4.99/month · full collide + deep toolkit</li>
-      <li><strong>Players</strong> — free core collide with a player pass</li>
-      <li>Sign in with the <strong>same email</strong> you use on Whop</li>
+      <li><strong>1. Join free</strong> — Sparkverse Lobby on Whop (free tier)</li>
+      <li><strong>2. Sign in here</strong> — same email you use on Whop</li>
+      <li><strong>3. Collide</strong> — one tool, your lead into the Lobby</li>
+      <li><strong>Optional</strong> — Frequency Pro $4.99/mo for deep toolkit</li>
     </ul>
     <div class="error" id="accessGateError"></div>
-    <div class="btn-row" style="flex-direction:column;gap:10px">
-      <button type="button" class="btn" onclick="startProCheckout()">Subscribe · $4.99/month</button>
-      <button type="button" class="btn btn-secondary" id="btnPlayerPass" onclick="startPlayerCheckout()" style="display:none">Claim player pass</button>
-      <button type="button" class="btn btn-secondary" onclick="openAuthModal()">Sign in</button>
+    <div class="btn-row">
+      <button type="button" class="btn" onclick="startPlayerCheckout()">Join Sparkverse free</button>
+      <button type="button" class="btn btn-secondary" onclick="openAuthModal()">I joined — sign in</button>
+      <button type="button" class="btn btn-secondary" onclick="startProCheckout()">Or go Pro · $4.99/mo</button>
     </div>
-    <p class="hint" id="accessGateHint">After checkout, return here — access unlocks when the Whop webhook matches your email.</p>
+    <p class="hint" id="accessGateHint">Use the <strong>same email</strong> on Whop and here so access unlocks after you join. Whop webhook sets player/Pro on your account.</p>
   </div>
 </div>
 
@@ -1207,7 +1439,7 @@ body.access-locked .container {
   <div class="modal">
     <button type="button" class="modal-close" onclick="closeModal('authModal')" aria-label="Close">&times;</button>
     <h2>Sign in</h2>
-    <p class="lead">Required to verify Pro or player access. Use your Whop email.</p>
+    <p class="lead">Required to verify Sparkverse free or Pro access. Use your Whop email.</p>
     <div class="error" id="authError"></div>
     <input type="email" id="authEmail" placeholder="you@email.com" autocomplete="email">
     <div class="btn-row">
@@ -1215,18 +1447,17 @@ body.access-locked .container {
       <button type="button" class="btn btn-secondary" id="btnSignOut" onclick="doSignOut()" style="display:none">Sign out</button>
       <button type="button" class="btn btn-secondary" id="btnPortal" onclick="openPortal()" style="display:none">Manage billing</button>
     </div>
-    <p class="hint" id="authHint">We’ll email a one-time link. No password.</p>
+    <p class="hint" id="authHint">We’ll email a one-time link. No password. Same email as Whop.</p>
   </div>
 </div>
 
-<!-- Paywall modal (Pro upsell / deep toolkit) -->
+<!-- Paywall modal (Pro upsell only) -->
 <div class="modal-overlay" id="paywallModal" role="dialog" aria-modal="true">
   <div class="modal">
     <button type="button" class="modal-close" onclick="closeModal('paywallModal')" aria-label="Close">&times;</button>
     <h2>Frequency Pro</h2>
-    <p class="lead">$4.99/month via Whop — unlock the app if you’re not a player, plus the deep toolkit.</p>
+    <p class="lead">Deep toolkit on top of free Lobby access — $4.99/month via Whop.</p>
     <ul class="feature-list">
-      <li>App access (if you don’t hold a player pass)</li>
       <li>Saved match history library</li>
       <li>Deeper analysis — expression, personality, birthday</li>
       <li>Romance / friendship / family / business lens</li>
@@ -1235,9 +1466,9 @@ body.access-locked .container {
     <div class="btn-row">
       <button type="button" class="btn" id="btnCheckout" onclick="startProCheckout()">Upgrade on Whop · $4.99/month</button>
       <button type="button" class="btn btn-secondary" onclick="openAuthModal(); closeModal('paywallModal')">Sign in first</button>
-      <button type="button" class="btn btn-secondary" id="btnPlayerFromPaywall" onclick="startPlayerCheckout()" style="display:none">I’m a player</button>
+      <button type="button" class="btn btn-secondary" onclick="startPlayerCheckout(); closeModal('paywallModal')">Join free Lobby instead</button>
     </div>
-    <p class="hint">Sign in with the <strong>same email</strong> you use on Whop so access unlocks automatically.</p>
+    <p class="hint">Sign in with the <strong>same email</strong> as Whop so Pro unlocks automatically.</p>
   </div>
 </div>
 
@@ -1431,32 +1662,66 @@ function getHeadline(score) {
   return "Opposite poles. The tension itself is the teaching.";
 }
 
+/** Plain-English takeaway — practical first, symbolic framing second */
+function getPlainStory(score, p1, p2) {
+  const names = `${p1.firstName} and ${p2.firstName}`;
+  if (score >= 88) {
+    return `In plain terms: ${names} tend to reinforce each other. Life Paths ${p1.lifePath} and ${p2.lifePath}, with ${p1.sun.name} and ${p2.sun.name}, point to easy rapport — a symbolic read for reflection, not a prediction.`;
+  }
+  if (score >= 72) {
+    return `In plain terms: ${names} have real overlap and some stretch. Life Paths ${p1.lifePath} and ${p2.lifePath} suggest you bring different strengths; the work is naming them out loud.`;
+  }
+  if (score >= 55) {
+    return `In plain terms: ${names} may need more deliberate translation. Life Paths ${p1.lifePath} and ${p2.lifePath} (${p1.sun.element} × ${p2.sun.element}) often mean different defaults — curiosity beats assumption.`;
+  }
+  return `In plain terms: ${names} sit far apart on several symbolic axes. That can be a powerful teaching dynamic if both people stay honest about difference. Not a verdict — a mirror.`;
+}
+
+function soulMapUrl(matchData) {
+  const base = 'https://soul-maps.thefirstspark.shop/';
+  if (!matchData) return base;
+  const params = new URLSearchParams();
+  params.set('from', 'frequency-match');
+  if (matchData.p1 && matchData.p1.fullName) params.set('p1', matchData.p1.fullName);
+  if (matchData.p2 && matchData.p2.fullName) params.set('p2', matchData.p2.fullName);
+  if (typeof matchData.overall === 'number') params.set('score', String(matchData.overall));
+  return `${base}?${params.toString()}`;
+}
+
+function updateSoulMapLinks() {
+  const url = soulMapUrl(window.matchData);
+  ['ctaSoulMapTop', 'ctaSoulMapBottom'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.href = url;
+  });
+}
+
 // ========== STRENGTH/TENSION GENERATOR ==========
 function generateStrengths(p1, p2, scores) {
   const out = [];
 
   if (scores.numerology >= 85) {
-    out.push(`Both charts carry <strong>resonant numerology</strong> — your life paths echo each other in pattern, not duplicate.`);
+    out.push(`You tend to understand each other&rsquo;s life direction — Life Paths ${p1.lifePath} and ${p2.lifePath} <strong>echo in pattern</strong>, not as copies. <em>(Symbolic numerology read.)</em>`);
   }
   if (scores.element >= 85) {
-    out.push(`Your <strong>elemental signatures harmonize</strong> — ${p1.sun.element} meets ${p2.sun.element}, a natural conductor for shared energy.`);
+    out.push(`Day-to-day energy often feels easy: <strong>${p1.sun.element} meets ${p2.sun.element}</strong> in a classic complementary pairing.`);
   }
   if (scores.modality >= 80) {
-    out.push(`<strong>Modality alignment</strong> means you approach time and change in compatible rhythms.`);
+    out.push(`You often move at a <strong>similar pace</strong> through change — starting, sustaining, or adapting in compatible ways.`);
   }
   if (scores.zodiac >= 85) {
-    out.push(`Your Chinese zodiac signs sit in the same <strong>compatibility triangle</strong> — instinctive understanding without explanation.`);
+    out.push(`In the Eastern frame, your signs sit in a <strong>supportive triangle</strong> — many people experience this as instinctive ease.`);
   }
   // Master number flag
   const masters = [11, 22, 33];
   const m1 = [p1.lifePath, p1.expression, p1.soulUrge].filter(n => masters.includes(n));
   const m2 = [p2.lifePath, p2.expression, p2.soulUrge].filter(n => masters.includes(n));
   if (m1.length && m2.length) {
-    out.push(`<strong>Both charts carry master numbers</strong> (${[...new Set([...m1, ...m2])].join(', ')}) — you're operating on amplified frequencies.`);
+    out.push(`Both charts carry <strong>master numbers</strong> (${[...new Set([...m1, ...m2])].join(', ')}) in the Selector Model — a story of intensity and depth, not a clinical diagnosis.`);
   }
 
   if (out.length === 0) {
-    out.push(`Your <strong>differences create depth</strong> — neither of you is here to mirror the other.`);
+    out.push(`Your <strong>differences create depth</strong> — neither of you is here only to mirror the other.`);
   }
   return out.slice(0, 4);
 }
@@ -1465,23 +1730,23 @@ function generateTensions(p1, p2, scores) {
   const out = [];
 
   if (scores.element < 65) {
-    out.push(`<strong>Elemental friction</strong>: ${p1.sun.element} and ${p2.sun.element} don't naturally translate — meaning gets lost without intentional bridging.`);
+    out.push(`<strong>Different default energies</strong> (${p1.sun.element} and ${p2.sun.element}): meaning can get lost unless you spell things out.`);
   }
   if (Math.abs(p1.lifePath - p2.lifePath) >= 4 && p1.lifePath !== p2.lifePath) {
     out.push(`Your <strong>life paths run different tracks</strong> (${p1.lifePath} vs ${p2.lifePath}) — what feels essential to one may feel optional to the other.`);
   }
   if (scores.modality < 70) {
-    out.push(`Different <strong>modalities</strong> — one of you initiates, the other adapts. Pace mismatches will surface.`);
+    out.push(`Different <strong>paces with change</strong> — one may push forward while the other holds or adapts. Name the pace mismatch early.`);
   }
   if (scores.zodiac < 60) {
-    out.push(`Chinese zodiac <strong>opposition</strong> — instinctive reactions can read as hostile when they're just wired differently.`);
+    out.push(`In the Eastern frame, your animals often sit in <strong>opposition</strong> — first reactions can feel sharp when they&rsquo;re just different wiring.`);
   }
   if (p1.soulUrge !== p2.soulUrge && Math.abs(p1.soulUrge - p2.soulUrge) >= 5) {
-    out.push(`<strong>Different soul drives</strong> — what fulfills you at the core isn't the same. Honor both, don't blend them.`);
+    out.push(`<strong>Different core drives</strong> — what fulfills you isn&rsquo;t the same. Honor both; don&rsquo;t force a blend.`);
   }
 
   if (out.length === 0) {
-    out.push(`Few hard tensions — but watch for <strong>echo chambers</strong>. Too much harmony can dull the signal.`);
+    out.push(`Few hard tensions in this model — still watch for <strong>echo chambers</strong>. Easy harmony can hide hard conversations.`);
   }
   return out.slice(0, 4);
 }
@@ -1490,13 +1755,13 @@ function generatePattern(p1, p2, score) {
   const tier = score >= 88 ? 'high' : score >= 72 ? 'mid' : score >= 55 ? 'tension' : 'opposite';
 
   const patterns = {
-    high: `${p1.firstName} and ${p2.firstName} are running compatible source code. The numerological core (Life Paths ${p1.lifePath} & ${p2.lifePath}) and astrological signatures (${p1.sun.name} ${p1.sun.sym} & ${p2.sun.name} ${p2.sun.sym}) form a stable harmonic. This is the kind of match where the energy compounds rather than cancels — both of you become more yourselves in each other's presence, not less. The work is honoring the depth, not searching for problems that aren't there.`,
+    high: `${p1.firstName} and ${p2.firstName} show strong overlap in this symbolic model. Life Paths ${p1.lifePath} &amp; ${p2.lifePath} with ${p1.sun.name} ${p1.sun.sym} and ${p2.sun.name} ${p2.sun.sym} often feel like ease that compounds — each person more themselves, not less. The work is honoring depth, not hunting for problems. <em>This is a reflective story, not a measurement.</em>`,
 
-    mid: `${p1.firstName} and ${p2.firstName} carry <strong>productive resonance</strong>. Not every frequency aligns, but the ones that do form a strong enough bridge to carry weight. Life Paths ${p1.lifePath} & ${p2.lifePath} create a dynamic where one of you tends to lead in areas the other tends to follow — when this is conscious, it's a partnership; when it's unconscious, it becomes a power struggle. The teaching is in the asymmetry.`,
+    mid: `${p1.firstName} and ${p2.firstName} carry <strong>productive difference</strong>. Not every theme lines up, but enough of a bridge exists to carry real weight. Life Paths ${p1.lifePath} &amp; ${p2.lifePath} can mean one leads where the other follows — conscious, that&rsquo;s partnership; unconscious, it becomes a power struggle. The teaching is in the asymmetry.`,
 
-    tension: `${p1.firstName} and ${p2.firstName} are running on different operating systems that interface through translation. The compatibility isn't automatic — it's chosen, daily. Your numerological signatures (${p1.lifePath} & ${p2.lifePath}) and astrological elements (${p1.sun.element} & ${p2.sun.element}) require active negotiation. The friction isn't a bug; it's the curriculum. Couples who rate "high friction, high commitment" often build the most durable structures because nothing is taken for granted.`,
+    tension: `${p1.firstName} and ${p2.firstName} look like different operating styles that need translation. Compatibility here is chosen, not automatic. Life Paths ${p1.lifePath} &amp; ${p2.lifePath} with ${p1.sun.element} and ${p2.sun.element} elements ask for negotiation. Friction isn&rsquo;t a failure mode in this frame — it&rsquo;s curriculum. High-friction, high-commitment bonds often last because nothing is taken for granted.`,
 
-    opposite: `${p1.firstName} and ${p2.firstName} are positioned at opposite ends of the spectrum on most key axes. This is the kind of match that either teaches both of you everything you came here to learn — or breaks under the weight of unmet expectations. The score isn't a judgment; it's a calibration warning. This dynamic works when both parties accept that the other's worldview is genuinely different, not wrong. It fails when either tries to convert the other.`
+    opposite: `${p1.firstName} and ${p2.firstName} sit far apart on several axes in this model. That can teach both people a great deal — or strain under unmet expectations. The score is a mirror for reflection, not a judgment. It works when difference is respected; it strains when either tries to convert the other.`
   };
 
   return patterns[tier];
@@ -1547,7 +1812,7 @@ async function runCollision() {
     return;
   }
 
-  // Members mode: Pro ($4.99) or verified player required
+  // Lead magnet: must be entitled (Sparkverse free OR Pro) before one try
   if (window.FM) {
     const authz = await FM.authorizeMatch();
     if (!authz.ok) {
@@ -1566,12 +1831,12 @@ async function runCollision() {
   document.getElementById('loadingScreen').classList.add('active');
 
   const loadingMsgs = [
-    'Reading frequencies...',
+    'Reading the charts...',
     'Calculating numerology...',
     'Mapping archetypes...',
-    'Aligning the stars...',
-    'Running collision...',
-    'Forging the verdict...'
+    'Comparing signatures...',
+    'Building Player Cards...',
+    'Writing your match story...'
   ];
   let i = 0;
   const interval = setInterval(() => {
@@ -1637,19 +1902,25 @@ async function runCollision() {
   buildPlayerCard(p1, 1);
   buildPlayerCard(p2, 2);
 
+  // Story-first open (practical + flavor)
+  const headline = getHeadline(overall);
+  const plain = getPlainStory(overall, p1, p2);
+  document.getElementById('storyHeadline').textContent = headline;
+  document.getElementById('storyPlain').textContent = plain;
+
   // Animate score
   animateScore(overall);
 
   // Headline
-  document.getElementById('verdictHeadline').textContent = `"${getHeadline(overall)}"`;
+  document.getElementById('verdictHeadline').textContent = `"${headline}"`;
 
-  // Dimensions
+  // Dimensions (symbolic dimensions — labeled as model scores)
   const dims = [
-    {name:'Numerological Core', value: scores.numerology},
-    {name:'Soul Urge Alignment', value: scores.soulUrge},
-    {name:'Elemental Harmony', value: scores.element},
-    {name:'Modality Sync', value: scores.modality},
-    {name:'Eastern Affinity', value: scores.zodiac}
+    {name:'Life Path (symbolic)', value: scores.numerology},
+    {name:'Soul Urge (symbolic)', value: scores.soulUrge},
+    {name:'Element pairing', value: scores.element},
+    {name:'Pace / modality', value: scores.modality},
+    {name:'Eastern affinity', value: scores.zodiac}
   ];
   document.getElementById('dimensionsGrid').innerHTML = dims.map(d => `
     <div class="dimension">
@@ -1708,15 +1979,23 @@ async function runCollision() {
   // Store for share / save
   window.matchData = {
     p1, p2, scores, overall, relationshipMode, isPro,
-    strengths, tensions, pattern
+    strengths, tensions, pattern, headline, plain
   };
+
+  updateSoulMapLinks();
+
+  // Pro CTAs: hide redundant upsell if already Pro
+  const proTop = document.getElementById('ctaProTop');
+  const proBottom = document.getElementById('ctaProBottom');
+  if (proTop) proTop.style.display = isPro ? 'none' : '';
+  if (proBottom) proBottom.style.display = isPro ? 'none' : '';
 
   // Auto-save for Pro
   if (isPro && window.FM) {
     await persistMatch(false);
   }
 
-  // Smooth scroll to verdict
+  // Smooth scroll to story open
   setTimeout(() => {
     document.getElementById('resultsPhase').scrollIntoView({ behavior: 'smooth' });
   }, 200);
@@ -1797,15 +2076,47 @@ function downloadVerdict() {
   });
 }
 
-function shareResults() {
-  const { p1, p2, overall } = window.matchData;
-  const text = `${p1.firstName} × ${p2.firstName} = ${overall}% Frequency Match.\n\n"${getHeadline(overall)}"\n\nRun your own at thefirstspark.shop`;
+function sharePayload() {
+  if (!window.matchData) return null;
+  const { p1, p2, overall, headline } = window.matchData;
+  const url = window.location.href.split('#')[0];
+  const text = `${p1.firstName} × ${p2.firstName} = ${overall}% Frequency Match\n\n"${headline || getHeadline(overall)}"\n\nCompare your code: ${url}`;
+  return { title: 'Frequency Match · Player Card', text, url };
+}
 
-  if (navigator.share) {
-    navigator.share({ title: 'Frequency Match', text, url: window.location.href });
-  } else {
-    navigator.clipboard.writeText(text + '\n' + window.location.href);
-    alert('Result copied to clipboard. Paste it anywhere.');
+function showShareToast(msg) {
+  const toast = document.getElementById('shareToast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+async function shareResults(mode) {
+  const payload = sharePayload();
+  if (!payload) return;
+
+  if (mode === 'copy' || !navigator.share) {
+    try {
+      await navigator.clipboard.writeText(payload.text);
+      showShareToast('Link and match copied — paste anywhere.');
+    } catch (e) {
+      // Fallback prompt for older browsers
+      window.prompt('Copy this match:', payload.text);
+    }
+    return;
+  }
+
+  try {
+    await navigator.share({ title: payload.title, text: payload.text, url: payload.url });
+  } catch (e) {
+    if (e && e.name === 'AbortError') return;
+    try {
+      await navigator.clipboard.writeText(payload.text);
+      showShareToast('Copied to clipboard.');
+    } catch (_) {
+      window.prompt('Copy this match:', payload.text);
+    }
   }
 }
 
@@ -1822,7 +2133,7 @@ function resetTool() {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// ========== ACCESS / FREEMIUM UI ==========
+// ========== ACCESS / FREEMIUM UI (lead magnet) ==========
 function setAccessGateVisible(show) {
   const gate = document.getElementById('accessGate');
   if (!gate) return;
@@ -1834,9 +2145,9 @@ function openAccessGate(reason) {
   const err = document.getElementById('accessGateError');
   if (err) {
     if (reason === 'sign_in_required') {
-      err.textContent = 'Sign in with your Whop email, then subscribe or claim player access.';
+      err.textContent = 'Sign in with your Whop email after you join free Sparkverse.';
     } else if (reason === 'access_required') {
-      err.textContent = 'No active Pro or player pass on this account yet.';
+      err.textContent = 'Join free Sparkverse Lobby (or Pro), then sign in with that email.';
     } else {
       err.textContent = '';
     }
@@ -1860,53 +2171,52 @@ function updateUsageUI(usage) {
   const btnSignOut = document.getElementById('btnSignOut');
   const btnPortal = document.getElementById('btnPortal');
   const freeCta = document.getElementById('freePlayersCta');
-  const btnPlayerPass = document.getElementById('btnPlayerPass');
-  const btnPlayerFromPaywall = document.getElementById('btnPlayerFromPaywall');
 
-  const entitled = u.hasAccess !== false && (u.hasAccess || u.isPro || u.isPlayer || u.accessMode === 'open' || !u.configured);
-  const showPlayerBtn = Boolean(u.playerCheckout);
+  const entitled = Boolean(u.hasAccess || u.isPro || u.isPlayer);
 
-  if (btnPlayerPass) btnPlayerPass.style.display = showPlayerBtn ? '' : 'none';
-  if (btnPlayerFromPaywall) btnPlayerFromPaywall.style.display = showPlayerBtn ? '' : 'none';
+  // Hard gate until Lobby free or Pro
+  if (window.FM && FM.isConfigured && FM.isConfigured() && !entitled) {
+    setAccessGateVisible(true);
+  } else {
+    setAccessGateVisible(false);
+  }
 
   if (u.isPro) {
     pill.classList.add('pro');
     text.textContent = 'Frequency Pro · deep toolkit';
     btnUpgrade.textContent = 'Pro active';
+    btnUpgrade.classList.add('primary');
     btnUpgrade.onclick = () => openPortal();
-    modeSelect.disabled = false;
-    modeLock.textContent = '✦ Unlocked';
-    btnHistory.style.display = '';
+    if (modeSelect) modeSelect.disabled = false;
+    if (modeLock) modeLock.textContent = '✦ Unlocked';
+    if (btnHistory) btnHistory.style.display = '';
     if (freeCta) freeCta.style.display = 'none';
-  } else if (u.isPlayer) {
+  } else if (u.isPlayer || entitled) {
     pill.classList.remove('pro');
-    text.textContent = 'Player access · core collide';
-    btnUpgrade.textContent = `Go Pro · ${u.priceLabel || '$4.99/month'}`;
+    text.textContent = 'Sparkverse free · unlocked';
+    btnUpgrade.textContent = 'Frequency Pro';
+    btnUpgrade.classList.remove('primary');
     btnUpgrade.onclick = () => openPaywall();
-    modeSelect.disabled = true;
-    modeSelect.value = 'general';
-    modeLock.textContent = '🔒 Frequency Pro';
-    btnHistory.style.display = 'none';
+    if (modeSelect) {
+      modeSelect.disabled = true;
+      modeSelect.value = 'general';
+    }
+    if (modeLock) modeLock.textContent = '🔒 Frequency Pro';
+    if (btnHistory) btnHistory.style.display = 'none';
     if (freeCta) freeCta.style.display = 'none';
   } else {
     pill.classList.remove('pro');
-    text.textContent = entitled && u.accessMode === 'open'
-      ? 'Open access'
-      : 'Locked · Pro or player';
-    btnUpgrade.textContent = `Go Pro · ${u.priceLabel || '$4.99/month'}`;
+    text.textContent = 'Join free Lobby to unlock';
+    btnUpgrade.textContent = 'Frequency Pro';
+    btnUpgrade.classList.remove('primary');
     btnUpgrade.onclick = () => openPaywall();
-    modeSelect.disabled = true;
-    modeSelect.value = 'general';
-    modeLock.textContent = '🔒 Frequency Pro';
-    btnHistory.style.display = 'none';
-    if (freeCta) freeCta.style.display = entitled ? 'none' : '';
-  }
-
-  // Hard gate whenever members mode and not entitled
-  if (u.configured && u.accessMode !== 'open' && !u.isPro && !u.isPlayer && u.hasAccess === false) {
-    setAccessGateVisible(true);
-  } else if (u.isPro || u.isPlayer || u.accessMode === 'open' || !u.configured) {
-    setAccessGateVisible(false);
+    if (modeSelect) {
+      modeSelect.disabled = true;
+      modeSelect.value = 'general';
+    }
+    if (modeLock) modeLock.textContent = '🔒 Locked';
+    if (btnHistory) btnHistory.style.display = 'none';
+    if (freeCta) freeCta.style.display = '';
   }
 
   if (u.signedIn) {
@@ -1930,13 +2240,35 @@ function openAuthModal() {
   document.getElementById('authError').textContent = '';
   const u = window.FM && FM.getUsageSnapshot();
   document.getElementById('authHint').textContent = u && u.signedIn
-    ? `Signed in as ${u.email || 'member'}.`
-    : 'We’ll email a one-time link. No password.';
+    ? `Signed in as ${u.email || 'member'}. Join free Lobby if access is still locked.`
+    : 'Use the same email as Whop. We’ll email a one-time link.';
   openModal('authModal');
 }
 function openPaywall() {
   document.getElementById('paywallError').textContent = '';
   openModal('paywallModal');
+}
+
+async function startPlayerCheckout() {
+  try {
+    if (window.FM && !FM.getUsageSnapshot().signedIn) {
+      openAuthModal();
+      const err = document.getElementById('authError');
+      if (err) err.textContent = 'Sign in first, then join free Sparkverse with the same email.';
+      return;
+    }
+    await FM.startCheckout('player');
+  } catch (e) {
+    // If not signed in, open Lobby URL publicly as lead magnet
+    const url = (window.FM_CONFIG && window.FM_CONFIG.WHOP_PLAYER_CHECKOUT_URL) ||
+      'https://whop.com/sparkverse-511c/the-sparkverse-lobby/';
+    if (!window.FM || !FM.getUsageSnapshot().signedIn) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    const gateErr = document.getElementById('accessGateError');
+    if (gateErr) gateErr.textContent = e.message || String(e);
+  }
 }
 
 async function submitMagicLink() {
@@ -1966,42 +2298,24 @@ async function doSignOut() {
 }
 
 async function startProCheckout() {
-  const err =
-    document.getElementById('paywallError') ||
-    document.getElementById('accessGateError');
+  const err = document.getElementById('paywallError');
+  const gateErr = document.getElementById('accessGateError');
   if (err) err.textContent = '';
   if (!window.FM) return;
   const u = FM.getUsageSnapshot();
   if (!u.signedIn) {
     const msg = 'Sign in first (same email you’ll use on Whop), then subscribe.';
     if (err) err.textContent = msg;
+    if (gateErr) gateErr.textContent = msg;
     openAuthModal();
     return;
   }
   try {
     await FM.startCheckout('pro');
   } catch (e) {
-    if (err) err.textContent = e.message || 'Checkout unavailable';
-  }
-}
-
-async function startPlayerCheckout() {
-  const err =
-    document.getElementById('accessGateError') ||
-    document.getElementById('paywallError');
-  if (err) err.textContent = '';
-  if (!window.FM) return;
-  const u = FM.getUsageSnapshot();
-  if (!u.signedIn) {
-    const msg = 'Sign in first with your player / Whop email.';
+    const msg = e.message || 'Checkout unavailable';
     if (err) err.textContent = msg;
-    openAuthModal();
-    return;
-  }
-  try {
-    await FM.startCheckout('player');
-  } catch (e) {
-    if (err) err.textContent = e.message || 'Player pass checkout not configured';
+    if (gateErr) gateErr.textContent = msg;
   }
 }
 
@@ -2098,20 +2412,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (params.get('whop') === 'return' || params.get('checkout') === 'success') {
     // Returning from Whop — webhook may still be in flight; poll profile briefly
     const note = document.getElementById('usageText');
-    if (note) note.textContent = 'Checking access…';
+    if (note) note.textContent = 'Checking membership…';
     let tries = 0;
     const poll = async () => {
       tries += 1;
       const u = await FM.refreshProStatus();
-      if (u.hasAccess || tries >= 8) {
+      if (u.isPro || u.isPlayer || u.hasAccess || tries >= 8) {
         history.replaceState({}, '', location.pathname);
         updateUsageUI(u);
-        if (u.isPro) {
-          alert('Frequency Pro is active. Full toolkit unlocked.');
-        } else if (u.isPlayer) {
-          alert('Player access is active. Core collide unlocked.');
+        if (u.isPro || u.isPlayer || u.hasAccess) {
+          alert(
+            u.isPro
+              ? 'Frequency Pro is active. Deep toolkit unlocked.'
+              : 'Sparkverse access confirmed. You can collide now.'
+          );
         } else {
-          alert('If you just paid, wait a minute and refresh. Use the same email on Whop and Frequency Match.');
+          alert(
+            'Membership received — if access isn’t open yet, wait a minute and refresh. Use the same email on Whop and Frequency Match.'
+          );
         }
         return;
       }
