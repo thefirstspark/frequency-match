@@ -1733,7 +1733,9 @@ function generateStrengths(p1, p2, scores) {
     out.push(`You tend to understand each other&rsquo;s life direction — Life Paths ${p1.lifePath} and ${p2.lifePath} <strong>echo in pattern</strong>, not as copies. <em>(Symbolic numerology read.)</em>`);
   }
   if (scores.element >= 85) {
-    out.push(`Day-to-day energy often feels easy: <strong>${p1.sun.element} meets ${p2.sun.element}</strong> in a classic complementary pairing.`);
+    out.push(p1.sun.element === p2.sun.element
+      ? `Day-to-day energy often feels easy: you both run on <strong>${p1.sun.element}</strong> — same elemental language, shared defaults.`
+      : `Day-to-day energy often feels easy: <strong>${p1.sun.element} meets ${p2.sun.element}</strong> in a classic complementary pairing.`);
   }
   if (scores.modality >= 80) {
     out.push(`You often move at a <strong>similar pace</strong> through change — starting, sustaining, or adapting in compatible ways.`);
@@ -2032,6 +2034,7 @@ async function runCollision() {
 
 function buildProfile(name, date, id, place = '') {
   const sun = sunSign(date);
+  sun.element = sun.el;
   const year = parseInt(date.split('-')[0]);
   return {
     id,
