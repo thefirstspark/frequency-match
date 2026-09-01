@@ -2440,6 +2440,67 @@ function escapeHtml(s) {
     .replace(/"/g, '&quot;');
 }
 
+// ========== SOUL CARD LINKS ==========
+// A minted Soul Map signature is a card. Card links prefill a player:
+//   ?p1=E1855DD782A3          quantum ID, resolved against the public registry
+//   ?n1=Full+Name&d1=1988-05-19   direct prefill (free tier, no card)
+// Both players prefilled = the pre-collision state arrives ready to fire.
+const CARD_REGISTRY_URL = 'https://soul-maps.thefirstspark.shop/signatures.json';
+let cardRegistry = null;
+async function fetchCardRegistry() {
+  if (cardRegistry) return cardRegistry;
+  const res = await fetch(CARD_REGISTRY_URL);
+  if (!res.ok) throw new Error('registry unavailable');
+  cardRegistry = await res.json();
+  return cardRegistry;
+}
+function findCard(reg, quantum) {
+  const q = String(quantum).replace(/[^0-9a-f]/gi, '').toUpperCase();
+  if (!q) return null;
+  for (const key in reg) {
+    const e = reg[key];
+    if (e && e.quantum && String(e.quantum).toUpperCase() === q) return e;
+  }
+  return null;
+}
+function prefillPlayer(slot, name, date, place, cardLabel) {
+  if (name) document.getElementById(`p${slot}Name`).value = name;
+  if (date) document.getElementById(`p${slot}Date`).value = date;
+  if (place) document.getElementById(`p${slot}Place`).value = place;
+  if (cardLabel) {
+    const lab = document.getElementById(`p${slot}-label`);
+    if (lab) lab.textContent = `◆ ${cardLabel} ◆`;
+  }
+}
+document.addEventListener('DOMContentLoaded', async () => {
+  const q = new URLSearchParams(window.location.search);
+  let filled = 0;
+  // direct prefill params
+  for (const slot of [1, 2]) {
+    const n = q.get(`n${slot}`), d = q.get(`d${slot}`);
+    if (n && d && /^\d{4}-\d{2}-\d{2}$/.test(d)) { prefillPlayer(slot, n, d, '', ''); filled++; }
+  }
+  // card params (quantum IDs from the soul map registry)
+  const wants = [1, 2].filter(s => q.get(`p${s}`));
+  if (wants.length) {
+    try {
+      const reg = await fetchCardRegistry();
+      for (const slot of wants) {
+        const card = findCard(reg, q.get(`p${slot}`));
+        if (!card) continue;
+        const place = [card.birth_city, card.birth_country].filter(Boolean).join(', ');
+        const label = (card.codex_role ? card.codex_role + ' · ' : '') + (card.quantum_display || card.quantum);
+        prefillPlayer(slot, card.name, card.dob, place, label);
+        filled++;
+      }
+    } catch (e) { console.warn('Card registry lookup failed:', e); }
+  }
+  if (filled) {
+    const grid = document.querySelector('.input-grid');
+    if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+
 // Boot freemium
 document.addEventListener('DOMContentLoaded', async () => {
   wireCtaUrls();
