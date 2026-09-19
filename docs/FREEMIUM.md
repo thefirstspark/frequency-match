@@ -30,7 +30,7 @@ Visitor → frequency.thefirstspark.shop
 
 ```js
 ACCESS_MODE: 'members',
-WHOP_PLAYER_CHECKOUT_URL: 'https://whop.com/sparkverse-511c/the-sparkverse-lobby/',
+WHOP_PLAYER_CHECKOUT_URL: 'https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f',
 WHOP_PLAYER_PLAN_ID: 'plan_…', // free Lobby plan id for webhook
 WHOP_CHECKOUT_URL: 'https://whop.com/checkout/plan_gX14Qd9V6UEml', // Pro
 ```

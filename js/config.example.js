@@ -10,7 +10,7 @@ window.FM_CONFIG = {
   WHOP_PLAN_ID: 'plan_XXXX',
   // Sparkverse free tier (lead magnet) — join Lobby before first collide
   WHOP_PLAYER_CHECKOUT_URL:
-    'https://whop.com/sparkverse-511c/the-sparkverse-lobby/',
+    'https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f',
   // Free Lobby plan id(s) for webhook → sets is_player (comma-separated ok in secrets)
   WHOP_PLAYER_PLAN_ID: 'plan_YOUR_FREE_LOBBY_PLAN',
   WHOP_APP_ID: '',

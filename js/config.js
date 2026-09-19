@@ -15,7 +15,7 @@ window.FM_CONFIG = {
 
   // Sparkverse free tier — join Lobby before first try
   WHOP_PLAYER_CHECKOUT_URL:
-    'https://whop.com/sparkverse-511c/the-sparkverse-lobby/',
+    'https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f',
   // Set this to the free Lobby plan id when Whop webhook should set is_player
   WHOP_PLAYER_PLAN_ID: 'plan_dBFxXLnwQoj1l',
   WHOP_APP_ID: '',
