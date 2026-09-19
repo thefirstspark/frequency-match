@@ -9,7 +9,7 @@
 <meta property="og:description" content="Compare your code with someone you love, lead, or can't stop thinking about. Two names. Two birth dates. One Player Card match.">
 <meta property="og:image" content="https://thefirstspark.shop/og-frequency-match.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono:wght@400;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono:wght@400;700&family=Cinzel:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
@@ -484,13 +484,13 @@ button:focus:not(:focus-visible) { outline: none; }
 
 /* ========== COMPATIBILITY VERDICT ========== */
 .verdict-card {
-  background: linear-gradient(135deg, rgba(13, 7, 40, 0.95), rgba(3, 1, 13, 0.98));
-  border: 2px solid var(--gold);
-  border-radius: 24px;
-  padding: 40px;
+  background: #050508;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 36px 32px 32px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 60px rgba(243, 178, 58, 0.3);
+  box-shadow: none;
 }
 
 .verdict-bg {
@@ -516,33 +516,31 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .score-number {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(4rem, 12vw, 7rem);
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(3.4rem, 10vw, 5.6rem);
   font-weight: 700;
-  background: linear-gradient(180deg, var(--gold-soft), var(--gold), var(--ember));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--gold-soft);
   line-height: 1;
-  text-shadow: 0 0 60px rgba(243, 178, 58, 0.4);
+  letter-spacing: 0.06em;
 }
 
 .score-percent {
-  font-family: 'Cinzel', serif;
-  font-size: 2rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.4rem;
   color: var(--gold);
   margin-left: 4px;
+  letter-spacing: 0.12em;
 }
 
 .verdict-headline {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.3rem, 3vw, 1.8rem);
-  font-style: italic;
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+  font-style: normal;
   color: var(--gold-soft);
   text-align: center;
   margin: 8px 0 24px;
   position: relative; z-index: 2;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .dimensions-grid {
@@ -584,10 +582,10 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .dim-value {
-  font-family: 'Cinzel', serif;
-  font-size: 1.1rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.05rem;
   color: var(--soft-white);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .breakdown-section {
@@ -596,8 +594,8 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .breakdown-section h3 {
-  font-family: 'Cinzel', serif;
-  font-size: 1rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
   letter-spacing: 3px;
   color: var(--gold);
   margin-bottom: 12px;
@@ -605,9 +603,9 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .breakdown-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.92rem;
+  line-height: 1.65;
   color: rgba(240,240,240,0.85);
 }
 
@@ -621,22 +619,24 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .tension-points li, .strengths li {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.05rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
   color: rgba(240,240,240,0.8);
   margin: 8px 0;
   padding-left: 24px;
   position: relative;
   list-style: none;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 .strengths li::before {
-  content: "⚡"; position: absolute; left: 0;
-  color: var(--gold);
+  content: "+"; position: absolute; left: 0;
+  color: var(--cyan);
+  font-weight: 700;
 }
 .tension-points li::before {
-  content: "◆"; position: absolute; left: 0;
+  content: "!"; position: absolute; left: 0;
   color: var(--ember);
+  font-weight: 700;
   font-size: 0.8rem;
   top: 4px;
 }
@@ -666,16 +666,18 @@ button:focus:not(:focus-visible) { outline: none; }
   margin-bottom: 12px;
 }
 .story-open .story-headline {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
-  font-style: italic;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.15rem, 3vw, 1.55rem);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   color: var(--gold-soft);
   line-height: 1.35;
   margin-bottom: 10px;
 }
 .story-open .story-plain {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.95rem;
   color: rgba(240,240,240,0.82);
   line-height: 1.55;
 }
@@ -691,19 +693,19 @@ button:focus:not(:focus-visible) { outline: none; }
   z-index: 2;
 }
 .upgrade-strip h3 {
-  font-family: 'Cinzel', serif;
-  font-size: 1.15rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95rem;
   letter-spacing: 2px;
   color: var(--gold);
   margin-bottom: 8px;
   text-transform: uppercase;
 }
 .upgrade-strip p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.88rem;
   color: rgba(240,240,240,0.85);
   margin-bottom: 16px;
-  line-height: 1.45;
+  line-height: 1.5;
   max-width: 520px;
   margin-left: auto;
   margin-right: auto;
@@ -1209,7 +1211,7 @@ body.access-locked .container {
   <div class="brand-tag">The First Spark · Soul Card Collider</div>
   <h1>FREQUENCY MATCH</h1>
   <p class="journey-lead">Compare your code with someone you love, lead, or can&rsquo;t stop thinking about.</p>
-  <p class="journey-how">Enter two people&rsquo;s names and birth details to create a symbolic comparison.</p>
+  <p class="journey-how">Two names. Two dates. One collision.</p>
   <a class="free-badge" id="freePlayersCta"
      href="https://thefirstspark.shop/join.html"
      target="_blank" rel="noopener noreferrer"
@@ -1287,7 +1289,7 @@ body.access-locked .container {
   </div>
 
   <div class="collide-zone">
-    <button type="button" class="btn btn-primary-cta" id="collideBtn" onclick="runCollision()">Create Your Frequency Match</button>
+    <button type="button" class="btn btn-primary-cta" id="collideBtn" onclick="runCollision()">Collide</button>
   </div>
 </section>
 
@@ -1301,17 +1303,17 @@ body.access-locked .container {
 <section class="cards-arena" id="resultsPhase" aria-live="polite" aria-label="Frequency Match results">
 
   <div class="story-open" id="storyOpen">
-    <div class="story-kicker">Your match story begins here</div>
+    <div class="story-kicker">Collision log</div>
     <p class="story-headline" id="storyHeadline">—</p>
     <p class="story-plain" id="storyPlain">—</p>
   </div>
 
   <div class="upgrade-strip" id="upgradeTop">
-    <h3>Build Your Full Soul Map</h3>
-    <p>Your personal page with archetype identity, gift &amp; shadow, and a permanent code — a full map you keep, not just a score.</p>
+    <h3>The match is a ping</h3>
+    <p>The Soul Map is the rest of the file — archetype, gift, shadow, the code you keep. $22. PayPal.</p>
     <div class="upgrade-actions">
-      <a class="btn" id="ctaSoulMapTop" href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener">Build Your Full Soul Map</a>
-      <button type="button" class="btn btn-secondary" id="ctaProTop" onclick="openPaywall()">Unlock deeper relationship insight with Frequency Pro</button>
+      <a class="btn" id="ctaSoulMapTop" href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener">Read the rest of the file</a>
+      <button type="button" class="btn btn-secondary" id="ctaProTop" onclick="openPaywall()">Open the deep scan</button>
     </div>
   </div>
 
@@ -1363,7 +1365,7 @@ body.access-locked .container {
     <div class="verdict-bg" aria-hidden="true"></div>
 
     <div class="score-display">
-      <div class="score-label">Symbolic match score</div>
+      <div class="score-label">Checksum</div>
       <div>
         <span class="score-number" id="scoreNumber">0</span><span class="score-percent">%</span>
       </div>
@@ -1374,17 +1376,17 @@ body.access-locked .container {
     <div class="dimensions-grid" id="dimensionsGrid"></div>
 
     <div class="breakdown-section">
-      <h3>⚡ Where You Resonate</h3>
+      <h3>Signal lock</h3>
       <ul class="strengths" id="strengthsList"></ul>
     </div>
 
     <div class="breakdown-section">
-      <h3>◆ Where The Friction Lives</h3>
+      <h3>Interference</h3>
       <ul class="tension-points" id="tensionList"></ul>
     </div>
 
     <div class="breakdown-section">
-      <h3>⟁ The Pattern</h3>
+      <h3>The read</h3>
       <p class="breakdown-text" id="patternText">—</p>
     </div>
 
@@ -1403,18 +1405,18 @@ body.access-locked .container {
     </div>
 
     <div class="upgrade-strip" id="upgradeBottom" style="margin-top:32px;margin-bottom:0">
-      <h3>Build Your Full Soul Map</h3>
-      <p>Go deeper than the match: your archetype, gift &amp; shadow pair, and full Soul Code on a private page you keep.</p>
+      <h3>The match is a ping</h3>
+      <p>The Soul Map is the rest of the file. $22. PayPal. Not a score you screenshot and forget.</p>
       <div class="upgrade-actions">
-        <a class="btn" id="ctaSoulMapBottom" href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener">Build Your Full Soul Map</a>
-        <button type="button" class="btn btn-secondary" id="ctaProBottom" onclick="openPaywall()">Unlock deeper relationship insight with Frequency Pro</button>
+        <a class="btn" id="ctaSoulMapBottom" href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener">Read the rest of the file</a>
+        <button type="button" class="btn btn-secondary" id="ctaProBottom" onclick="openPaywall()">Open the deep scan</button>
       </div>
     </div>
   </div>
 
   <div class="actions">
     <button type="button" class="btn" onclick="resetTool()">Compare Another Connection</button>
-    <a class="btn btn-secondary" href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">Build Your Full Soul Map</a>
+    <a class="btn btn-secondary" href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">Get the Soul Map</a>
     <button type="button" class="btn btn-secondary" id="btnSaveMatch" onclick="saveCurrentMatch()" style="display:none">☁ Save to Library</button>
   </div>
 
@@ -1680,31 +1682,40 @@ function chineseZodiacAffinity(a1, a2) {
   return 70;
 }
 
+function displayName(raw) {
+  const s = String(raw || '').trim();
+  if (!s) return '';
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+function pairNames(p1, p2) {
+  return `${displayName(p1.firstName)} × ${displayName(p2.firstName)}`;
+}
+
 // ========== HEADLINE GENERATOR ==========
 function getHeadline(score) {
   if (score >= 95) return "Same code. Different vessels.";
-  if (score >= 88) return "Resonant frequencies. The signal is loud.";
-  if (score >= 80) return "Strong harmonic match. Different keys, same song.";
-  if (score >= 72) return "Compatible architecture. Some patches required.";
-  if (score >= 65) return "Productive friction. The kind that builds something.";
-  if (score >= 55) return "Different operating systems. Translation layer needed.";
-  if (score >= 45) return "Cross-frequency static. Listen for the signal underneath.";
-  return "Opposite poles. The tension itself is the teaching.";
+  if (score >= 88) return "The signal is loud. Don't pretend you don't hear it.";
+  if (score >= 80) return "Different keys. Same song.";
+  if (score >= 72) return "The files overlap. The rest is work.";
+  if (score >= 65) return "Friction that builds. Or burns. Honesty decides.";
+  if (score >= 55) return "Two operating systems. Translation required.";
+  if (score >= 45) return "Static on the line. The signal is underneath.";
+  return "Opposite poles. The tension is the teaching.";
 }
 
-/** Plain-English takeaway — practical first, symbolic framing second */
 function getPlainStory(score, p1, p2) {
-  const names = `${p1.firstName} and ${p2.firstName}`;
+  const names = pairNames(p1, p2);
   if (score >= 88) {
-    return `In plain terms: ${names} tend to reinforce each other. Life Paths ${p1.lifePath} and ${p2.lifePath}, with ${p1.sun.name} and ${p2.sun.name}, point to easy rapport — a symbolic read for reflection, not a prediction.`;
+    return `${names}. Life Paths ${p1.lifePath} and ${p2.lifePath}. The code already knows each other. Don't waste it on being polite.`;
   }
   if (score >= 72) {
-    return `In plain terms: ${names} have real overlap and some stretch. Life Paths ${p1.lifePath} and ${p2.lifePath} suggest you bring different strengths; the work is naming them out loud.`;
+    return `${names}. Life Paths ${p1.lifePath} and ${p2.lifePath}. Enough overlap to run. Not enough to coast.`;
   }
   if (score >= 55) {
-    return `In plain terms: ${names} may need more deliberate translation. Life Paths ${p1.lifePath} and ${p2.lifePath} (${p1.sun.element} × ${p2.sun.element}) often mean different defaults — curiosity beats assumption.`;
+    return `${names}. ${p1.sun.element} × ${p2.sun.element}. Different defaults. Curiosity beats assumption. Assumption is how this dies.`;
   }
-  return `In plain terms: ${names} sit far apart on several symbolic axes. That can be a powerful teaching dynamic if both people stay honest about difference. Not a verdict — a mirror.`;
+  return `${names}. Far apart on the axes. That is a teacher or a wreck. Honesty is the only difference.`;
 }
 
 function soulMapUrl(matchData) {
@@ -1731,29 +1742,28 @@ function generateStrengths(p1, p2, scores) {
   const out = [];
 
   if (scores.numerology >= 85) {
-    out.push(`You tend to understand each other&rsquo;s life direction — Life Paths ${p1.lifePath} and ${p2.lifePath} <strong>echo in pattern</strong>, not as copies. <em>(Symbolic numerology read.)</em>`);
+    out.push(`Life Paths ${p1.lifePath} and ${p2.lifePath} <strong>echo</strong>. Not copies. Same checksum family.`);
   }
   if (scores.element >= 85) {
     out.push(p1.sun.element === p2.sun.element
-      ? `Day-to-day energy often feels easy: you both run on <strong>${p1.sun.element}</strong> — same elemental language, shared defaults.`
-      : `Day-to-day energy often feels easy: <strong>${p1.sun.element} meets ${p2.sun.element}</strong> in a classic complementary pairing.`);
+      ? `Same element: <strong>${p1.sun.element}</strong>. Shared defaults. Less translation tax.`
+      : `<strong>${p1.sun.element} meets ${p2.sun.element}</strong>. Complementary pairing. The current already knows how to move.`);
   }
   if (scores.modality >= 80) {
-    out.push(`You often move at a <strong>similar pace</strong> through change — starting, sustaining, or adapting in compatible ways.`);
+    out.push(`Same <strong>pace through change</strong>. You start, hold, or adapt on a similar clock.`);
   }
   if (scores.zodiac >= 85) {
-    out.push(`In the Eastern frame, your signs sit in a <strong>supportive triangle</strong> — many people experience this as instinctive ease.`);
+    out.push(`Eastern triangle. The wiring already recognizes itself.`);
   }
-  // Master number flag
   const masters = [11, 22, 33];
   const m1 = [p1.lifePath, p1.expression, p1.soulUrge].filter(n => masters.includes(n));
   const m2 = [p2.lifePath, p2.expression, p2.soulUrge].filter(n => masters.includes(n));
   if (m1.length && m2.length) {
-    out.push(`Both charts carry <strong>master numbers</strong> (${[...new Set([...m1, ...m2])].join(', ')}) in the Selector Model — a story of intensity and depth, not a clinical diagnosis.`);
+    out.push(`Both carry <strong>master numbers</strong> (${[...new Set([...m1, ...m2])].join(', ')}). Intensity is not a mood. It is the voltage.`);
   }
 
   if (out.length === 0) {
-    out.push(`Your <strong>differences create depth</strong> — neither of you is here only to mirror the other.`);
+    out.push(`The lock is not sameness. <strong>Neither of you is here to be a mirror.</strong>`);
   }
   return out.slice(0, 4);
 }
@@ -1762,38 +1772,39 @@ function generateTensions(p1, p2, scores) {
   const out = [];
 
   if (scores.element < 65) {
-    out.push(`<strong>Different default energies</strong> (${p1.sun.element} and ${p2.sun.element}): meaning can get lost unless you spell things out.`);
+    out.push(`<strong>${p1.sun.element} vs ${p2.sun.element}</strong>. Different default energy. If you don't say it out loud, it gets lost.`);
   }
   if (Math.abs(p1.lifePath - p2.lifePath) >= 4 && p1.lifePath !== p2.lifePath) {
-    out.push(`Your <strong>life paths run different tracks</strong> (${p1.lifePath} vs ${p2.lifePath}) — what feels essential to one may feel optional to the other.`);
+    out.push(`Life Paths <strong>${p1.lifePath} vs ${p2.lifePath}</strong>. What is load-bearing for one is optional for the other. That is architecture, not a vibe.`);
   }
   if (scores.modality < 70) {
-    out.push(`Different <strong>paces with change</strong> — one may push forward while the other holds or adapts. Name the pace mismatch early.`);
+    out.push(`Pace mismatch. One pushes. One holds. Name it before it becomes a character assassination.`);
   }
   if (scores.zodiac < 60) {
-    out.push(`In the Eastern frame, your animals often sit in <strong>opposition</strong> — first reactions can feel sharp when they&rsquo;re just different wiring.`);
+    out.push(`Eastern opposition. First reactions can cut. That is wiring, not destiny, and it will still draw blood if you sleepwalk.`);
   }
   if (p1.soulUrge !== p2.soulUrge && Math.abs(p1.soulUrge - p2.soulUrge) >= 5) {
-    out.push(`<strong>Different core drives</strong> — what fulfills you isn&rsquo;t the same. Honor both; don&rsquo;t force a blend.`);
+    out.push(`<strong>Different core drives.</strong> What fills one empties the other. Don't force a blend.`);
   }
 
   if (out.length === 0) {
-    out.push(`Few hard tensions in this model — still watch for <strong>echo chambers</strong>. Easy harmony can hide hard conversations.`);
+    out.push(`Few hard collisions in the model. Watch the <strong>echo chamber</strong>. Easy harmony hides the conversation you are avoiding.`);
   }
   return out.slice(0, 4);
 }
 
 function generatePattern(p1, p2, score) {
+  const names = pairNames(p1, p2);
   const tier = score >= 88 ? 'high' : score >= 72 ? 'mid' : score >= 55 ? 'tension' : 'opposite';
 
   const patterns = {
-    high: `${p1.firstName} and ${p2.firstName} show strong overlap in this symbolic model. Life Paths ${p1.lifePath} &amp; ${p2.lifePath} with ${p1.sun.name} ${p1.sun.sym} and ${p2.sun.name} ${p2.sun.sym} often feel like ease that compounds — each person more themselves, not less. The work is honoring depth, not hunting for problems. <em>This is a reflective story, not a measurement.</em>`,
+    high: `${names}. Life Paths ${p1.lifePath} and ${p2.lifePath}. ${p1.sun.name} ${p1.sun.sym} × ${p2.sun.name} ${p2.sun.sym}. The overlap is real. The work is staying yourselves inside it, not hunting for a problem so you have something to do.`,
 
-    mid: `${p1.firstName} and ${p2.firstName} carry <strong>productive difference</strong>. Not every theme lines up, but enough of a bridge exists to carry real weight. Life Paths ${p1.lifePath} &amp; ${p2.lifePath} can mean one leads where the other follows — conscious, that&rsquo;s partnership; unconscious, it becomes a power struggle. The teaching is in the asymmetry.`,
+    mid: `${names}. Enough overlap to run. Not enough to coast. Life Paths ${p1.lifePath} and ${p2.lifePath} — one leads, one follows. Conscious: partnership. Unconscious: a power struggle you will keep calling chemistry.`,
 
-    tension: `${p1.firstName} and ${p2.firstName} look like different operating styles that need translation. Compatibility here is chosen, not automatic. Life Paths ${p1.lifePath} &amp; ${p2.lifePath} with ${p1.sun.element} and ${p2.sun.element} elements ask for negotiation. Friction isn&rsquo;t a failure mode in this frame — it&rsquo;s curriculum. High-friction, high-commitment bonds often last because nothing is taken for granted.`,
+    tension: `${names}. Different operating styles. Compatibility is chosen, not automatic. Life Paths ${p1.lifePath} and ${p2.lifePath}, ${p1.sun.element} × ${p2.sun.element}. Friction is not a failure mode. It is curriculum. Sleepwalk and it becomes a war.`,
 
-    opposite: `${p1.firstName} and ${p2.firstName} sit far apart on several axes in this model. That can teach both people a great deal — or strain under unmet expectations. The score is a mirror for reflection, not a judgment. It works when difference is respected; it strains when either tries to convert the other.`
+    opposite: `${names}. Far apart on several axes. That can teach you, or it can strain until someone tries to convert the other. The checksum is a mirror. It is not a sentence.`
   };
 
   return patterns[tier];
@@ -1863,12 +1874,11 @@ async function runCollision() {
   document.getElementById('loadingScreen').classList.add('active');
 
   const loadingMsgs = [
-    'Reading the charts...',
-    'Calculating numerology...',
+    'Pulling the instance logs...',
+    'Reading the numbers...',
     'Mapping archetypes...',
     'Comparing signatures...',
-    'Building Player Cards...',
-    'Writing your match story...'
+    'Compiling the collision...'
   ];
   let i = 0;
   const interval = setInterval(() => {
@@ -1944,15 +1954,14 @@ async function runCollision() {
   animateScore(overall);
 
   // Headline
-  document.getElementById('verdictHeadline').textContent = `"${headline}"`;
+  document.getElementById('verdictHeadline').textContent = headline;
 
-  // Dimensions (symbolic dimensions — labeled as model scores)
   const dims = [
-    {name:'Life Path (symbolic)', value: scores.numerology},
-    {name:'Soul Urge (symbolic)', value: scores.soulUrge},
-    {name:'Element pairing', value: scores.element},
-    {name:'Pace / modality', value: scores.modality},
-    {name:'Eastern affinity', value: scores.zodiac}
+    {name:'Life Path', value: scores.numerology},
+    {name:'Soul Urge', value: scores.soulUrge},
+    {name:'Element', value: scores.element},
+    {name:'Pace', value: scores.modality},
+    {name:'Eastern', value: scores.zodiac}
   ];
   document.getElementById('dimensionsGrid').innerHTML = dims.map(d => `
     <div class="dimension">
@@ -2040,7 +2049,7 @@ function buildProfile(name, date, id, place = '') {
   return {
     id,
     fullName: name,
-    firstName: name.split(' ')[0],
+    firstName: displayName(name.split(' ')[0]),
     date,
     place: place || '',
     lifePath: lifePath(date),
@@ -2055,29 +2064,29 @@ function buildProfile(name, date, id, place = '') {
 
 // ========== PRO NARRATIVES ==========
 function generateLensReading(p1, p2, score, mode, scores) {
-  const names = `${p1.firstName} and ${p2.firstName}`;
+  const names = pairNames(p1, p2);
   const placeNote = (p1.place || p2.place)
-    ? ` Geography in the chart (${[p1.place, p2.place].filter(Boolean).join(' · ')}) colors the story — place is a soft signal, not a verdict.`
+    ? ` Place in the chart (${[p1.place, p2.place].filter(Boolean).join(' · ')}) is a soft signal, not a verdict.`
     : '';
 
   const byMode = {
-    general: `Under a <strong>general chemistry</strong> lens, ${names} score ${score}%. The core stack (life path + element + soul urge) is the main signal; Pro dimensions refine how you show up, not whether the code can run.${placeNote}`,
-    romance: `As a <strong>romantic / partnership</strong> pair, watch soul urge (${scores.soulUrge}%) and expression (${scores.expression}%). Desire (soul urge) vs. how love is spoken (expression) is where most couples misfire. Score ${score}% means the bond is ${score >= 75 ? 'structurally supportive' : 'a practice, not a free ride'}.${placeNote}`,
-    friendship: `As <strong>friends</strong>, modality (${scores.modality}%) and personality (${scores.personality}%) matter more than destiny theater. ${names} will click when social pacing matches; friction shows up as “why aren’t you answering?” more than cosmic doom. Overall ${score}%.${placeNote}`,
-    family: `In a <strong>family</strong> frame, life path difference is curriculum, not incompatibility. Eastern affinity (${scores.zodiac}%) often tracks instinctive roles (protector, messenger, stabiliser). ${names}: treat ${score}% as a map of who needs more explicit care language.${placeNote}`,
-    business: `For <strong>business / collab</strong>, expression (${scores.expression}%) and modality (${scores.modality}%) predict meeting culture and launch style. ${names} at ${score}% — ${score >= 78 ? 'strong co-founding harmonic if roles are explicit' : 'pair a visionary with an operator and write the ops down'}.${placeNote}`
+    general: `${names}. Checksum ${score}. Core stack is life path + element + soul urge. The rest is how you show up, not whether the code can run.${placeNote}`,
+    romance: `${names} as a pair. Watch soul urge (${scores.soulUrge}%) against expression (${scores.expression}%). Desire vs how love gets spoken is where most of you misfire. ${score >= 75 ? 'The structure holds if you tell the truth.' : 'This is a practice, not a free ride.'}${placeNote}`,
+    friendship: `${names} as friends. Pace (${scores.modality}%) and personality (${scores.personality}%) matter more than destiny theater. Friction looks like unanswered messages, not cosmic doom. Checksum ${score}.${placeNote}`,
+    family: `${names} in a family frame. Life path difference is curriculum, not a diagnosis. Eastern ${scores.zodiac}% tracks the instinctive roles. Checksum ${score} is a map of who needs the care said out loud.${placeNote}`,
+    business: `${names} as collab. Expression ${scores.expression}% and pace ${scores.modality}% predict the meeting culture. ${score >= 78 ? 'Write the roles down and this can ship.' : 'Pair the visionary with the operator. Write the ops down or it dies in the group chat.'}${placeNote}`
   };
   return byMode[mode] || byMode.general;
 }
 
 function generateExprPersonality(p1, p2, scores) {
-  return `<strong>${p1.firstName}</strong> Expression ${p1.expression} / Personality ${p1.personality} meets <strong>${p2.firstName}</strong> Expression ${p2.expression} / Personality ${p2.personality}. ` +
-    `Expression resonance ${scores.expression}% is how you <em>broadcast</em>; personality sync ${scores.personality}% is how the world reads you cold. ` +
+  return `<strong>${displayName(p1.firstName)}</strong> Expression ${p1.expression} / Personality ${p1.personality} meets <strong>${displayName(p2.firstName)}</strong> Expression ${p2.expression} / Personality ${p2.personality}. ` +
+    `Expression ${scores.expression}% is the broadcast. Personality ${scores.personality}% is how the room reads you cold. ` +
     (scores.expression >= 80 && scores.personality < 70
-      ? `You speak a similar language but present differently — great for public/private duality, messy if one expects the other to “look” like they sound.`
+      ? `You speak a similar language and look like different people. Fine, until one of you expects the other to match the voice.`
       : scores.personality >= 80
-        ? `The room reads you as a unit even before you speak. Use that; don’t let it become a costume you can’t take off.`
-        : `Neither mask nor microphone fully match — translate out loud. Name the gap and it becomes a feature.`);
+        ? `The room reads you as a unit before you speak. Use it. Don't let it become a costume you can't take off.`
+        : `Mask and microphone don't fully match. Say the gap out loud and it becomes a feature.`);
 }
 
 function animateScore(target) {
@@ -2113,7 +2122,7 @@ function sharePayload() {
   if (!window.matchData) return null;
   const { p1, p2, overall, headline } = window.matchData;
   const url = window.location.href.split('#')[0];
-  const text = `${p1.firstName} × ${p2.firstName} = ${overall}% Frequency Match\n\n"${headline || getHeadline(overall)}"\n\nCompare your code: ${url}`;
+  const text = `${displayName(p1.firstName)} × ${displayName(p2.firstName)} · checksum ${overall}\n\n${headline || getHeadline(overall)}\n\nCollide: ${url}`;
   return { title: 'Frequency Match · Player Card', text, url };
 }
 
