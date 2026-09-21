@@ -6,16 +6,11 @@ A public tool from [The First Spark](https://thefirstspark.shop) that turns two 
 
 **Live:** https://frequency.thefirstspark.shop
 
-## Access (Whop members)
+## Access
 
-| | Locked | Players (pass) | Frequency Pro ($4.99/month via Whop) |
-|--|------|----------------|-------------------------------------|
-| Collisions | — | ✓ | ✓ |
-| Core score + cards + download | — | ✓ | ✓ |
-| Saved match library | — | — | ✓ |
-| Relationship lens + deep dimensions | — | — | ✓ |
+Collide is free. Frequency Pro ($4.99/month via Whop) unlocks saved history and the deep toolkit.
 
-**Not free** unless you pay **$4.99/month** or hold a **player** pass. Designed as a Whop embedded app with an in-app access gate.
+Free Sparkverse membership is `https://thefirstspark.shop/join.html` (email, not a Whop Lobby).
 
 Full setup: [docs/FREEMIUM.md](docs/FREEMIUM.md)
 
@@ -37,7 +32,7 @@ Static HTML/JS (GitHub Pages) plus members backend:
 - Client engines in `index.html` (html2canvas CDN for PNG export)
 - Supabase Auth + Postgres (`fm_profiles`, `fm_matches`) — see `supabase/schema.sql`
 - Whop checkout (`plan_gX14Qd9V6UEml`) + `whop-webhook` Edge Function (Pro + player plans)
-- Config: `js/config.js` — `ACCESS_MODE: 'members'`
+- Config: `js/config.js` — `ACCESS_MODE: 'open'`
 
 ```powershell
 cd frequency-match

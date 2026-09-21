@@ -8,16 +8,15 @@ window.FM_CONFIG = {
   // Frequency Pro — $4.99/month
   WHOP_CHECKOUT_URL: 'https://whop.com/checkout/plan_XXXX',
   WHOP_PLAN_ID: 'plan_XXXX',
-  // Sparkverse free tier (lead magnet) — join Lobby before first collide
+  // Sparkverse free membership (email gate)
   WHOP_PLAYER_CHECKOUT_URL:
     'https://thefirstspark.shop/join.html',
-  // Free Lobby plan id(s) for webhook → sets is_player (comma-separated ok in secrets)
-  WHOP_PLAYER_PLAN_ID: 'plan_YOUR_FREE_LOBBY_PLAN',
+  WHOP_PLAYER_PLAN_ID: '',
   WHOP_APP_ID: '',
   WHOP_MANAGE_URL: 'https://whop.com/orders',
   FUNCTIONS_BASE: 'https://YOUR_PROJECT.supabase.co/functions/v1',
-  // members = must join free Lobby (is_player) OR Pro before one try
-  ACCESS_MODE: 'members',
+  // open = collide is free; members = Pro or is_player
+  ACCESS_MODE: 'open',
   PRO_PRICE_LABEL: '$4.99/month',
   PRO_NAME: 'Frequency Pro',
   SITE_NAME: 'Frequency Match',

@@ -1215,12 +1215,12 @@ body.access-locked .container {
   <a class="free-badge" id="freePlayersCta"
      href="https://thefirstspark.shop/join.html"
      target="_blank" rel="noopener noreferrer"
-     style="cursor:pointer;text-decoration:none">Join Sparkverse free · then collide</a>
+     style="cursor:pointer;text-decoration:none">Join the Sparkverse free</a>
 </header>
 
 <div class="top-bar" id="topBar">
   <div class="usage-pill" id="usagePill">
-    <strong id="usageText">Members access</strong> · free Lobby or Pro
+    <strong id="usageText">Free to collide</strong> · Pro optional
   </div>
   <div class="top-actions">
     <button type="button" class="btn-sm" id="btnHistory" onclick="toggleHistory()" style="display:none" aria-label="Open match history">History</button>
@@ -1431,34 +1431,33 @@ body.access-locked .container {
 <footer>
   <p class="tagline">Reality is programmable. Consciousness is the code.</p>
   <p>Built by <a href="https://thefirstspark.shop" target="_blank" rel="noopener">The First Spark</a> · Powered by <a href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener">Soul Maps</a></p>
-  <p style="margin-top:10px;font-size:11px;opacity:0.45">Free via Sparkverse Lobby · Pro $4.99/month optional</p>
+  <p style="margin-top:10px;font-size:11px;opacity:0.45">Free to collide · Pro $4.99/month optional</p>
   <p class="disclaimer">For reflection, exploration, and entertainment. Symbolic readings from the Selector Model — not scientific measurement, medical advice, or professional counseling.</p>
 </footer>
 
 </div>
 
-<!-- Hard access gate: join free Lobby + sign in before first try -->
+<!-- Optional access gate (hidden when ACCESS_MODE is open) -->
 <div class="access-gate" id="accessGate" role="dialog" aria-modal="true" aria-labelledby="accessGateTitle">
   <div class="access-gate-card">
-    <h2 id="accessGateTitle">Unlock Frequency Match</h2>
-    <p class="lead">Join free Sparkverse first — then sign in. No collide until you’re in.</p>
+    <h2 id="accessGateTitle">Frequency Match</h2>
+    <p class="lead">Collide is free. Join the Sparkverse if you want the rest of the world around it.</p>
     <ul>
-      <li><strong>1. Join free</strong> — Sparkverse Lobby on Whop (free tier)</li>
-      <li><strong>2. Sign in here</strong> — same email you use on Whop</li>
-      <li><strong>3. Collide</strong> — one tool, your lead into the Lobby</li>
-      <li><strong>Optional</strong> — Frequency Pro $4.99/mo for deep toolkit</li>
+      <li><strong>Join free</strong> — one email, no account, no card</li>
+      <li><strong>Collide</strong> — two names and dates, one score</li>
+      <li><strong>Optional</strong> — Frequency Pro $4.99/mo for the deep toolkit</li>
     </ul>
     <div class="error" id="accessGateError"></div>
     <div class="btn-row">
       <a class="btn" id="btnJoinLobby"
          href="https://thefirstspark.shop/join.html"
          target="_blank" rel="noopener noreferrer">Join Sparkverse free</a>
-      <button type="button" class="btn btn-secondary" id="btnGateSignIn">I joined — sign in</button>
+      <button type="button" class="btn btn-secondary" id="btnGateSignIn">Sign in</button>
       <a class="btn btn-secondary" id="btnGoPro"
          href="https://whop.com/checkout/plan_gX14Qd9V6UEml"
          target="_blank" rel="noopener noreferrer">Or go Pro · $4.99/mo</a>
     </div>
-    <p class="hint" id="accessGateHint">1) Join free Lobby · 2) Come back and sign in with the <strong>same email</strong> · 3) Collide unlocks when membership hits your account.</p>
+    <p class="hint" id="accessGateHint">Join free at thefirstspark.shop/join.html · collide here anytime.</p>
   </div>
 </div>
 
@@ -1467,7 +1466,7 @@ body.access-locked .container {
   <div class="modal">
     <button type="button" class="modal-close" onclick="closeModal('authModal')" aria-label="Close">&times;</button>
     <h2>Sign in</h2>
-    <p class="lead">Required to verify Sparkverse free or Pro access. Use your Whop email.</p>
+    <p class="lead">Magic link. No password. Use this if you have Frequency Pro.</p>
     <div class="error" id="authError"></div>
     <input type="email" id="authEmail" placeholder="you@email.com" autocomplete="email">
     <div class="btn-row">
@@ -1475,7 +1474,7 @@ body.access-locked .container {
       <button type="button" class="btn btn-secondary" id="btnSignOut" onclick="doSignOut()" style="display:none">Sign out</button>
       <button type="button" class="btn btn-secondary" id="btnPortal" onclick="openPortal()" style="display:none">Manage billing</button>
     </div>
-    <p class="hint" id="authHint">We’ll email a one-time link. No password. Same email as Whop.</p>
+    <p class="hint" id="authHint">We’ll email a one-time link. No password.</p>
   </div>
 </div>
 
@@ -1484,7 +1483,7 @@ body.access-locked .container {
   <div class="modal">
     <button type="button" class="modal-close" onclick="closeModal('paywallModal')" aria-label="Close">&times;</button>
     <h2>Frequency Pro</h2>
-    <p class="lead">Deep toolkit on top of free Lobby access — $4.99/month via Whop.</p>
+    <p class="lead">Deep toolkit on top of free collide — $4.99/month.</p>
     <ul class="feature-list">
       <li>Saved match history library</li>
       <li>Deeper analysis — expression, personality, birthday</li>
@@ -1498,9 +1497,9 @@ body.access-locked .container {
       <button type="button" class="btn btn-secondary" id="btnPaywallSignIn">Sign in first</button>
       <a class="btn btn-secondary" id="btnPaywallLobby"
          href="https://thefirstspark.shop/join.html"
-         target="_blank" rel="noopener noreferrer">Join free Lobby instead</a>
+         target="_blank" rel="noopener noreferrer">Join Sparkverse free instead</a>
     </div>
-    <p class="hint">Sign in with the <strong>same email</strong> as Whop so Pro unlocks automatically.</p>
+    <p class="hint">Sign in with the <strong>same email</strong> you used at checkout so Pro unlocks.</p>
   </div>
 </div>
 
@@ -2187,9 +2186,9 @@ function openAccessGate(reason) {
   const err = document.getElementById('accessGateError');
   if (err) {
     if (reason === 'sign_in_required') {
-      err.textContent = 'Sign in with your Whop email after you join free Sparkverse.';
+      err.textContent = 'Sign in with the email you used to join.';
     } else if (reason === 'access_required') {
-      err.textContent = 'Join free Sparkverse Lobby (or Pro), then sign in with that email.';
+      err.textContent = 'Join free at thefirstspark.shop/join.html, or go Pro.';
     } else {
       err.textContent = '';
     }
@@ -2216,7 +2215,6 @@ function updateUsageUI(usage) {
 
   const entitled = Boolean(u.hasAccess || u.isPro || u.isPlayer);
 
-  // Hard gate until Lobby free or Pro
   if (window.FM && FM.isConfigured && FM.isConfigured() && !entitled) {
     setAccessGateVisible(true);
   } else {
@@ -2235,7 +2233,7 @@ function updateUsageUI(usage) {
     if (freeCta) freeCta.style.display = 'none';
   } else if (u.isPlayer || entitled) {
     pill.classList.remove('pro');
-    text.textContent = 'Sparkverse free · unlocked';
+    text.textContent = 'Free to collide · Pro optional';
     btnUpgrade.textContent = 'Frequency Pro';
     btnUpgrade.classList.remove('primary');
     btnUpgrade.onclick = () => openPaywall();
@@ -2245,10 +2243,10 @@ function updateUsageUI(usage) {
     }
     if (modeLock) modeLock.textContent = '🔒 Frequency Pro';
     if (btnHistory) btnHistory.style.display = 'none';
-    if (freeCta) freeCta.style.display = 'none';
+    if (freeCta) freeCta.style.display = '';
   } else {
     pill.classList.remove('pro');
-    text.textContent = 'Join free Lobby to unlock';
+    text.textContent = 'Free to collide · Pro optional';
     btnUpgrade.textContent = 'Frequency Pro';
     btnUpgrade.classList.remove('primary');
     btnUpgrade.onclick = () => openPaywall();
@@ -2282,8 +2280,8 @@ function openAuthModal() {
   document.getElementById('authError').textContent = '';
   const u = window.FM && FM.getUsageSnapshot();
   document.getElementById('authHint').textContent = u && u.signedIn
-    ? `Signed in as ${u.email || 'member'}. Join free Lobby if access is still locked.`
-    : 'Use the same email as Whop. We’ll email a one-time link.';
+    ? `Signed in as ${u.email || 'member'}.`
+    : 'We’ll email a one-time link. No password.';
   openModal('authModal');
 }
 function openPaywall() {
